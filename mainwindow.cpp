@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
     h_limit=1000;
     v_limit= 500;
 
+
+
     timer=new QTimer(this);
     scene=new QGraphicsScene(this);
     scene->setSceneRect(0,0,h_limit,v_limit);
@@ -21,27 +23,27 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->resize(scene->width(),scene->height());
     this->resize(ui->graphicsView->width()+100,ui->graphicsView->height()+100);
 
-//    posx= 32;//50+(rand()%951);
-//    posy= 300;//50+(rand()%951);
-//    r= 20;//5+(rand()%26);
-//    mass= 50;//50+(rand()%651);
-//    velx= 10;//0(rand()%300);
-//    vely= 0;//(rand()%300);
-//    k= 0.0;//(rand()%10)/1000;//0.2
-//    e= 1;//(0.5+(rand()%5)/10);//1.17
-    //esf= new cuerpo(posx,posy,velx,vely,mass,r,k,e);
 
-    principal = new personaje(0,0,0,0,50,15,0.3,0,5);
+//    pisos.push_back(new plataforma(0,10,h_limit,20));
+//    pisos.push_back(new plataforma(0,200,h_limit,20));
+
+//    for(int i=0;i<pisos.size();i++)
+//    {
+//        pisos.at(i)->posicionAbs(v_limit);
+//        scene->addItem(pisos.at(i));
+//    }
+
+    principal = new personaje(0,0,0,0,50,20,0.3,0,5);
     principal->actualizar(v_limit);
 
     scene->addItem(principal);
 
     timer->start(5);
-    bars.push_back(new pelota(32,300,10,0,50,20,0,1,2));
+    bars.push_back(new pelota(32,300,10,0,50,40,0,1,2));
     bars.back()->actualizar(v_limit);
     scene->addItem(bars.back());
 
-    bars.push_back(new pelota(32,300,30,0,50,8,0,1,7));
+    bars.push_back(new pelota(32,300,30,0,50,10,0,1,7));
     bars.back()->actualizar(v_limit);
     scene->addItem(bars.back());
 
@@ -111,6 +113,12 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_D)
     {
         b->set_vel(15,b->getVY(),b->getPX(),b->getPY());
+//        for(auto it=pisos.begin();it!=pisos.end();it++)
+//        {
+//            if(b->collidesWithItem(*it)){
+//                b->set_vel(-15,b->getVY(),b->getPX(),b->getPY());
+//            }
+//        }
     }
     if(event->key() == Qt::Key_A)
     {
@@ -119,5 +127,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_W)
     {
         b->set_vel(b->getVX(),40,b->getPX(),b->getPY());
+    }
+    if(event->key() == Qt::Key_Space)
+    {
+        proyectil *bullet = new proyectil();
+        bullet->setPos(b->getPX(),v_limit-b->getPY());
+        scene->addItem(bullet);
     }
 }

@@ -7,6 +7,8 @@
 #include "pelota.h"
 #include <QKeyEvent>
 #include "personaje.h"
+#include "plataforma.h"
+#include "proyectil.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -34,7 +36,9 @@ private:
     void borderColilisionPer(personaje *b);
     void keyPressEvent(QKeyEvent *event);
 
+    //plataforma *suelo;
     personaje *principal;
+    QList<plataforma *>pisos;
     QList<pelota *>bars;
 };
 #endif // MAINWINDOW_H
