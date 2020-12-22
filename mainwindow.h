@@ -6,7 +6,7 @@
 #include <QGraphicsScene>
 #include "pelota.h"
 #include <QKeyEvent>
-
+#include "personaje.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -31,6 +31,10 @@ private:
     int h_limit;
     int v_limit;
     void borderColilision(pelota *b);
+    void borderColilisionPer(personaje *b);
+    void keyPressEvent(QKeyEvent *event);
+
+    personaje *principal;
     QList<pelota *>bars;
 };
 #endif // MAINWINDOW_H

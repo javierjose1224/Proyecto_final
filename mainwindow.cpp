@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     scene->addRect(scene->sceneRect());//para ver los limites de la escne
     ui->graphicsView->resize(scene->width(),scene->height());
     this->resize(ui->graphicsView->width()+100,ui->graphicsView->height()+100);
+
 //    posx= 32;//50+(rand()%951);
 //    posy= 300;//50+(rand()%951);
 //    r= 20;//5+(rand()%26);
@@ -29,6 +30,12 @@ MainWindow::MainWindow(QWidget *parent)
 //    k= 0.0;//(rand()%10)/1000;//0.2
 //    e= 1;//(0.5+(rand()%5)/10);//1.17
     //esf= new cuerpo(posx,posy,velx,vely,mass,r,k,e);
+
+    principal = new personaje(0,0,0,0,50,15,0.3,0,5);
+    principal->actualizar(v_limit);
+
+    scene->addItem(principal);
+
     timer->start(5);
     bars.push_back(new pelota(32,300,10,0,50,20,0,1,2));
     bars.back()->actualizar(v_limit);
@@ -48,6 +55,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::actualizarm()
 {
+    principal->actualizar(v_limit);
+    borderColilisionPer(principal);
+
     for(int i=0;i<bars.size();i++)
     {
         bars.at(i)->actualizar(v_limit);
@@ -75,3 +85,39 @@ void MainWindow::borderColilision(pelota *b)
     }
 }
 
+void MainWindow::borderColilisionPer(personaje *b)
+{
+    if(b->getPX()<b->getR())
+    {
+        b->set_vel(-1*b->getE()*b->getVX(),b->getVY(),b->getR(),b->getPY());
+    }
+    if(b->getPX()>h_limit-b->getR())
+    {
+        b->set_vel(-1*b->getE()*b->getVX(),b->getVY(),h_limit-b->getR(),b->getPY());
+    }
+    if(b->getPY()<b->getR())
+    {
+        b->set_vel(b->getVX(),-1*b->getE()*b->getVY(),b->getPX(),b->getR());
+    }
+    if(b->getPY()>v_limit-b->getR())
+    {
+        b->set_vel(b->getVX(),-1*b->getE()*b->getVY(),b->getPX(),v_limit-b->getR());
+    }
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    personaje *b = principal;
+    if(event->key() == Qt::Key_D)
+    {
+        b->set_vel(15,b->getVY(),b->getPX(),b->getPY());
+    }
+    if(event->key() == Qt::Key_A)
+    {
+        b->set_vel(-15,b->getVY(),b->getPX(),b->getPY());
+    }
+    if(event->key() == Qt::Key_W)
+    {
+        b->set_vel(b->getVX(),40,b->getPX(),b->getPY());
+    }
+}
