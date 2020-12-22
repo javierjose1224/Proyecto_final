@@ -22,7 +22,9 @@ MainWindow::MainWindow(QWidget *parent)
     scene->addRect(scene->sceneRect());//para ver los limites de la escne
     ui->graphicsView->resize(scene->width(),scene->height());
     this->resize(ui->graphicsView->width()+100,ui->graphicsView->height()+100);
-
+    conVidas= new vida();
+    conVidas->setPos(0,0);
+    scene->addItem(conVidas);
 
 //    pisos.push_back(new plataforma(0,10,h_limit,20));
 //    pisos.push_back(new plataforma(0,200,h_limit,20));
@@ -33,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
 //        scene->addItem(pisos.at(i));
 //    }
 
-    principal = new personaje(0,0,0,0,50,20,0.3,0,5);
+    principal = new personaje(0,0,0,0,50,20,0.3,0,5);//0.3
     principal->actualizar(v_limit);
 
     scene->addItem(principal);
@@ -44,6 +46,10 @@ MainWindow::MainWindow(QWidget *parent)
     scene->addItem(bars.back());
 
     bars.push_back(new pelota(32,300,30,0,50,10,0,1,7));
+    bars.back()->actualizar(v_limit);
+    scene->addItem(bars.back());
+
+    bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
     bars.back()->actualizar(v_limit);
     scene->addItem(bars.back());
 
@@ -59,7 +65,23 @@ void MainWindow::actualizarm()
 {
     principal->actualizar(v_limit);
     borderColilisionPer(principal);
-
+    for(int i=0;i<bars.size();i++)
+    {
+        if(principal->collidesWithItem(bars.at(i)))
+        {
+            if(conVidas->getvidaT()>0)
+            {
+                conVidas->decrease();
+                principal->setPos(0,0);
+                principal->setPX(0);
+                principal->setPY(0);
+            }
+            else
+            {
+                scene->removeItem(principal);
+            }
+        }
+    }
     for(int i=0;i<bars.size();i++)
     {
         bars.at(i)->actualizar(v_limit);
@@ -113,24 +135,18 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_D)
     {
         b->set_vel(15,b->getVY(),b->getPX(),b->getPY());
-//        for(auto it=pisos.begin();it!=pisos.end();it++)
-//        {
-//            if(b->collidesWithItem(*it)){
-//                b->set_vel(-15,b->getVY(),b->getPX(),b->getPY());
-//            }
-//        }
     }
     if(event->key() == Qt::Key_A)
     {
-        b->set_vel(-15,b->getVY(),b->getPX(),b->getPY());
+        b->set_vel(-15,b->getVY(),b->getPX(),b->getPY());       
     }
     if(event->key() == Qt::Key_W)
     {
-        b->set_vel(b->getVX(),40,b->getPX(),b->getPY());
+        b->set_vel(b->getVX(),40,b->getPX(),b->getPY());        
     }
     if(event->key() == Qt::Key_Space)
     {
-        proyectil *bullet = new proyectil();
+        proyectil *bullet = new proyectil(v_limit);
         bullet->setPos(b->getPX(),v_limit-b->getPY());
         scene->addItem(bullet);
     }

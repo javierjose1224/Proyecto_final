@@ -4,12 +4,17 @@
 #include <QObject>
 #include <QGraphicsRectItem>
 #include <QTimer>
+#include <QGraphicsScene>
+#include <QDebug>
+#include "pelota.h"
 
 class proyectil: public QObject,public QGraphicsRectItem
 {
     Q_OBJECT
+    float posX;
 public:
-    proyectil();
+    proyectil(float v_limit);
+    float getPosX() const;
 
 public slots:
     void movimiento();

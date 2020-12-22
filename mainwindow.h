@@ -9,6 +9,7 @@
 #include "personaje.h"
 #include "plataforma.h"
 #include "proyectil.h"
+#include "vida.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -37,6 +38,7 @@ private:
     void keyPressEvent(QKeyEvent *event);
 
     //plataforma *suelo;
+    vida *conVidas;
     personaje *principal;
     QList<plataforma *>pisos;
     QList<pelota *>bars;

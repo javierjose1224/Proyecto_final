@@ -21,14 +21,16 @@ SOURCES += \
     pelota.cpp \
     personaje.cpp \
     plataforma.cpp \
-    proyectil.cpp
+    proyectil.cpp \
+    vida.cpp
 
 HEADERS += \
     mainwindow.h \
     pelota.h \
     personaje.h \
     plataforma.h \
-    proyectil.h
+    proyectil.h \
+    vida.h
 
 FORMS += \
     mainwindow.ui
