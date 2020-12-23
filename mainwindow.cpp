@@ -52,7 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
     bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
     bars.back()->actualizar(v_limit);
     scene->addItem(bars.back());
-
+    //nueva pelota para prueba
     connect(timer,SIGNAL(timeout()),this,SLOT(actualizarm()));
 }
 
