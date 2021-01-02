@@ -15,6 +15,10 @@ public:
     void posicionAbs(float v_limit);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
+    float getPosX() const;
+    void setPosX(float value);
+    float getPosY() const;
+    void setPosY(float value);
 };
 
 #endif // PLATAFORMA_H

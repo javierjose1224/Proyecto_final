@@ -102,6 +102,12 @@ void personaje::set_vel(float vx, float vy, float px, float py)
     PY=py;
 }
 
+void personaje::set_Newvel(float vx, float vy)
+{
+    VX=vx;
+    VY=vy;
+}
+
 float personaje::getPX() const
 {
     return PX;

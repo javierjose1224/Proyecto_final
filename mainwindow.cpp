@@ -11,8 +11,6 @@ MainWindow::MainWindow(QWidget *parent)
     h_limit=1000;
     v_limit= 500;
 
-
-
     timer=new QTimer(this);
     scene=new QGraphicsScene(this);
     scene->setSceneRect(0,0,h_limit,v_limit);
@@ -26,18 +24,18 @@ MainWindow::MainWindow(QWidget *parent)
     conVidas->setPos(0,0);
     scene->addItem(conVidas);
 
-//    pisos.push_back(new plataforma(0,10,h_limit,20));
-//    pisos.push_back(new plataforma(0,200,h_limit,20));
+    //pisos.push_back(new plataforma(0,10,h_limit,20));
+    //pisos.push_back(new plataforma(0,100,h_limit,20));
+    pisos.push_back(new plataforma(h_limit/4,v_limit/4,200,20));
 
-//    for(int i=0;i<pisos.size();i++)
-//    {
-//        pisos.at(i)->posicionAbs(v_limit);
-//        scene->addItem(pisos.at(i));
-//    }
+    for(int i=0;i<pisos.size();i++)
+    {
+        pisos.at(i)->posicionAbs(v_limit);
+        scene->addItem(pisos.at(i));
+    }
 
-    principal = new personaje(0,0,0,0,50,20,0.3,0,5);//0.3
+    principal = new personaje(h_limit/2,0,0,0,50,20,0.3,0,5);//0.3
     principal->actualizar(v_limit);
-
     scene->addItem(principal);
 
     timer->start(5);
@@ -45,13 +43,14 @@ MainWindow::MainWindow(QWidget *parent)
     bars.back()->actualizar(v_limit);
     scene->addItem(bars.back());
 
-    bars.push_back(new pelota(32,300,30,0,50,10,0,1,7));
-    bars.back()->actualizar(v_limit);
-    scene->addItem(bars.back());
+//    bars.push_back(new pelota(32,300,30,0,50,10,0,1,7));
+//    bars.back()->actualizar(v_limit);
+//    scene->addItem(bars.back());
 
-    bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
-    bars.back()->actualizar(v_limit);
-    scene->addItem(bars.back());
+//    bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
+//    bars.back()->actualizar(v_limit);
+//    scene->addItem(bars.back());
+
     //nueva pelota para prueba
     connect(timer,SIGNAL(timeout()),this,SLOT(actualizarm()));
 }
@@ -65,6 +64,15 @@ void MainWindow::actualizarm()
 {
     principal->actualizar(v_limit);
     borderColilisionPer(principal);
+    for(int i=0;i<pisos.size();i++)
+    {
+        if(principal->collidesWithItem(pisos.at(i)))
+        {
+            principal->set_Newvel(principal->getVX(),-1*principal->getE()*principal->getVY());
+            principal->setPY(2*(pisos.at(i)->getPosY())+principal->getR());
+            //qDebug()<<"POSICION EN Y DE EL MURO "<<pisos.at(i)->getPosY();
+        }
+    }
     for(int i=0;i<bars.size();i++)
     {
         if(principal->collidesWithItem(bars.at(i)))
@@ -72,13 +80,15 @@ void MainWindow::actualizarm()
             if(conVidas->getvidaT()>0)
             {
                 conVidas->decrease();
+                qDebug()<<"Me golpeo";
                 principal->setPos(0,0);
                 principal->setPX(0);
                 principal->setPY(0);
             }
             else
-            {
+            {                               
                 scene->removeItem(principal);
+                timer->stop();
             }
         }
     }
@@ -135,17 +145,21 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_D)
     {
         b->set_vel(15,b->getVY(),b->getPX(),b->getPY());
+        qDebug()<<"ME MOVI CON D";
     }
     if(event->key() == Qt::Key_A)
     {
-        b->set_vel(-15,b->getVY(),b->getPX(),b->getPY());       
+        b->set_vel(-15,b->getVY(),b->getPX(),b->getPY());
+        qDebug()<<"ME MOVI CON A";
     }
     if(event->key() == Qt::Key_W)
     {
-        b->set_vel(b->getVX(),40,b->getPX(),b->getPY());        
+        b->set_vel(b->getVX(),40,b->getPX(),b->getPY());
+        qDebug()<<"ME MOVI CON W";
     }
     if(event->key() == Qt::Key_Space)
     {
+        qDebug()<<"disparo";
         proyectil *bullet = new proyectil(v_limit);
         bullet->setPos(b->getPX(),v_limit-b->getPY());
         scene->addItem(bullet);

@@ -43,6 +43,7 @@ public:
     float getVY() const;
     float getE() const;
     void set_vel(float vx,float vy, float px,float py);
+    void set_Newvel(float vx,float vy);
     void setPX(float value);
     void setPY(float value);
 };
