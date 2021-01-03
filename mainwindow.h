@@ -10,6 +10,7 @@
 #include "plataforma.h"
 #include "proyectil.h"
 #include "vida.h"
+#include "nivel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -37,6 +38,7 @@ private:
     void borderColilisionPer(personaje *b);
     void keyPressEvent(QKeyEvent *event);
 
+    nivel *nivel_1;
     //plataforma *suelo;
     vida *conVidas;
     personaje *principal;

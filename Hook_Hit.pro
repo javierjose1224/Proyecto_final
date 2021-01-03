@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    nivel.cpp \
     pelota.cpp \
     personaje.cpp \
     plataforma.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
 
 HEADERS += \
     mainwindow.h \
+    nivel.h \
     pelota.h \
     personaje.h \
     plataforma.h \

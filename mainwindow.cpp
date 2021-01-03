@@ -26,33 +26,34 @@ MainWindow::MainWindow(QWidget *parent)
 
     //pisos.push_back(new plataforma(0,10,h_limit,20));
     //pisos.push_back(new plataforma(0,100,h_limit,20));
-    pisos.push_back(new plataforma(h_limit/4,v_limit/4,200,20));
-
-    for(int i=0;i<pisos.size();i++)
-    {
-        pisos.at(i)->posicionAbs(v_limit);
-        scene->addItem(pisos.at(i));
-    }
+    pisos.push_back(new plataforma(h_limit/2,v_limit/2,200,50));
+    //pisos.push_back(new plataforma(h_limit/8,v_limit/3,200,50));
 
     principal = new personaje(h_limit/2,0,0,0,50,20,0.3,0,5);//0.3
-    principal->actualizar(v_limit);
-    scene->addItem(principal);
 
-
-    timer->start(5);
     bars.push_back(new pelota(32,300,10,0,50,40,0,1,2));
-    bars.back()->actualizar(v_limit);
-    scene->addItem(bars.back());
+    bars.push_back(new pelota(32,300,30,0,50,10,0,1,7));
+    bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
 
-//    bars.push_back(new pelota(32,300,30,0,50,10,0,1,7));
-//    bars.back()->actualizar(v_limit);
-//    scene->addItem(bars.back());
+    nivel_1=new nivel(bars,principal,pisos);
 
-//    bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
-//    bars.back()->actualizar(v_limit);
-//    scene->addItem(bars.back());
+    //AÑADIDO DE LOS ELEMENTOS EN LA ESCENA
+    for(int i=0;i<nivel_1->getFloors().size();i++)
+    {
+        nivel_1->getFloors().at(i)->posicionAbs(v_limit);
+        scene->addItem(nivel_1->getFloors().at(i));
+    }
 
-    //nueva pelota para prueba
+    for(int i=0;i<nivel_1->getBalls().size();i++)
+    {
+        nivel_1->getBalls().at(i)->actualizar(v_limit);
+        scene->addItem(nivel_1->getBalls().at(i));
+    }
+
+    nivel_1->getProtag()->actualizar(v_limit);
+    scene->addItem(nivel_1->getProtag());
+    //++++++++++++++++++++++++++++++++++++++++++++
+    timer->start(5);
     connect(timer,SIGNAL(timeout()),this,SLOT(actualizarm()));
 }
 
@@ -63,48 +64,59 @@ MainWindow::~MainWindow()
 
 void MainWindow::actualizarm()
 {
-    principal->actualizar(v_limit);
-    borderColilisionPer(principal);
-    for(int i=0;i<pisos.size();i++)
+    nivel_1->getProtag()->actualizar(v_limit);
+    borderColilisionPer(nivel_1->getProtag());
+    for(int i=0;i<nivel_1->getFloors().size();i++)
     {
-        if(principal->collidesWithItem(pisos.at(i)))
+        if(nivel_1->getProtag()->collidesWithItem(nivel_1->getFloors().at(i)))
         {
-            if(principal->getPY()>2*(pisos.at(i)->getPosY()))
+            if(nivel_1->getProtag()->getPY()>2*(nivel_1->getFloors().at(i)->getPosY()))
             {
-                principal->set_Newvel(principal->getVX(),-1*principal->getE()*principal->getVY());
-                principal->setPY(2*(pisos.at(i)->getPosY())+principal->getR());
+                nivel_1->getProtag()->set_Newvel(nivel_1->getProtag()->getVX(),-1*nivel_1->getProtag()->getE()*nivel_1->getProtag()->getVY());
+                nivel_1->getProtag()->setPY(2*(nivel_1->getFloors().at(i)->getPosY())+nivel_1->getProtag()->getR());
             }
-            else if(principal->getPY()<2*(pisos.at(i)->getPosY()))
+            else if(nivel_1->getProtag()->getPY()<2*(nivel_1->getFloors().at(i)->getPosY()))
             {
-                principal->set_Newvel(principal->getVX(),-1*principal->getVY());
+                nivel_1->getProtag()->set_Newvel(nivel_1->getProtag()->getVX(),-1*nivel_1->getProtag()->getVY());
+                //nivel_1->getProtag()->setPY(pisos.at(i)->getPosY());
                 qDebug()<<"POSICION EN Y DE EL MURO debajo"<<pisos.at(i)->getPosY();
             }
+//            if(nivel_1->getProtag()->getPX()>2*(pisos.at(i)->getPosX()))
+//            {
+//                 principal->set_vel(-1*principal->getE()*principal->getVX(),principal->getVY(),-2*(pisos.at(i)->getPosX())-principal->getR(),principal->getPY());
+//                 qDebug()<<"POSICION EN X DE EL MURO izq"<<pisos.at(i)->getPosX();
+//            }
+//            else if(principal->getPX()<2*(pisos.at(i)->getPosX()))
+//            {
+//                principal->set_Newvel(-1*principal->getE()*principal->getVX(),principal->getVY());
+//            }
             //qDebug()<<"POSICION EN Y DE EL MURO "<<pisos.at(i)->getPosY();
         }
     }
-    for(int i=0;i<bars.size();i++)
+    for(int i=0;i<nivel_1->getBalls().size();i++)
     {
-        if(principal->collidesWithItem(bars.at(i)))
+        if(nivel_1->getProtag()->collidesWithItem(nivel_1->getBalls().at(i)))
         {
             if(conVidas->getvidaT()>0)
             {
                 conVidas->decrease();
                 qDebug()<<"Me golpeo";
-                principal->setPos(0,0);
-                principal->setPX(0);
-                principal->setPY(0);
+                nivel_1->getProtag()->setPos(0,0);
+                nivel_1->getProtag()->setPX(0);
+                nivel_1->getProtag()->setPY(0);
             }
             else
             {                               
-                scene->removeItem(principal);
-                timer->stop();               
+                scene->removeItem(nivel_1->getProtag());
+                timer->stop();
+                nivel_1->~nivel();
             }
         }
     }
-    for(int i=0;i<bars.size();i++)
+    for(int i=0;i<nivel_1->getBalls().size();i++)
     {
-        bars.at(i)->actualizar(v_limit);
-        borderColilision(bars.at(i));
+        nivel_1->getBalls().at(i)->actualizar(v_limit);
+        borderColilision(nivel_1->getBalls().at(i));
     }
 }
 
@@ -150,7 +162,7 @@ void MainWindow::borderColilisionPer(personaje *b)
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    personaje *b = principal;
+    personaje *b = nivel_1->getProtag();
     if(event->key() == Qt::Key_D)
     {
         b->set_vel(15,b->getVY(),b->getPX(),b->getPY());
