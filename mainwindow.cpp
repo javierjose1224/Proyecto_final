@@ -38,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     principal->actualizar(v_limit);
     scene->addItem(principal);
 
+
     timer->start(5);
     bars.push_back(new pelota(32,300,10,0,50,40,0,1,2));
     bars.back()->actualizar(v_limit);
@@ -68,8 +69,16 @@ void MainWindow::actualizarm()
     {
         if(principal->collidesWithItem(pisos.at(i)))
         {
-            principal->set_Newvel(principal->getVX(),-1*principal->getE()*principal->getVY());
-            principal->setPY(2*(pisos.at(i)->getPosY())+principal->getR());
+            if(principal->getPY()>2*(pisos.at(i)->getPosY()))
+            {
+                principal->set_Newvel(principal->getVX(),-1*principal->getE()*principal->getVY());
+                principal->setPY(2*(pisos.at(i)->getPosY())+principal->getR());
+            }
+            else if(principal->getPY()<2*(pisos.at(i)->getPosY()))
+            {
+                principal->set_Newvel(principal->getVX(),-1*principal->getVY());
+                qDebug()<<"POSICION EN Y DE EL MURO debajo"<<pisos.at(i)->getPosY();
+            }
             //qDebug()<<"POSICION EN Y DE EL MURO "<<pisos.at(i)->getPosY();
         }
     }
@@ -88,7 +97,7 @@ void MainWindow::actualizarm()
             else
             {                               
                 scene->removeItem(principal);
-                timer->stop();
+                timer->stop();               
             }
         }
     }
