@@ -1,5 +1,15 @@
 #include "plataforma.h"
 
+float plataforma::getAlto() const
+{
+    return alto;
+}
+
+float plataforma::getAncho() const
+{
+    return ancho;
+}
+
 plataforma::plataforma(float posx_, float posy_, float ancho_, float alto_)
 {
     posX=-posx_/2;//con -

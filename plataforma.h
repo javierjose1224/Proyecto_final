@@ -19,6 +19,8 @@ public:
     void setPosX(float value);
     float getPosY() const;
     void setPosY(float value);
+    float getAlto() const;
+    float getAncho() const;
 };
 
 #endif // PLATAFORMA_H
