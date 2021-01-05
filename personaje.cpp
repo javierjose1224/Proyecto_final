@@ -43,7 +43,7 @@ QRectF personaje::boundingRect() const
 void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->setBrush(Qt::darkRed);
-    painter->drawEllipse(boundingRect());
+    painter->drawRect(boundingRect());
 }
 
 void personaje::setEscala(float s)

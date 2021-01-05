@@ -26,8 +26,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     //pisos.push_back(new plataforma(0,10,h_limit,20));
     //pisos.push_back(new plataforma(0,100,h_limit,20));
-    pisos.push_back(new plataforma(h_limit/2,v_limit/2,200,100));
+    //pisos.push_back(new plataforma(h_limit,v_limit,200,100));
     //pisos.push_back(new plataforma(h_limit/8,v_limit/3,200,50));
+    muros.push_back(new muro(h_limit/2,v_limit/2,200,100));
 
     principal = new personaje(0,0,0,0,50,20,0.3,0,5);//0.3
 
@@ -35,12 +36,12 @@ MainWindow::MainWindow(QWidget *parent)
     //bars.push_back(new pelota(32,300,30,0,50,10,0,1,7));
     //bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
 
-    nivel_1=new nivel(bars,principal,pisos);
+    nivel_1=new nivel(bars,principal,muros);
 
     //AÑADIDO DE LOS ELEMENTOS EN LA ESCENA
     for(int i=0;i<nivel_1->getFloors().size();i++)
     {
-        nivel_1->getFloors().at(i)->posicionAbs(v_limit);
+        nivel_1->getFloors().at(i)->posicionar(v_limit);
         scene->addItem(nivel_1->getFloors().at(i));
     }
 
@@ -69,40 +70,60 @@ void MainWindow::actualizarm()
     personaje *prot= nivel_1->getProtag();
     for(int i=0;i<nivel_1->getFloors().size();i++)
     {
-        plataforma *floo= nivel_1->getFloors().at(i);
+        muro *floo= nivel_1->getFloors().at(i);
         if(prot->collidesWithItem(floo))
-        {             
-            //qDebug()<<"colisione";
+        {
+            {
+//            if(prot->getPX()>floo->getPX() && prot->getPX()<floo->getPX()+floo->getAncho())
+//            {
+//                 qDebug()<<"colisione centro";
+//                 if(prot->getPY()>floo->getPY())
+//                 {
+//                     prot->set_vel(prot->getVX(),-1*prot->getE()*prot->getVY(),prot->getPX(),floo->getPY()+prot->getR());
+//                 }
+//                 if(prot->getPY()<floo->getPY()-floo->getAlto())
+//                 {
+//                     qDebug()<<"colisione abajo";
+//                     prot->set_vel(prot->getVX(),-1*prot->getE()*prot->getVY(),prot->getPX(),floo->getPY()-floo->getAlto()-prot->getR());
+//                 }
+//            }
 
-            if(prot->getPY()>2*(floo->getPosY()) && prot->getPX()>floo->getPosX())
+//            if(prot->getPY()>floo->getPY() && prot->getPY()<floo->getPY()-floo->getAlto())
+//            {
+//                if(prot->getPX()<floo->getPX())
+//                {
+//                    qDebug()<<"colisione en la derecha";
+//                    prot->set_vel(-1*prot->getE()*prot->getVX(),prot->getVY(),prot->getPX(),prot->getPY());
+//                }
+//                if(prot->getPX()>floo->getPX()+floo->getAncho())
+//                {
+//                    qDebug()<<"colisione en la izq";
+//                    prot->set_vel(-1*prot->getE()*prot->getVX(),prot->getVY(),floo->getPX()+floo->getAncho()+prot->getR(),prot->getPY());
+//                }
+//            }
+           }
+            if(prot->getPX()<floo->getPX() && prot->getPY()<floo->getPY())
             {
-               prot->set_vel(prot->getVX(),-1*prot->getE()*prot->getVY(),prot->getPX(),2*(floo->getPosY())+prot->getR());
-            }
-            else if(prot->getPY()<(2*(floo->getPosY()))-floo->getAlto() && prot->getPX()>floo->getPosX())
-            {
-                prot->set_vel(prot->getVX(),-1*prot->getE()*prot->getVY(),prot->getPX(),(2*(floo->getPosY())-floo->getAlto())-prot->getR());
-                qDebug()<<"colisione diabajo";
-            }
-            else if(prot->getPX()<floo->getPosX())
-            {
-                prot->set_vel(-1*prot->getE()*prot->getVX(),prot->getVY(),prot->getPX(),prot->getPY());
                 qDebug()<<"colisione en la derecha";
+                prot->set_vel(-1*prot->getE()*prot->getVX(),prot->getVY(),prot->getPX(),prot->getPY());
             }
-//            if(nivel_1->getProtag()->getPY()>2*(nivel_1->getFloors().at(i)->getPosY()) && nivel_1->getProtag()->getPX()>2*(nivel_1->getFloors().at(i)->getPosX()))
-//            {
-//                nivel_1->getProtag()->set_Newvel(nivel_1->getProtag()->getVX(),-1*nivel_1->getProtag()->getE()*nivel_1->getProtag()->getVY());
-//                nivel_1->getProtag()->setPY(2*(nivel_1->getFloors().at(i)->getPosY())+nivel_1->getProtag()->getR());
-//            }
-//            else if(nivel_1->getProtag()->getPX()>2*(nivel_1->getFloors().at(i)->getPosX()))
-//            {
-//                nivel_1->getProtag()->set_Newvel(-1*nivel_1->getProtag()->getVX(),nivel_1->getProtag()->getVY());
-//            }
-
-//            if(nivel_1->getProtag()->getPY()<(2*(nivel_1->getFloors().at(i)->getPosY())) && nivel_1->getProtag()->getPX()>(2*(nivel_1->getFloors().at(i)->getPosX())))
-//            {
-//                nivel_1->getProtag()->set_Newvel(nivel_1->getProtag()->getVX(),-1*nivel_1->getProtag()->getVY());
-//            }
+            else if(prot->getPX()>floo->getPX()+floo->getAncho())
+            {
+                qDebug()<<"colisione en la izq";
+                prot->set_vel(-1*prot->getE()*prot->getVX(),prot->getVY(),floo->getPX()+floo->getAncho()+prot->getR(),prot->getPY());
+            }
+            else if(prot->getPY()>floo->getPY())
+            {
+                 qDebug()<<"colisione arriba";
+                 prot->set_vel(prot->getVX(),-1*prot->getE()*prot->getVY(),prot->getPX(),floo->getPY()+prot->getR());
+            }
+            else if(prot->getPY()<floo->getPY()-floo->getAlto() && prot->getPX()>floo->getPX())
+            {
+                qDebug()<<"colisione abajo";
+                prot->set_vel(prot->getVX(),-1*prot->getE()*prot->getVY(),prot->getPX(),floo->getPY()-floo->getAlto()-prot->getR());
+            }
         }
+
     }
     for(int i=0;i<nivel_1->getBalls().size();i++)
     {

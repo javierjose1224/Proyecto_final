@@ -3,21 +3,21 @@
 
 #include "pelota.h"
 #include "personaje.h"
-#include "plataforma.h"
+#include "muro.h"
 
 class nivel
 {
 private:
     QList<pelota*>balls;
     personaje *protag;
-    QList<plataforma*>floors;
+    QList<muro*>floors;
 
 public:
-    nivel(QList<pelota*>balls_,personaje *protag_,QList<plataforma*>floors_);
+    nivel(QList<pelota*>balls_,personaje *protag_,QList<muro*>floors_);
     ~nivel();
     QList<pelota *> getBalls() const;
     personaje *getProtag() const;
-    QList<plataforma *> getFloors() const;
+    QList<muro *> getFloors() const;
 
 };
 

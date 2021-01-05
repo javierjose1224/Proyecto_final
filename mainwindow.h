@@ -7,10 +7,11 @@
 #include "pelota.h"
 #include <QKeyEvent>
 #include "personaje.h"
-#include "plataforma.h"
 #include "proyectil.h"
 #include "vida.h"
 #include "nivel.h"
+#include "muro.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -42,7 +43,7 @@ private:
     //plataforma *suelo;
     vida *conVidas;
     personaje *principal;
-    QList<plataforma *>pisos;
+    QList<muro *>muros;
     QList<pelota *>bars;
 };
 #endif // MAINWINDOW_H

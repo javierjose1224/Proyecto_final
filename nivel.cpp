@@ -1,6 +1,6 @@
 #include "nivel.h"
 
-nivel::nivel(QList<pelota *> balls_, personaje *protag_, QList<plataforma *> floors_)
+nivel::nivel(QList<pelota *> balls_, personaje *protag_, QList<muro *> floors_)
 {
     balls=balls_;
     protag=protag_;
@@ -24,7 +24,7 @@ personaje *nivel::getProtag() const
     return protag;
 }
 
-QList<plataforma *> nivel::getFloors() const
+QList<muro *> nivel::getFloors() const
 {
     return floors;
 }

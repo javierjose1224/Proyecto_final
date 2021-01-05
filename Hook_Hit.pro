@@ -18,19 +18,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    muro.cpp \
     nivel.cpp \
     pelota.cpp \
     personaje.cpp \
-    plataforma.cpp \
     proyectil.cpp \
     vida.cpp
 
 HEADERS += \
     mainwindow.h \
+    muro.h \
     nivel.h \
     pelota.h \
     personaje.h \
-    plataforma.h \
     proyectil.h \
     vida.h
 
