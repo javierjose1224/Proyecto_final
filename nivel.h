@@ -8,6 +8,7 @@
 class nivel
 {
 private:
+
     QList<pelota*>balls;
     personaje *protag;
     QList<muro*>floors;
@@ -18,7 +19,6 @@ public:
     QList<pelota *> getBalls() const;
     personaje *getProtag() const;
     QList<muro *> getFloors() const;
-
 };
 
 #endif // NIVEL_H

@@ -28,13 +28,13 @@ MainWindow::MainWindow(QWidget *parent)
     //pisos.push_back(new plataforma(0,100,h_limit,20));
     //pisos.push_back(new plataforma(h_limit,v_limit,200,100));
     //pisos.push_back(new plataforma(h_limit/8,v_limit/3,200,50));
-    muros.push_back(new muro(h_limit/2,v_limit/2,200,100));
+    muros.push_back(new muro(h_limit/2,v_limit/2,200,50));
 
-    principal = new personaje(0,0,0,0,50,20,0.3,0,5);//0.3
+    principal = new personaje(0,0,0,0,50,20,0.3,0,5);//0.3k
 
-    //bars.push_back(new pelota(32,300,10,0,50,40,0,1,2));
-    //bars.push_back(new pelota(32,300,30,0,50,10,0,1,7));
-    //bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
+    bars.push_back(new pelota(32,300,10,0,50,40,0,1,2));
+    bars.push_back(new pelota(32,300,30,0,50,10,0,1,7));
+    bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
 
     nivel_1=new nivel(bars,principal,muros);
 
@@ -65,6 +65,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::actualizarm()
 {
+
     nivel_1->getProtag()->actualizar(v_limit);
     borderColilisionPer(nivel_1->getProtag());
     personaje *prot= nivel_1->getProtag();
@@ -72,54 +73,25 @@ void MainWindow::actualizarm()
     {
         muro *floo= nivel_1->getFloors().at(i);
         if(prot->collidesWithItem(floo))
-        {
-            {
-//            if(prot->getPX()>floo->getPX() && prot->getPX()<floo->getPX()+floo->getAncho())
-//            {
-//                 qDebug()<<"colisione centro";
-//                 if(prot->getPY()>floo->getPY())
-//                 {
-//                     prot->set_vel(prot->getVX(),-1*prot->getE()*prot->getVY(),prot->getPX(),floo->getPY()+prot->getR());
-//                 }
-//                 if(prot->getPY()<floo->getPY()-floo->getAlto())
-//                 {
-//                     qDebug()<<"colisione abajo";
-//                     prot->set_vel(prot->getVX(),-1*prot->getE()*prot->getVY(),prot->getPX(),floo->getPY()-floo->getAlto()-prot->getR());
-//                 }
-//            }
-
-//            if(prot->getPY()>floo->getPY() && prot->getPY()<floo->getPY()-floo->getAlto())
-//            {
-//                if(prot->getPX()<floo->getPX())
-//                {
-//                    qDebug()<<"colisione en la derecha";
-//                    prot->set_vel(-1*prot->getE()*prot->getVX(),prot->getVY(),prot->getPX(),prot->getPY());
-//                }
-//                if(prot->getPX()>floo->getPX()+floo->getAncho())
-//                {
-//                    qDebug()<<"colisione en la izq";
-//                    prot->set_vel(-1*prot->getE()*prot->getVX(),prot->getVY(),floo->getPX()+floo->getAncho()+prot->getR(),prot->getPY());
-//                }
-//            }
-           }
+        {           
             if(prot->getPX()<floo->getPX() && prot->getPY()<floo->getPY())
             {
-                qDebug()<<"colisione en la derecha";
+                //qDebug()<<"colisione en la derecha";
                 prot->set_vel(-1*prot->getE()*prot->getVX(),prot->getVY(),prot->getPX(),prot->getPY());
             }
-            else if(prot->getPX()>floo->getPX()+floo->getAncho())
+            if(prot->getPX()>floo->getPX()+floo->getAncho())
             {
-                qDebug()<<"colisione en la izq";
+                //qDebug()<<"colisione en la izq";
                 prot->set_vel(-1*prot->getE()*prot->getVX(),prot->getVY(),floo->getPX()+floo->getAncho()+prot->getR(),prot->getPY());
             }
-            else if(prot->getPY()>floo->getPY())
+            if(prot->getPY()>floo->getPY() && prot->getPX()+prot->getR()>floo->getPX())
             {
-                 qDebug()<<"colisione arriba";
+                 qDebug()<<"colisione arriba"<< int(prot->getPY()-prot->getR());
                  prot->set_vel(prot->getVX(),-1*prot->getE()*prot->getVY(),prot->getPX(),floo->getPY()+prot->getR());
             }
-            else if(prot->getPY()<floo->getPY()-floo->getAlto() && prot->getPX()>floo->getPX())
+            if(prot->getPY()<floo->getPY()-floo->getAlto() && prot->getPX()+prot->getPX()>floo->getPX())
             {
-                qDebug()<<"colisione abajo";
+                //qDebug()<<"colisione abajo";
                 prot->set_vel(prot->getVX(),-1*prot->getE()*prot->getVY(),prot->getPX(),floo->getPY()-floo->getAlto()-prot->getR());
             }
         }
@@ -144,7 +116,10 @@ void MainWindow::actualizarm()
                 nivel_1->~nivel();
             }
         }
+
     }
+
+
     for(int i=0;i<nivel_1->getBalls().size();i++)
     {
         nivel_1->getBalls().at(i)->actualizar(v_limit);

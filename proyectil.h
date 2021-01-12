@@ -6,6 +6,7 @@
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QDebug>
+#include "pelota.h"
 
 class proyectil: public QObject,public QGraphicsRectItem
 {
