@@ -23,17 +23,17 @@ void proyectil::movimiento()
 //            //incrementa el puntaje
 //            scene()->removeItem(colliding_items[i]);
 //            scene()->removeItem(this);
-//            //delete colliding_items[i];
+//            delete colliding_items[i];
 //            colliding_items.removeAt(i);
 //            delete this;
 //        }
 //    }
 
     setPos(x(),y()-10);
-//    if(pos().y()+rect().height()<0)
-//    {
-//        scene()->removeItem(this);
-//        delete this;
-//        qDebug()<<"bala eliminada";
-//    }
+    if(pos().y()+rect().height()<0)
+    {
+        scene()->removeItem(this);
+        delete this;
+        qDebug()<<"bala eliminada";
+    }
 }

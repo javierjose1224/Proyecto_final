@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    disparo.cpp \
     main.cpp \
     mainwindow.cpp \
     muro.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
     vida.cpp
 
 HEADERS += \
+    disparo.h \
     mainwindow.h \
     muro.h \
     nivel.h \

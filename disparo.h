@@ -1,5 +1,5 @@
-#ifndef PELOTA_H
-#define PELOTA_H
+#ifndef DISPARO_H
+#define DISPARO_H
 
 #include <QGraphicsItem>
 #include <QPainter>
@@ -7,12 +7,11 @@
 #include <QGraphicsScene>
 #include <stdlib.h>
 #include <time.h>
-#include <proyectil.h>
 #include <QList>
+#include <QDebug>
 
-class pelota:public QObject,public QGraphicsItem
+class disparo: public QGraphicsItem
 {
-private:
     float PX;
     float PY;
     float mass;
@@ -28,11 +27,8 @@ private:
     float V;//vector de velocidad
     float dt;//var del tiempo
     float escala;
-
 public:
-    pelota(float posX_,float posY_,float velX_,float velY_,float masa,float radio,float k_,float e_,float G_);
-    ~pelota();
-
+    disparo(float posX_,float posY_,float velX_,float velY_,float radio);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) override;
     void setEscala(float s);
@@ -40,15 +36,6 @@ public:
     //void collisionball(QList<proyectil *> balas_player, QGraphicsScene *scene);
 
     void actualizar(float v_limit);
-
-    float getPX() const;
-    float getPY() const;
-    float getMass() const;
-    float getR() const;
-    float getVX() const;
-    float getVY() const;
-    float getE() const;
-    void set_vel(float vx,float vy, float px,float py);
 };
 
-#endif // PELOTA_H
+#endif // DISPARO_H

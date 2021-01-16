@@ -4,6 +4,7 @@
 #include "pelota.h"
 #include "personaje.h"
 #include "muro.h"
+#include "proyectil.h"
 
 class nivel
 {
@@ -17,6 +18,8 @@ public:
     nivel(QList<pelota*>balls_,personaje *protag_,QList<muro*>floors_);
     ~nivel();
     QList<pelota *> getBalls() const;
+    void graficar(QGraphicsScene *scene,float v_limit);
+    void actualizar_juego();
     personaje *getProtag() const;
     QList<muro *> getFloors() const;
 };

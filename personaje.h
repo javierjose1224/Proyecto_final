@@ -5,7 +5,7 @@
 #include <QGraphicsScene>
 #include <stdlib.h>
 #include <time.h>
-
+#include <proyectil.h>
 
 class personaje:public QGraphicsItem
 {
@@ -35,6 +35,8 @@ public:
     void setEscala(float s);
 
     void actualizar(float v_limit);
+    void disparar(QList<proyectil *> balas_Player, QGraphicsScene *scene);
+
     float getPX() const;
     float getPY() const;
     float getMass() const;

@@ -1,6 +1,7 @@
 #include "pelota.h"
 #include <math.h>
 #include <cmath>
+#include "proyectil.h"
 
 pelota::pelota(float posX_, float posY_, float velX_, float velY_, float masa, float radio, float k_, float e_,float G_)
 {
@@ -40,6 +41,18 @@ void pelota::setEscala(float s)
 {
     escala=s;
 }
+
+//void pelota::collisionball(QList<proyectil*> balas_player, QGraphicsScene *scene)
+//{
+//    for(int i=0;balas_player.size();i++)
+//    {
+//        if(balas_player.at(i)->collidesWithItem(this)){
+//            scene->removeItem(balas_player.at(i));
+//            balas_player.removeAt(i);
+//            break;
+//        }
+//    }
+//}
 
 void pelota::actualizar(float v_limit)
 {

@@ -64,6 +64,13 @@ void personaje::actualizar(float v_limit)
     setPos(PX,v_limit-PY);
 }
 
+void personaje::disparar(QList<proyectil *> balas_Player, QGraphicsScene *scene)
+{
+    balas_Player.append(new proyectil(500));
+    balas_Player.last()->setPos(this->getPX(),500-this->getPY());
+    scene->addItem(balas_Player.last());
+}
+
 float personaje::getPY() const
 {
     return PY;

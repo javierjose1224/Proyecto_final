@@ -37,22 +37,8 @@ MainWindow::MainWindow(QWidget *parent)
     bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
 
     nivel_1=new nivel(bars,principal,muros);
-
+    nivel_1->graficar(scene,v_limit);
     //AÑADIDO DE LOS ELEMENTOS EN LA ESCENA
-    for(int i=0;i<nivel_1->getFloors().size();i++)
-    {
-        nivel_1->getFloors().at(i)->posicionar(v_limit);
-        scene->addItem(nivel_1->getFloors().at(i));
-    }
-
-    for(int i=0;i<nivel_1->getBalls().size();i++)
-    {
-        nivel_1->getBalls().at(i)->actualizar(v_limit);
-        scene->addItem(nivel_1->getBalls().at(i));
-    }
-
-    nivel_1->getProtag()->actualizar(v_limit);
-    scene->addItem(nivel_1->getProtag());
     //++++++++++++++++++++++++++++++++++++++++++++
     timer->start(5);
     connect(timer,SIGNAL(timeout()),this,SLOT(actualizarm()));
@@ -65,8 +51,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::actualizarm()
 {
-
     nivel_1->getProtag()->actualizar(v_limit);
+
     borderColilisionPer(nivel_1->getProtag());
     personaje *prot= nivel_1->getProtag();
     for(int i=0;i<nivel_1->getFloors().size();i++)
@@ -115,15 +101,33 @@ void MainWindow::actualizarm()
                 timer->stop();
                 nivel_1->~nivel();
             }
-        }
-
+        }       
     }
 
+    for(int i=0;i<bala_jugador.size();i++)
+    {
+        for(int j=0;j<nivel_1->getBalls().size();j++)
+        {
+            if(bala_jugador.at(i)->collidesWithItem(nivel_1->getBalls().at(j)))
+            {
+                qDebug()<<"colisione";
+                scene->removeItem(nivel_1->getBalls().at(i));
+                nivel_1->getBalls().removeAt(j);
+                //delete nivel_1->getBalls().at(i);
+            }
+        }
+    }
 
     for(int i=0;i<nivel_1->getBalls().size();i++)
-    {
+    {       
         nivel_1->getBalls().at(i)->actualizar(v_limit);
         borderColilision(nivel_1->getBalls().at(i));
+        //nivel_1->getBalls().at(i)->collision_ball(balas_player,scene);
+    }
+
+    for(int i=0;i<bala_jugador.size();i++)
+    {
+        bala_jugador.at(i)->actualizar(v_limit);
     }
 }
 
@@ -188,8 +192,13 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_Space)
     {
         qDebug()<<"disparo";
-        proyectil *bullet = new proyectil(v_limit);
-        bullet->setPos(b->getPX(),v_limit-b->getPY());
-        scene->addItem(bullet);
+//        proyectil *bullet = new proyectil(v_limit);
+//        bullet->setPos(b->getPX(),v_limit-b->getPY());
+//        scene->addItem(bullet);
+        bala_jugador.push_back(new disparo(nivel_1->getProtag()->getPX()+nivel_1->getProtag()->getR(),nivel_1->getProtag()->getPY(),0,20,5));
+        bala_jugador.back()->actualizar(v_limit);
+        scene->addItem(bala_jugador.back());
+
+        //b->disparar(balas_player,scene);
     }
 }
