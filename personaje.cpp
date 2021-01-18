@@ -12,6 +12,18 @@ void personaje::setPY(float value)
     PY = value;
 }
 
+void personaje::disparo_lis(QGraphicsScene *scene,float v_limit)
+{
+    balas_jugador.push_back(new disparo(PX+R,PY,0,20,5));
+    balas_jugador.back()->actualizar(v_limit);
+    scene->addItem(balas_jugador.back());
+}
+
+QList<disparo *> personaje::getBalas_jugador() const
+{
+    return balas_jugador;
+}
+
 personaje::personaje(float posX_, float posY_, float velX_, float velY_, float masa, float radio, float k_, float e_,float G_)
 {
      PX=posX_;
@@ -38,6 +50,7 @@ personaje::~personaje()
 QRectF personaje::boundingRect() const
 {
     return QRectF(-1*escala*R,-1*escala*R,2*escala*R,2*escala*R);
+
 }
 
 void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -64,11 +77,24 @@ void personaje::actualizar(float v_limit)
     setPos(PX,v_limit-PY);
 }
 
-void personaje::disparar(QList<proyectil *> balas_Player, QGraphicsScene *scene)
+void personaje::colision_lados_escena(float v_limit,float h_limit)//v_limit,h_limit
 {
-    balas_Player.append(new proyectil(500));
-    balas_Player.last()->setPos(this->getPX(),500-this->getPY());
-    scene->addItem(balas_Player.last());
+    if(this->getPX()<this->getR())//IZQUIERDA
+    {
+        this->set_vel(-1*this->getE()*this->getVX(),this->getVY(),this->getR(),this->getPY());
+    }
+    if(this->getPX()>h_limit-this->getR())//DERECHA
+    {
+        this->set_vel(-1*this->getE()*this->getVX(),this->getVY(),h_limit-this->getR(),this->getPY());
+    }
+    if(this->getPY()<this->getR())//AbAJO
+    {
+        this->set_vel(this->getVX(),-1*this->getE()*this->getVY(),this->getPX(),this->getR());
+    }
+    if(this->getPY()>v_limit-this->getR())//ARRIBA
+    {
+        this->set_vel(this->getVX(),-1*this->getE()*this->getVY(),this->getPX(),v_limit-this->getR());
+    }
 }
 
 float personaje::getPY() const

@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <proyectil.h>
+#include "disparo.h"
 
 class personaje:public QGraphicsItem
 {
@@ -25,7 +26,7 @@ private:
     float V;//vector de velocidad
     float dt;//var del tiempo
     float escala;
-
+    QList<disparo*> balas_jugador;
 
 public:
     personaje(float posX_,float posY_,float velX_,float velY_,float masa,float radio,float k_,float e_,float G_);
@@ -35,7 +36,7 @@ public:
     void setEscala(float s);
 
     void actualizar(float v_limit);
-    void disparar(QList<proyectil *> balas_Player, QGraphicsScene *scene);
+    void colision_lados_escena(float v_limit,float h_limit);
 
     float getPX() const;
     float getPY() const;
@@ -48,6 +49,9 @@ public:
     void set_Newvel(float vx,float vy);
     void setPX(float value);
     void setPY(float value);
+
+    void disparo_lis(QGraphicsScene *scene,float v_limit);
+    QList<disparo *> getBalas_jugador() const;
 };
 
 #endif // PERSONAJE_H

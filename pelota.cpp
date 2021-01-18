@@ -42,6 +42,27 @@ void pelota::setEscala(float s)
     escala=s;
 }
 
+void pelota::collision_lados_escena(float v_limit,float h_limit)
+{
+
+    if(this->getPX()<this->getR())
+    {
+        this->set_vel(-1*this->getE()*this->getVX(),this->getVY(),this->getR(),this->getPY());
+    }
+    if(this->getPX()>h_limit-this->getR())
+    {
+        this->set_vel(-1*this->getE()*this->getVX(),this->getVY(),h_limit-this->getR(),this->getPY());
+    }
+    if(this->getPY()<this->getR())
+    {
+        this->set_vel(this->getVX(),-1*this->getE()*this->getVY(),this->getPX(),this->getR());
+    }
+    if(this->getPY()>v_limit-this->getR())
+    {
+        this->set_vel(this->getVX(),-1*this->getE()*this->getVY(),this->getPX(),v_limit-this->getR());
+    }
+}
+
 //void pelota::collisionball(QList<proyectil*> balas_player, QGraphicsScene *scene)
 //{
 //    for(int i=0;balas_player.size();i++)
