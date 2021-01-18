@@ -25,10 +25,6 @@ MainWindow::MainWindow(QWidget *parent)
     conVidas->setPos(0,0);
     scene->addItem(conVidas);
 
-    //pisos.push_back(new plataforma(0,10,h_limit,20));
-    //pisos.push_back(new plataforma(0,100,h_limit,20));
-    //pisos.push_back(new plataforma(h_limit,v_limit,200,100));
-    //pisos.push_back(new plataforma(h_limit/8,v_limit/3,200,50));
     muros.push_back(new muro(h_limit/2,v_limit/2,200,50));
 
     principal = new personaje(0,0,0,0,50,20,0.3,0,5);//0.3k
@@ -40,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
     bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
 
     nivel_1=new nivel(bars,muros);
+
     nivel_1->graficar(scene,v_limit,h_limit);
     //AÑADIDO DE LOS ELEMENTOS EN LA ESCENA
     //++++++++++++++++++++++++++++++++++++++++++++
@@ -53,9 +50,19 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::actualizar_Level_esc()
+void MainWindow::actualizarm()
 {
-    nivel_1->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas);
+    if(conVidas->getvidaT()>0)
+    {
+        nivel_1->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas);
+    }
+    else
+    {
+        timer->stop();
+        qDebug()<<"entre a menor a cero";
+        nivel_1->borrar_elementos(scene);
+        //nivel_1->~nivel();
+    }
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)

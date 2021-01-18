@@ -29,7 +29,7 @@ public:
 
 public slots:
 
-    void actualizar_Level_esc();
+    void actualizarm();
 
 private:
 

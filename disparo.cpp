@@ -40,5 +40,7 @@ void disparo::actualizar(float v_limit)
     VX=VX+AX*dt;
     VY=VY+AY*dt;
     setPos(PX,v_limit-PY);
-
 }
+
+
+
