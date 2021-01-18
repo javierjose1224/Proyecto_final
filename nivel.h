@@ -5,9 +5,9 @@
 #include "pelota.h"
 #include "personaje.h"
 #include "muro.h"
-#include "proyectil.h"
 #include "vida.h"
 #include <QTimer>
+#include "puntaje.h"
 
 class nivel:public QObject
 {
@@ -18,7 +18,6 @@ private:
     QList<muro*>floors;
 
 public slots:
-
 
 
 public:
@@ -32,7 +31,7 @@ public:
     QList<muro *> getFloors() const;
 
     void graficar(QGraphicsScene *scene,float v_limit,float h_limit);
-    void actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,personaje *protag,QTimer *timer,vida *conVidas);
+    void actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,personaje *protag,QTimer *timer,vida *conVidas,puntaje *score);
 
 };
 

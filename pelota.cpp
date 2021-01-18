@@ -1,7 +1,6 @@
 #include "pelota.h"
 #include <math.h>
 #include <cmath>
-#include "proyectil.h"
 
 pelota::pelota(float posX_, float posY_, float velX_, float velY_, float masa, float radio, float k_, float e_,float G_)
 {

@@ -5,12 +5,17 @@ float disparo::getPX() const
     return PX;
 }
 
-disparo::disparo(float posX_, float posY_, float velX_, float velY_,float radio)
+float disparo::getR() const
+{
+    return R;
+}
+
+disparo::disparo(float posX_, float posY_, float velX_, float velY_)
 {
     PX=posX_;
     PY=posY_;
     mass=10;
-    R=radio;
+    R=2.5;
     VX=velX_;
     VY=velY_;
     AX=0;

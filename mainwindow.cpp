@@ -25,15 +25,19 @@ MainWindow::MainWindow(QWidget *parent)
     conVidas->setPos(0,0);
     scene->addItem(conVidas);
 
-    //muros.push_back(new muro(h_limit/2,v_limit/2,200,50));
+    score = new puntaje();
+    score->setPos(h_limit-200,0);
+    scene->addItem(score);
 
-    muros.push_back(new muro(h_limit/2-25,v_limit,50,v_limit));
+    muros.push_back(new muro(h_limit/2,v_limit/2,200,50));
+
+    //muros.push_back(new muro(h_limit/2-25,v_limit,50,v_limit));
 
     principal = new personaje(0,0,0,0,50,20,0.3,0,5);//0.3k
     principal->actualizar(v_limit);
     scene->addItem(principal);
 
-    bars.push_back(new pelota(32,300,10,0,50,40,0,1,2));
+    bars.push_back(new pelota(32,300,10,0,50,60,0,1,2));
 //    bars.push_back(new pelota(32,300,30,0,50,10,0,1,7));
 //    bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
 
@@ -56,12 +60,13 @@ void MainWindow::actualizarm()
 {
     if(conVidas->getvidaT()>0)
     {
-        nivel_1->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas);
+        nivel_1->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas,score);
     }
     else
     {
         timer->stop();
         qDebug()<<"entre a menor a cero";
+        scene->removeItem(principal);
         nivel_1->borrar_elementos(scene);
         //nivel_1->~nivel();
     }

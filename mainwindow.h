@@ -7,11 +7,10 @@
 #include "pelota.h"
 #include <QKeyEvent>
 #include "personaje.h"
-#include "proyectil.h"
 #include "vida.h"
 #include "nivel.h"
 #include "muro.h"
-
+#include "puntaje.h"
 #include "disparo.h"
 
 QT_BEGIN_NAMESPACE
@@ -42,12 +41,12 @@ private:
     void borderColilision(pelota *b);
     void borderColilisionPer(personaje *b);
     void keyPressEvent(QKeyEvent *event);
-    QList <proyectil *> balas_player;
     nivel *nivel_1;
 
     QList <disparo *> bala_jugador;
 
     //plataforma *suelo;
+    puntaje *score;
     vida *conVidas;
     personaje *principal;
     QList<muro *>muros;

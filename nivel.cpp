@@ -58,7 +58,7 @@ void nivel::graficar(QGraphicsScene *scene, float v_limit,float h_limit)
 //    connect(timer_emp,SIGNAL(timeout()),this,SLOT(actualizar_nivel()));
 }
 
-void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,personaje *protag,QTimer *timer,vida *conVidas)
+void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,personaje *protag,QTimer *timer,vida *conVidas,puntaje *score)
 {
     protag->actualizar(v_limit);
     protag->colision_lados_escena(v_limit,h_limit);
@@ -126,26 +126,30 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
             {
 
                 qDebug()<<"colisione";
+                score->increase();
                 float posx=balls.at(j)->getPX();
                 float posy=balls.at(j)->getPY();
+                float rad=balls.at(j)->getR()/2;
+                float posx_b=protag->getBalas_jugador().at(i)->getPX();
 
                 scene->removeItem(protag->getBalas_jugador().at(i));
-                protag->getBalas_jugador().removeAt(i);
+                protag->eliminar_disparo(i);
+                //protag->getBalas_jugador().removeAt(i);
+
 
                 scene->removeItem(balls.at(j));
                 balls.removeAt(j);
 
-                if(posx>protag->getBalas_jugador().at(i)->getPX())
+                if(posx>posx_b)
                 {
-                    balls.push_back(new pelota(posx,posy,10,20,50,30,0,1,2));
-                    //balls.back()->actualizar(v_limit);
+
+                    balls.push_back(new pelota(posx,posy,10,20,50,rad,0,1,2));
                     scene->addItem(balls.back());
 
-                    balls.push_back(new pelota(posx,posy,10,0,50,30,0,1,2));
-                    //balls.back()->actualizar(v_limit);
+                    balls.push_back(new pelota(posx_b-2*rad,posy,-10,20,50,rad,0,1,2));
                     scene->addItem(balls.back());
                 }
-                //delete this->getBalls().at(i);
+
             }
         }
     }
@@ -157,7 +161,6 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         //borderColilision(balls.at(i));
         //this->getBalls().at(i)->collision_ball(balas_player,scene);
     }
-
 
 }
 

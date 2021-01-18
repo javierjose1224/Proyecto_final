@@ -7,7 +7,6 @@
 #include <QGraphicsScene>
 #include <stdlib.h>
 #include <time.h>
-#include <proyectil.h>
 #include <QList>
 
 class pelota:public QObject,public QGraphicsItem

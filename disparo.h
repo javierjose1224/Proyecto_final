@@ -27,8 +27,9 @@ class disparo: public QGraphicsItem
     float V;//vector de velocidad
     float dt;//var del tiempo
     float escala;
+
 public:
-    disparo(float posX_,float posY_,float velX_,float velY_,float radio);
+    disparo(float posX_,float posY_,float velX_,float velY_);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) override;
     void setEscala(float s);
@@ -37,6 +38,7 @@ public:
 
     void actualizar(float v_limit);
     float getPX() const;
+    float getR() const;
 };
 
 #endif // DISPARO_H

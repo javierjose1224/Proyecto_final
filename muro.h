@@ -5,7 +5,6 @@
 #include <QGraphicsScene>
 #include <stdlib.h>
 #include <time.h>
-#include "proyectil.h"
 
 class muro:public QGraphicsItem
 {

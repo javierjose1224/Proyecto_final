@@ -12,9 +12,17 @@ void personaje::setPY(float value)
     PY = value;
 }
 
+void personaje::eliminar_disparo(int i)
+{
+    con=con+1;
+    qDebug()<<"bala a eliminar"<<i;
+    balas_jugador.removeAt(i-con);
+//sd
+}
+
 void personaje::disparo_lis(QGraphicsScene *scene,float v_limit)
 {
-    balas_jugador.push_back(new disparo(PX+R,PY,0,20,2.5));
+    balas_jugador.push_back(new disparo(PX+R,PY,0,20));
     balas_jugador.back()->actualizar(v_limit);
     scene->addItem(balas_jugador.back());
 }

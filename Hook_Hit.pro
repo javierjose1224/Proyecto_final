@@ -16,7 +16,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    ad_nivel.cpp \
     disparo.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -24,18 +23,17 @@ SOURCES += \
     nivel.cpp \
     pelota.cpp \
     personaje.cpp \
-    proyectil.cpp \
+    puntaje.cpp \
     vida.cpp
 
 HEADERS += \
-    ad_nivel.h \
     disparo.h \
     mainwindow.h \
     muro.h \
     nivel.h \
     pelota.h \
     personaje.h \
-    proyectil.h \
+    puntaje.h \
     vida.h
 
 FORMS += \
