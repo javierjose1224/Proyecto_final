@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
-
+//cambio
 class vida:public QGraphicsTextItem
 {
 public:
