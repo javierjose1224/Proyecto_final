@@ -36,6 +36,7 @@ public:
     //void collisionball(QList<proyectil *> balas_player, QGraphicsScene *scene);
 
     void actualizar(float v_limit);
+    float getPX() const;
 };
 
 #endif // DISPARO_H

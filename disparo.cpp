@@ -1,5 +1,10 @@
 #include "disparo.h"
 
+float disparo::getPX() const
+{
+    return PX;
+}
+
 disparo::disparo(float posX_, float posY_, float velX_, float velY_,float radio)
 {
     PX=posX_;

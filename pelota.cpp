@@ -63,17 +63,6 @@ void pelota::collision_lados_escena(float v_limit,float h_limit)
     }
 }
 
-//void pelota::collisionball(QList<proyectil*> balas_player, QGraphicsScene *scene)
-//{
-//    for(int i=0;balas_player.size();i++)
-//    {
-//        if(balas_player.at(i)->collidesWithItem(this)){
-//            scene->removeItem(balas_player.at(i));
-//            balas_player.removeAt(i);
-//            break;
-//        }
-//    }
-//}
 
 void pelota::actualizar(float v_limit)
 {

@@ -69,17 +69,18 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         {
             if(protag->getPX()<floo->getPX())
             {
-                //qDebug()<<"colisione en la derecha";
-                protag->set_vel(-1*protag->getE()*protag->getVX(),protag->getVY(),protag->getPX(),protag->getPY());
+                //qDebug()<<"colisione en la izquierda";
+                protag->set_vel(-1*protag->getE()*protag->getVX(),protag->getVY(),floo->getPX()-protag->getR(),protag->getPY());
+                //protag->set_vel(-1*protag->getE()*protag->getVX(),protag->getVY(),protag->getPX(),protag->getPY());
             }
             if(protag->getPX()>floo->getPX()+floo->getAncho())
             {
-                //qDebug()<<"colisione en la izq";
+                //qDebug()<<"colisione en la derecha";
                 protag->set_vel(-1*protag->getE()*protag->getVX(),protag->getVY(),floo->getPX()+floo->getAncho()+protag->getR(),protag->getPY());
             }
             if(protag->getPY()>floo->getPY())
             {
-                 qDebug()<<"colisione arriba"<< int(protag->getPY()-protag->getR());
+                 //qDebug()<<"colisione arriba"
                  protag->set_vel(protag->getVX(),-1*protag->getE()*protag->getVY(),protag->getPX(),floo->getPY()+protag->getR());
             }
             if(protag->getPY()<floo->getPY()-floo->getAlto())
@@ -88,6 +89,11 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
                 protag->set_vel(protag->getVX(),-1*protag->getE()*protag->getVY(),protag->getPX(),floo->getPY()-floo->getAlto()-protag->getR());
             }
         }
+    }
+
+    for(int i=0;i<protag->getBalas_jugador().size();i++)
+    {
+        protag->getBalas_jugador().at(i)->actualizar(v_limit);
     }
 
     for(int i=0;i<balls.size();i++)
@@ -118,9 +124,27 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         {
             if(protag->getBalas_jugador().at(i)->collidesWithItem(balls.at(j)))
             {
+
                 qDebug()<<"colisione";
-                //scene->removeItem(balls.at(i));
-                //balls.removeAt(j);
+                float posx=balls.at(j)->getPX();
+                float posy=balls.at(j)->getPY();
+
+                scene->removeItem(protag->getBalas_jugador().at(i));
+                protag->getBalas_jugador().removeAt(i);
+
+                scene->removeItem(balls.at(j));
+                balls.removeAt(j);
+
+                if(posx>protag->getBalas_jugador().at(i)->getPX())
+                {
+                    balls.push_back(new pelota(posx,posy,10,20,50,30,0,1,2));
+                    //balls.back()->actualizar(v_limit);
+                    scene->addItem(balls.back());
+
+                    balls.push_back(new pelota(posx,posy,10,0,50,30,0,1,2));
+                    //balls.back()->actualizar(v_limit);
+                    scene->addItem(balls.back());
+                }
                 //delete this->getBalls().at(i);
             }
         }
@@ -134,10 +158,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         //this->getBalls().at(i)->collision_ball(balas_player,scene);
     }
 
-    for(int i=0;i<protag->getBalas_jugador().size();i++)
-    {
-        protag->getBalas_jugador().at(i)->actualizar(v_limit);
-    }
+
 }
 
 nivel::nivel(QObject *parent)

@@ -14,7 +14,7 @@ void personaje::setPY(float value)
 
 void personaje::disparo_lis(QGraphicsScene *scene,float v_limit)
 {
-    balas_jugador.push_back(new disparo(PX+R,PY,0,20,5));
+    balas_jugador.push_back(new disparo(PX+R,PY,0,20,2.5));
     balas_jugador.back()->actualizar(v_limit);
     scene->addItem(balas_jugador.back());
 }
