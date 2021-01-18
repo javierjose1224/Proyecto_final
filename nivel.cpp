@@ -1,9 +1,8 @@
 #include "nivel.h"
 
-nivel::nivel(QList<pelota *> balls_, personaje *protag_, QList<muro *> floors_)
+nivel::nivel(QList<pelota *> balls_,QList<muro *> floors_)
 {
     balls=balls_;
-    protag=protag_;
     floors=floors_;
 }
 
@@ -33,8 +32,7 @@ void nivel::graficar(QGraphicsScene *scene, float v_limit,float h_limit)
         balls.at(i)->actualizar(v_limit);
         scene->addItem(balls.at(i));
     }
-    this->getProtag()->actualizar(v_limit);
-    scene->addItem(protag);
+
 
 
     //timer_emp=new QTimer();
@@ -45,7 +43,7 @@ void nivel::graficar(QGraphicsScene *scene, float v_limit,float h_limit)
 //    connect(timer_emp,SIGNAL(timeout()),this,SLOT(actualizar_nivel()));
 }
 
-void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit)
+void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,personaje *protag,QTimer *timer,vida *conVidas)
 {
     protag->actualizar(v_limit);
     protag->colision_lados_escena(v_limit,h_limit);
@@ -77,24 +75,26 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit)
         }
 
     }
+
     for(int i=0;i<balls.size();i++)
     {
         if(protag->collidesWithItem(balls.at(i)))
         {
-            if(salud->getvidaT()>0)
+            qDebug()<<"COLISIONE PEZ";
+            if(conVidas->getvidaT()>0)
             {
-                salud->decrease();
+                conVidas->decrease();
                 qDebug()<<"Me golpeo";
-                this->getProtag()->setPos(0,0);
-                this->getProtag()->setPX(0);
-                this->getProtag()->setPY(0);
+                protag->setPos(0,0);
+                protag->setPX(0);
+                protag->setPY(0);
             }
-            else
-            {
-                scene->removeItem(this->getProtag());
-                timer_emp->stop();
-                this->~nivel();
-            }
+//            else
+//            {
+//                scene->removeItem(protag);
+//                timer->stop();
+//                this->~nivel();
+//            }
         }
     }
 
@@ -131,10 +131,6 @@ nivel::nivel(QObject *parent)
 
 }
 
-personaje *nivel::getProtag() const
-{
-    return protag;
-}
 
 QList<muro *> nivel::getFloors() const
 {
