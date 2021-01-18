@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     h_limit=1000;
     v_limit= 500;
 
-    //timer=new QTimer(this);
+    timer=new QTimer(this);
     scene=new QGraphicsScene(this);
     scene->setSceneRect(0,0,h_limit,v_limit);
 
@@ -42,13 +42,18 @@ MainWindow::MainWindow(QWidget *parent)
     //++++++++++++++++++++++++++++++++++++++++++++
 
 
-//    timer->start(5);
-//    connect(timer,SIGNAL(timeout()),this,SLOT(actualizarm()));
+    timer->start(5);
+    connect(timer,SIGNAL(timeout()),this,SLOT(actualizarm()));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::actualizarm()
+{
+    nivel_1->actualizar_nivel(scene,v_limit,h_limit);
 }
 
 //void MainWindow::actualizarm()

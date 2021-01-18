@@ -37,9 +37,9 @@ void nivel::graficar(QGraphicsScene *scene, float v_limit,float h_limit)
     scene->addItem(protag);
 
 
-    timer_emp=new QTimer();
+    //timer_emp=new QTimer();
     //connect(timer_emp,&QTimer::timeout,this,SLOT(actualizar_nivel(scene,v_limit,h_limit)));
-    timer_emp->start(5);
+    //timer_emp->start(5);
 
 //    timer_emp->start(5);
 //    connect(timer_emp,SIGNAL(timeout()),this,SLOT(actualizar_nivel()));

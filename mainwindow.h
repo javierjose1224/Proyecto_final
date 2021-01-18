@@ -29,7 +29,7 @@ public:
 
 public slots:
 
-    //void actualizarm();
+    void actualizarm();
 
 private:
 
