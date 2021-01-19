@@ -197,7 +197,6 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         //borderColilision(balls.at(i));
         //this->getBalls().at(i)->collision_ball(balas_player,scene);
     }
-
 }
 
 nivel::nivel(QObject *parent)
