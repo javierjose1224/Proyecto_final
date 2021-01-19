@@ -9,6 +9,7 @@
 #include <time.h>
 #include <QList>
 #include <QDebug>
+#include <cmath>
 
 class disparo: public QGraphicsItem
 {
@@ -39,6 +40,7 @@ public:
     void actualizar(float v_limit);
     float getPX() const;
     float getR() const;
+    float getPY() const;
 };
 
 #endif // DISPARO_H

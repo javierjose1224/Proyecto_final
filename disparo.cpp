@@ -10,6 +10,11 @@ float disparo::getR() const
     return R;
 }
 
+float disparo::getPY() const
+{
+    return PY;
+}
+
 disparo::disparo(float posX_, float posY_, float velX_, float velY_)
 {
     PX=posX_;

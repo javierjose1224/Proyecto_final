@@ -43,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     nivel_1=new nivel(bars,muros);
 
-    nivel_1->graficar(scene,v_limit,h_limit);
+    nivel_1->graficar(scene,v_limit);
     //AÑADIDO DE LOS ELEMENTOS EN LA ESCENA
     //++++++++++++++++++++++++++++++++++++++++++++
 
