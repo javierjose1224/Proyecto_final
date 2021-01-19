@@ -29,15 +29,19 @@ MainWindow::MainWindow(QWidget *parent)
     score->setPos(h_limit-200,0);
     scene->addItem(score);
 
-    muros.push_back(new muro(h_limit/2,v_limit/2,200,50));
+    //muros.push_back(new muro(h_limit/2,v_limit/2,200,50));
 
-    //muros.push_back(new muro(h_limit/2-25,v_limit,50,v_limit));
+    muros.push_back(new muro(h_limit/2-25,v_limit,50,v_limit-100));
 
     principal = new personaje(0,0,0,0,50,20,0.3,0,5);//0.3k
     principal->actualizar(v_limit);
     scene->addItem(principal);
 
     bars.push_back(new pelota(32,300,10,0,50,60,0,1,2));
+
+    bars.push_back(new pelota(600,300,-10,0,50,100,0,1,2));
+
+    bars.push_back(new pelota(30,100,-10,0,50,10,0,1,2));
 //    bars.push_back(new pelota(32,300,30,0,50,10,0,1,7));
 //    bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
 
@@ -65,10 +69,8 @@ void MainWindow::actualizarm()
     else
     {
         timer->stop();
-        qDebug()<<"entre a menor a cero";
         scene->removeItem(principal);
         nivel_1->borrar_elementos(scene);
-        //nivel_1->~nivel();
     }
 }
 
@@ -94,10 +96,5 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     {
         qDebug()<<"disparo";
         principal->disparo_lis(scene,v_limit);
-        //principal->disparar(bala_jugador,scene,v_limit);
-        //bala_jugador.push_back(new disparo(nivel_1->getProtag()->getPX()+nivel_1->getProtag()->getR(),nivel_1->getProtag()->getPY(),0,20,5));
-        //bala_jugador.back()->actualizar(v_limit);
-        //scene->addItem(bala_jugador.back());
-        //b->disparar(balas_player,scene);
     }
 }

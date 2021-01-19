@@ -53,6 +53,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
 {
     protag->actualizar(v_limit);
     protag->colision_lados_escena(v_limit,h_limit);
+    //COLISION DE LOS MUROS/PLATAFORMAS CON EL PERONAJE
     for(int i=0;i<floors.size();i++)
     {
         muro *floo= floors.at(i);
@@ -81,7 +82,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
             }
         }
     }
-
+    //ACTUALIZACION MOVIMIENTO DE LAS BALAS
     for(int i=0;i<protag->getBalas_jugador().size();i++)
     {
         protag->getBalas_jugador().at(i)->actualizar(v_limit);
@@ -90,7 +91,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
             protag->getBalas_jugador().removeAt(i);
         }
     }
-
+    //COLISION DEL PERSONAJE CON LAS PELOTAS
     for(int i=0;i<balls.size();i++)
     {
         if(protag->collidesWithItem(balls.at(i)))
@@ -112,7 +113,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
 //            }
         }
     }
-
+    //COLISION DE LAS BLAS CON LAS PELOTAS
     for(int i=0;i<protag->getBalas_jugador().size();i++)
     {
         for(int j=0;j<balls.size();j++)
@@ -121,31 +122,42 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
             {
 
                 qDebug()<<"colisione";
-                score->increase();
-                float posx=balls.at(j)->getPX();
-                float posy=balls.at(j)->getPY();
-                float rad=balls.at(j)->getR()/2;
-                float posx_b=protag->getBalas_jugador().at(i)->getPX();
 
-                //scene->removeItem(protag->getBalas_jugador().at(i));
-                //protag->eliminar_disparo(i);
-                //protag->getBalas_jugador().removeAt(i);
-
-                scene->removeItem(balls.at(j));
-                balls.removeAt(j);
-
-                if(posx>posx_b)
+                if(balls.at(j)->getR()>=10)
                 {
-                    balls.push_back(new pelota(posx,posy,10,20,50,rad,0,1,2));
-                    scene->addItem(balls.back());
+                    score->increase();
+                    float posx=balls.at(j)->getPX();
+                    float posy=balls.at(j)->getPY();
+                    float rad=balls.at(j)->getR()/2;
+                    float posx_b=protag->getBalas_jugador().at(i)->getPX();
 
-                    balls.push_back(new pelota(posx_b-2*rad,posy,-10,20,50,rad,0,1,2));
-                    scene->addItem(balls.back());
+                    //scene->removeItem(protag->getBalas_jugador().at(i));
+                    //protag->eliminar_disparo(i);
+                    //protag->getBalas_jugador().removeAt(i);
+
+                    scene->removeItem(balls.at(j));
+                    balls.removeAt(j);
+
+                    if(posx>posx_b)
+                    {
+                        balls.push_back(new pelota(posx,posy,10,20,50,rad,0,1,2));
+                        scene->addItem(balls.back());
+
+                        balls.push_back(new pelota(posx_b-2*rad,posy,-10,20,50,rad,0,1,2));
+                        scene->addItem(balls.back());
+                     }
                 }
+                else
+                {
+                    scene->removeItem(balls.at(j));
+                    balls.removeAt(j);
+                    score->increase();
+                }
+
             }
         }
     }
-
+    //COLISION DE LAS BALAS CON EL MURO/PLATAFORMAS
     for(int i=0;i<balls.size();i++)
     {
         for(int j=0;j<floors.size();j++)
@@ -169,7 +181,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
                      //qDebug()<<"colisione arriba"
                      balls.at(i)->set_vel(balls.at(i)->getVX(),-1*balls.at(i)->getE()*balls.at(i)->getVY(),balls.at(i)->getPX(),floo->getPY()+balls.at(i)->getR());
                 }
-                if(balls.at(i)->getPY()<floo->getPY()-floo->getAlto())
+                if(balls.at(i)->getPY()<floo->getPY()-floo->getAlto() && balls.at(i)->getPX()>floo->getPX())
                 {
                     //qDebug()<<"colisione abajo";
                     balls.at(i)->set_vel(balls.at(i)->getVX(),-1*balls.at(i)->getE()*balls.at(i)->getVY(),balls.at(i)->getPX(),floo->getPY()-floo->getAlto()-balls.at(i)->getR());
@@ -177,8 +189,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
             }
         }
     }
-
-
+    //ACTUALIZACION DE LAS PELOTAS
     for(int i=0;i<balls.size();i++)
     {
         balls.at(i)->actualizar(v_limit);
