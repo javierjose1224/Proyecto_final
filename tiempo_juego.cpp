@@ -23,3 +23,8 @@ int tiempo_juego::getTimerG()
 {
     return contador;
 }
+
+void tiempo_juego::setContador(int value)
+{
+    contador = value;
+}

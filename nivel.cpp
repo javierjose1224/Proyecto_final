@@ -99,7 +99,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
             qDebug()<<"COLISIONE PEZ";
             if(conVidas->getvidaT()>0)
             {
-//                conVidas->decrease();
+                conVidas->decrease();
                 qDebug()<<"Me golpeo";
                 protag->setPos(0,0);
                 protag->setPX(0);

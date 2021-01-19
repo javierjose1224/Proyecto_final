@@ -5,7 +5,7 @@
 #include <QObject>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
-//cambio
+//cambionuevo
 class tiempo_juego:public QGraphicsTextItem
 {
 public:
@@ -13,6 +13,9 @@ public:
     void increase_graf();
     void increase();
     int getTimerG();
+    void setContador(int value);
+
+
 private:
     int contador;
 };

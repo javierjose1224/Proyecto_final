@@ -71,8 +71,9 @@ void MainWindow::actualizarm()
         {
             timer->stop();
         }
-        else
+        else{
             contador_n1->increase_graf();
+        }
     }
 
 
