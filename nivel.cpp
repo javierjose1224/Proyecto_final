@@ -99,7 +99,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
             qDebug()<<"COLISIONE PEZ";
             if(conVidas->getvidaT()>0)
             {
-                conVidas->decrease();
+//                conVidas->decrease();
                 qDebug()<<"Me golpeo";
                 protag->setPos(0,0);
                 protag->setPX(0);
@@ -120,9 +120,9 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         {
             if(protag->getBalas_jugador().at(i)->collidesWithItem(balls.at(j)))
             {
-
+                //protag->eliminar_disparo(i);
+                //scene->removeItem(protag->getBalas_jugador().at(i));
                 qDebug()<<"colisione";
-
                 if(balls.at(j)->getR()>=10)
                 {
                     score->increase();
@@ -130,9 +130,9 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
                     float posy=balls.at(j)->getPY();
                     float rad=balls.at(j)->getR()/2;
                     float posx_b=protag->getBalas_jugador().at(i)->getPX();
-
+                    qDebug()<<"bala a eliminar"<< i;
                     //scene->removeItem(protag->getBalas_jugador().at(i));
-                    //protag->eliminar_disparo(i);
+
                     //protag->getBalas_jugador().removeAt(i);
 
                     scene->removeItem(balls.at(j));
@@ -194,8 +194,6 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
     {
         balls.at(i)->actualizar(v_limit);
         balls.at(i)->collision_lados_escena(v_limit,h_limit);
-        //borderColilision(balls.at(i));
-        //this->getBalls().at(i)->collision_ball(balas_player,scene);
     }
 }
 

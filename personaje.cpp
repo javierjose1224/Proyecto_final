@@ -14,9 +14,10 @@ void personaje::setPY(float value)
 
 void personaje::eliminar_disparo(int i)
 {
-    con=con+1;
-    qDebug()<<"bala a eliminar"<<i;
-    balas_jugador.removeAt(i-con);
+    //qDebug()<<"bala a eliminar"<<i;
+    //balas_jugador.clear();
+    //balas_jugador.removeAt(i);
+    //delete balas_jugador.at(i);
 //sd
 }
 

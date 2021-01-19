@@ -12,6 +12,7 @@
 #include "muro.h"
 #include "puntaje.h"
 #include "disparo.h"
+#include "tiempo_juego.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -46,8 +47,10 @@ private:
     QList <disparo *> bala_jugador;
 
     //plataforma *suelo;
+    tiempo_juego *contador_n1;
     puntaje *score;
     vida *conVidas;
+
     personaje *principal;
     QList<muro *>muros;
     QList<pelota *>bars;

@@ -19,15 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->centralwidget ->adjustSize();
     scene->addRect(scene->sceneRect());//para ver los limites de la escne
     ui->graphicsView->resize(scene->width(),scene->height());
-    this->resize(ui->graphicsView->width()+100,ui->graphicsView->height()+100);
-
-    conVidas= new vida();
-    conVidas->setPos(0,0);
-    scene->addItem(conVidas);
-
-    score = new puntaje();
-    score->setPos(h_limit-200,0);
-    scene->addItem(score);
+    this->resize(ui->graphicsView->width()+100,ui->graphicsView->height()+100);  
 
     //muros.push_back(new muro(h_limit/2,v_limit/2,200,50));
 
@@ -50,7 +42,17 @@ MainWindow::MainWindow(QWidget *parent)
     nivel_1->graficar(scene,v_limit);
     //AÑADIDO DE LOS ELEMENTOS EN LA ESCENA
     //++++++++++++++++++++++++++++++++++++++++++++
+    conVidas= new vida();
+    conVidas->setPos(0,-30);
+    scene->addItem(conVidas);
 
+    score = new puntaje();
+    score->setPos(h_limit-150,-30);
+    scene->addItem(score);
+
+    contador_n1= new tiempo_juego();
+    contador_n1->setPos(h_limit/2-50,-30);
+    scene->addItem(contador_n1);
     timer->start(5);//5
     connect(timer,SIGNAL(timeout()),this,SLOT(actualizarm()));
 }
@@ -62,6 +64,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::actualizarm()
 {
+    contador_n1->increase();
+    if(contador_n1->getTimerG()%150==0)
+    {
+        if(contador_n1->getTimerG()/150==61)
+        {
+            timer->stop();
+        }
+        else
+            contador_n1->increase_graf();
+    }
+
+
     if(conVidas->getvidaT()>0)
     {
         nivel_1->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas,score);
