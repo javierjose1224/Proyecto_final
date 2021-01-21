@@ -36,6 +36,8 @@ public:
 
     void actualizar(float v_limit);
     void colision_lados_escena(float v_limit,float h_limit);
+    bool saltar();
+
 
     float getPX() const;
     float getPY() const;

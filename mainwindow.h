@@ -13,6 +13,8 @@
 #include "puntaje.h"
 #include "disparo.h"
 #include "tiempo_juego.h"
+#include "senoidal.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -46,6 +48,7 @@ private:
 
     QList <disparo *> bala_jugador;
 
+    senoidal *bomba;
     //plataforma *suelo;
     tiempo_juego *contador_n1;
     puntaje *score;

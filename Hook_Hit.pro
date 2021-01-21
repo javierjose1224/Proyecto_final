@@ -24,6 +24,7 @@ SOURCES += \
     pelota.cpp \
     personaje.cpp \
     puntaje.cpp \
+    senoidal.cpp \
     tiempo_juego.cpp \
     vida.cpp
 
@@ -35,6 +36,7 @@ HEADERS += \
     pelota.h \
     personaje.h \
     puntaje.h \
+    senoidal.h \
     tiempo_juego.h \
     vida.h
 

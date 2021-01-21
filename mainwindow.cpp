@@ -29,11 +29,15 @@ MainWindow::MainWindow(QWidget *parent)
     principal->actualizar(v_limit);
     scene->addItem(principal);
 
-    bars.push_back(new pelota(32,300,10,0,50,60,0,1,2));
 
-    bars.push_back(new pelota(600,300,-10,0,50,100,0,1,2));
+    bomba= new senoidal(0,v_limit/2,1);
+    scene->addItem(bomba);
 
-    bars.push_back(new pelota(30,100,-10,0,50,10,0,1,2));
+//    bars.push_back(new pelota(32,300,10,0,50,60,0,1,2));
+
+//    bars.push_back(new pelota(600,300,-10,0,50,100,0,1,2));
+
+//    bars.push_back(new pelota(30,100,-10,0,50,10,0,1,2));
 //    bars.push_back(new pelota(32,300,30,0,50,10,0,1,7));
 //    bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
 
@@ -52,6 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     contador_n1= new tiempo_juego();
     contador_n1->setPos(h_limit/2-50,-30);
+
     scene->addItem(contador_n1);
     timer->start(5);//5
     connect(timer,SIGNAL(timeout()),this,SLOT(actualizarm()));
@@ -63,19 +68,26 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::actualizarm()
-{
-    contador_n1->increase();
-    if(contador_n1->getTimerG()%150==0)
-    {
-        if(contador_n1->getTimerG()/150==61)
-        {
-            timer->stop();
-        }
-        else{
-            contador_n1->increase_graf();
-        }
-    }
+{   
+    if(bomba->getPX()>600)
+        bomba->setU(-1);
 
+    bomba->actualizar(v_limit);
+    contador_n1->increase_graf();
+//    if(contador_n1->getCon_abs()==20)
+//    {
+//        timer->stop();
+//    }
+//    if(contador_n1->getTimerG()%150==0)
+//    {
+//        if(contador_n1->getTimerG()/150==61)
+//        {
+//            timer->stop();
+//        }
+//        else{
+//            contador_n1->increase_graf();
+//        }
+//    }
 
     if(conVidas->getvidaT()>0)
     {
@@ -92,20 +104,21 @@ void MainWindow::actualizarm()
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     personaje *b = principal;
+
     if(event->key() == Qt::Key_D)
     {
         b->set_vel(15,b->getVY(),b->getPX(),b->getPY());
-        qDebug()<<"ME MOVI CON D";
+        //qDebug()<<"ME MOVI CON D";
     }
     if(event->key() == Qt::Key_A)
     {
         b->set_vel(-15,b->getVY(),b->getPX(),b->getPY());
-        qDebug()<<"ME MOVI CON A";
+        //qDebug()<<"ME MOVI CON A";
     }
-    if(event->key() == Qt::Key_W)
+    if(event->key() == Qt::Key_W && b->getPY()<=b->getR())
     {
         b->set_vel(b->getVX(),40,b->getPX(),b->getPY());
-        qDebug()<<"ME MOVI CON W";
+        //qDebug()<<"ME MOVI CON W";
     }
     if(event->key() == Qt::Key_Space)
     {

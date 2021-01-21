@@ -96,7 +96,7 @@ void personaje::colision_lados_escena(float v_limit,float h_limit)//v_limit,h_li
     {
         this->set_vel(-1*this->getE()*this->getVX(),this->getVY(),h_limit-this->getR(),this->getPY());
     }
-    if(this->getPY()<this->getR())//AbAJO
+    if(this->getPY()<this->getR())//ABAJO
     {
         this->set_vel(this->getVX(),-1*this->getE()*this->getVY(),this->getPX(),this->getR());
     }
@@ -104,6 +104,17 @@ void personaje::colision_lados_escena(float v_limit,float h_limit)//v_limit,h_li
     {
         this->set_vel(this->getVX(),-1*this->getE()*this->getVY(),this->getPX(),v_limit-this->getR());
     }
+}
+
+bool personaje::saltar()
+{
+    if(this->getPY()<this->getR())//ABAJO
+    {
+        return true;
+        //this->set_vel(this->getVX(),-1*this->getE()*this->getVY(),this->getPX(),this->getR());
+    }
+    else
+        return false;
 }
 
 float personaje::getPY() const

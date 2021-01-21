@@ -195,6 +195,15 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         balls.at(i)->actualizar(v_limit);
         balls.at(i)->collision_lados_escena(v_limit,h_limit);
     }
+
+//    if(protag->saltar()==true)
+//    {
+//        qDebug()<<"te permito saltar chaval";
+//    }
+//    else
+//    {
+//        qDebug()<<"NO te permito saltar chaval";
+//    }
 }
 
 nivel::nivel(QObject *parent)
