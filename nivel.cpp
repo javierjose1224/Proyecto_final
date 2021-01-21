@@ -120,12 +120,13 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         {
             if(protag->getBalas_jugador().at(i)->collidesWithItem(balls.at(j)))
             {
+                score->increase();
                 //protag->eliminar_disparo(i);
                 //scene->removeItem(protag->getBalas_jugador().at(i));
                 qDebug()<<"colisione";
                 if(balls.at(j)->getR()>=10)
                 {
-                    score->increase();
+
                     float posx=balls.at(j)->getPX();
                     float posy=balls.at(j)->getPY();
                     float rad=balls.at(j)->getR()/2;
@@ -165,13 +166,13 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
             muro *floo= floors.at(j);
             if(balls.at(i)->collidesWithItem(floo))
             {
-                if(balls.at(i)->getPX()<floo->getPX())
+                if(balls.at(i)->getPX()<floo->getPX() && balls.at(i)->getPY()<floo->getPY())
                 {
                     //qDebug()<<"colisione en la izquierda";
                     balls.at(i)->set_vel(-1*balls.at(i)->getE()*balls.at(i)->getVX(),balls.at(i)->getVY(),floo->getPX()-balls.at(i)->getR(),balls.at(i)->getPY());
                     //balls.at(i)->set_vel(-1*balls.at(i)->getE()*protag->getVX(),protag->getVY(),protag->getPX(),protag->getPY());
                 }
-                if(balls.at(i)->getPX()>floo->getPX()+floo->getAncho())
+                if(balls.at(i)->getPX()>floo->getPX()+floo->getAncho() && balls.at(i)->getPY()<floo->getPY())
                 {
                     //qDebug()<<"colisione en la derecha";
                     balls.at(i)->set_vel(-1*balls.at(i)->getE()*balls.at(i)->getVX(),balls.at(i)->getVY(),floo->getPX()+floo->getAncho()+balls.at(i)->getR(),balls.at(i)->getPY());
@@ -195,15 +196,6 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         balls.at(i)->actualizar(v_limit);
         balls.at(i)->collision_lados_escena(v_limit,h_limit);
     }
-
-//    if(protag->saltar()==true)
-//    {
-//        qDebug()<<"te permito saltar chaval";
-//    }
-//    else
-//    {
-//        qDebug()<<"NO te permito saltar chaval";
-//    }
 }
 
 nivel::nivel(QObject *parent)

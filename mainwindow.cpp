@@ -19,11 +19,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->centralwidget ->adjustSize();
     scene->addRect(scene->sceneRect());//para ver los limites de la escne
     ui->graphicsView->resize(scene->width(),scene->height());
-    this->resize(ui->graphicsView->width()+100,ui->graphicsView->height()+100);  
+    this->resize(ui->graphicsView->width()+100,ui->graphicsView->height()+100);
 
-    //muros.push_back(new muro(h_limit/2,v_limit/2,200,50));
+    muros.push_back(new muro(h_limit/2-25,v_limit/2,100,100));
+//    muros.push_back(new muro(h_limit/2,v_limit/2,200,50));
 
-    muros.push_back(new muro(h_limit/2-25,v_limit,50,v_limit-100));
+//    muros.push_back(new muro(h_limit/2-25,v_limit,50,v_limit-100));
 
     principal = new personaje(0,0,0,0,50,20,0.3,0,5);//0.3k
     principal->actualizar(v_limit);
@@ -40,6 +41,14 @@ MainWindow::MainWindow(QWidget *parent)
 //    bars.push_back(new pelota(30,100,-10,0,50,10,0,1,2));
 //    bars.push_back(new pelota(32,300,30,0,50,10,0,1,7));
 //    bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
+
+    bars.push_back(new pelota(h_limit/2,v_limit-100,-10,0,40,40,0,1,2));
+    bars.push_back(new pelota(h_limit/2-10,v_limit-100,-10,0,40,40,0,1,2));
+    bars.push_back(new pelota(h_limit/2-20,v_limit-100,-10,0,40,40,0,1,2));
+    bars.push_back(new pelota(h_limit/2-30,v_limit-100,-10,0,40,40,0,1,2));
+    bars.push_back(new pelota(h_limit/2-40,v_limit-100,-10,0,40,40,0,1,2));
+
+
 
     nivel_1=new nivel(bars,muros);
 

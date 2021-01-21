@@ -10,7 +10,7 @@ puntaje::puntaje(QGraphicsItem *parent): QGraphicsTextItem(parent)
 
 void puntaje::increase()
 {
-    //score++;
+    score++;
     setPlainText(QString("Puntos: ")+ QString::number(score));
 }
 

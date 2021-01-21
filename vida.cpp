@@ -3,7 +3,7 @@
 
 vida::vida(QGraphicsItem *parent): QGraphicsTextItem(parent)
 {
-    vidaT = 3;
+    vidaT = 10;
     setPlainText(QString("Vidas: ")+ QString::number(vidaT));
     setDefaultTextColor(Qt::red);
     setFont(QFont("times",16));

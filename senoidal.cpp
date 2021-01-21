@@ -38,7 +38,7 @@ QRectF senoidal::boundingRect() const
 
 void senoidal::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::blue);
+    painter->setBrush(Qt::magenta);
     painter->drawEllipse(boundingRect());
 }
 

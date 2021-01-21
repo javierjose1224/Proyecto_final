@@ -26,6 +26,7 @@ muro::muro(float posx, float posy,float ancho, float alto)
     PY=posy;
     Ancho=ancho;
     Alto=alto;
+    R=1;
 }
 
 QRectF muro::boundingRect() const
