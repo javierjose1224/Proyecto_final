@@ -86,7 +86,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
     for(int i=0;i<protag->getBalas_jugador().size();i++)
     {
         protag->getBalas_jugador().at(i)->actualizar(v_limit);
-        if(protag->getBalas_jugador().at(i)->getPY()-v_limit>v_limit)
+        if(protag->getBalas_jugador().at(i)->getPY()>=v_limit)
         {
             //protag->getBalas_jugador().removeAt(i);
             scene->removeItem(protag->getBalas_jugador().at(i));
@@ -143,14 +143,21 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         float posy=balls.at(nv)->getPY();
         float rad=balls.at(nv)->getR()/2;
 
-        scene->removeItem(balls.at(nv));
-        balls.removeAt(nv);
+        if(rad>=2)
+        {
+            scene->removeItem(balls.at(nv));
+            balls.removeAt(nv);
+            balls.push_back(new pelota(posx,posy,10,20,50,rad,0,1,2));
+            scene->addItem(balls.back());
 
-        balls.push_back(new pelota(posx,posy,10,20,50,rad,0,1,2));
-        scene->addItem(balls.back());
-
-        balls.push_back(new pelota(posx,posy,-10,20,50,rad,0,1,2));
-        scene->addItem(balls.back());
+            balls.push_back(new pelota(posx,posy,-10,20,50,rad,0,1,2));
+            scene->addItem(balls.back());
+        }
+        else
+        {
+            scene->removeItem(balls.at(nv));
+            balls.removeAt(nv);
+        }
     }
 
 //    for(int i=0;i<protag->getBalas_jugador().size();i++)

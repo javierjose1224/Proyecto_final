@@ -38,7 +38,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     bars.push_back(new pelota(600,300,-10,0,50,100,0,1,2));
 
-    bars.push_back(new pelota(30,100,-10,0,50,10,0,1,2));
+//    bars.push_back(new pelota(30,100,-10,0,50,10,0,1,2));
+
 //    bars.push_back(new pelota(32,300,30,0,50,10,0,1,7));
 //    bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
 
