@@ -24,10 +24,11 @@ private:
     float e;//coef de restitucion
     float V;//vector de velocidad
     float dt;//var del tiempo
-    float escala;
-    QList<disparo*> balas_jugador;
+    float escala;    
     int con=0;
+    QList<disparo*> balas_jugador;
 public:
+
     personaje(float posX_,float posY_,float velX_,float velY_,float masa,float radio,float k_,float e_,float G_);
     ~personaje();
     QRectF boundingRect() const;

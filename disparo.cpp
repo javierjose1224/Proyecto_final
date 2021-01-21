@@ -33,6 +33,12 @@ disparo::disparo(float posX_, float posY_, float velX_, float velY_)
     escala=1;
 }
 
+disparo::~disparo()
+{
+    qDebug()<<"hlola";
+    //delete this;
+}
+
 QRectF disparo::boundingRect() const
 {
     return QRectF(-1*escala*R,-1*escala*R,2*escala*R,500);

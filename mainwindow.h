@@ -46,7 +46,7 @@ private:
     void keyPressEvent(QKeyEvent *event);
     nivel *nivel_1;
 
-    QList <disparo *> bala_jugador;
+    QList <disparo *> bala_player;
 
     senoidal *bomba;
     //plataforma *suelo;

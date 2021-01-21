@@ -86,11 +86,15 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
     for(int i=0;i<protag->getBalas_jugador().size();i++)
     {
         protag->getBalas_jugador().at(i)->actualizar(v_limit);
-        if(protag->getBalas_jugador().at(i)->getPY()>v_limit)
+        if(protag->getBalas_jugador().at(i)->getPY()-v_limit>v_limit)
         {
-            protag->getBalas_jugador().removeAt(i);
+            //protag->getBalas_jugador().removeAt(i);
+            scene->removeItem(protag->getBalas_jugador().at(i));
+            protag->eliminar_disparo(i);
+
         }
     }
+
     //COLISION DEL PERSONAJE CON LAS PELOTAS
     for(int i=0;i<balls.size();i++)
     {
@@ -113,51 +117,95 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
 //            }
         }
     }
-    //COLISION DE LAS BLAS CON LAS PELOTAS
+
+    //COLISION DE LAS BALAS CON LAS PELOTAS
+    bool ban=false;
+    int nv;
     for(int i=0;i<protag->getBalas_jugador().size();i++)
     {
         for(int j=0;j<balls.size();j++)
         {
             if(protag->getBalas_jugador().at(i)->collidesWithItem(balls.at(j)))
             {
-                score->increase();
-                //protag->eliminar_disparo(i);
-                //scene->removeItem(protag->getBalas_jugador().at(i));
-                qDebug()<<"colisione";
-                if(balls.at(j)->getR()>=10)
-                {
+                scene->removeItem(protag->getBalas_jugador().at(i));
+                protag->eliminar_disparo(i);
 
-                    float posx=balls.at(j)->getPX();
-                    float posy=balls.at(j)->getPY();
-                    float rad=balls.at(j)->getR()/2;
-                    float posx_b=protag->getBalas_jugador().at(i)->getPX();
-                    qDebug()<<"bala a eliminar"<< i;
-                    //scene->removeItem(protag->getBalas_jugador().at(i));
-
-                    //protag->getBalas_jugador().removeAt(i);
-
-                    scene->removeItem(balls.at(j));
-                    balls.removeAt(j);
-
-                    if(posx>posx_b)
-                    {
-                        balls.push_back(new pelota(posx,posy,10,20,50,rad,0,1,2));
-                        scene->addItem(balls.back());
-
-                        balls.push_back(new pelota(posx_b-2*rad,posy,-10,20,50,rad,0,1,2));
-                        scene->addItem(balls.back());
-                     }
-                }
-                else
-                {
-                    scene->removeItem(balls.at(j));
-                    balls.removeAt(j);
-                    score->increase();
-                }
-
+                ban=true;
+                nv=j;
+                break;
             }
         }
     }
+
+    if(ban==true)
+    {
+        float posx=balls.at(nv)->getPX();
+        float posy=balls.at(nv)->getPY();
+        float rad=balls.at(nv)->getR()/2;
+
+        scene->removeItem(balls.at(nv));
+        balls.removeAt(nv);
+
+        balls.push_back(new pelota(posx,posy,10,20,50,rad,0,1,2));
+        scene->addItem(balls.back());
+
+        balls.push_back(new pelota(posx,posy,-10,20,50,rad,0,1,2));
+        scene->addItem(balls.back());
+    }
+
+//    for(int i=0;i<protag->getBalas_jugador().size();i++)
+//    {
+//        for(int j=0;j<balls.size();j++)
+//        {
+//            if(protag->getBalas_jugador().at(i)->collidesWithItem(balls.at(j)))
+//            {
+//                score->increase();
+//                //this->remove_bullet(protag,i);
+
+//                scene->removeItem(protag->getBalas_jugador().at(i));
+
+//                //protag->getBalas_jugador().removeAt(i);
+//                float posx_b=protag->getBalas_jugador().at(i)->getPX();
+
+//                protag->eliminar_disparo(i);
+
+//                //scene->removeItem(protag->getBalas_jugador().at(i));
+//                //qDebug()<<"colisione"<< protag->getBalas_jugador().at(i);
+//                if(balls.at(j)->getR()>=10)
+//                {
+
+//                    float posx=balls.at(j)->getPX();
+//                    float posy=balls.at(j)->getPY();
+//                    float rad=balls.at(j)->getR()/2;
+
+//                    qDebug()<<"bala a eliminar"<< i;
+
+//                    scene->removeItem(balls.at(j));
+//                    balls.removeAt(j);
+
+//                    if(posx>posx_b)
+//                    {
+//                        balls.push_back(new pelota(posx,posy,10,20,50,rad,0,1,2));
+//                        scene->addItem(balls.back());
+
+//                        balls.push_back(new pelota(posx_b-2*rad,posy,-10,20,50,rad,0,1,2));
+//                        scene->addItem(balls.back());
+//                     }
+//                }
+//                else
+//                {
+//                    scene->removeItem(balls.at(j));
+//                    balls.removeAt(j);
+//                    score->increase();
+//                }
+
+//            }
+
+//        }
+//    }
+
+
+
     //COLISION DE LAS BALAS CON EL MURO/PLATAFORMAS
     for(int i=0;i<balls.size();i++)
     {
@@ -207,5 +255,10 @@ nivel::nivel(QObject *parent)
 QList<muro *> nivel::getFloors() const
 {
     return floors;
+}
+
+void nivel::remove_bullet(personaje *protag,int j)
+{
+    protag->getBalas_jugador().removeAt(j);
 }
 

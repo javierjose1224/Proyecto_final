@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     muros.push_back(new muro(h_limit/2-25,v_limit/2,100,100));
 //    muros.push_back(new muro(h_limit/2,v_limit/2,200,50));
 
-//    muros.push_back(new muro(h_limit/2-25,v_limit,50,v_limit-100));
+    muros.push_back(new muro(h_limit/2-25,v_limit,50,v_limit-100));
 
     principal = new personaje(0,0,0,0,50,20,0.3,0,5);//0.3k
     principal->actualizar(v_limit);
@@ -34,19 +34,19 @@ MainWindow::MainWindow(QWidget *parent)
     bomba= new senoidal(0,v_limit/2,1);
     scene->addItem(bomba);
 
-//    bars.push_back(new pelota(32,300,10,0,50,60,0,1,2));
+    bars.push_back(new pelota(32,300,10,0,50,60,0,1,2));
 
-//    bars.push_back(new pelota(600,300,-10,0,50,100,0,1,2));
+    bars.push_back(new pelota(600,300,-10,0,50,100,0,1,2));
 
-//    bars.push_back(new pelota(30,100,-10,0,50,10,0,1,2));
+    bars.push_back(new pelota(30,100,-10,0,50,10,0,1,2));
 //    bars.push_back(new pelota(32,300,30,0,50,10,0,1,7));
 //    bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
 
-    bars.push_back(new pelota(h_limit/2,v_limit-100,-10,0,40,40,0,1,2));
-    bars.push_back(new pelota(h_limit/2-10,v_limit-100,-10,0,40,40,0,1,2));
-    bars.push_back(new pelota(h_limit/2-20,v_limit-100,-10,0,40,40,0,1,2));
-    bars.push_back(new pelota(h_limit/2-30,v_limit-100,-10,0,40,40,0,1,2));
-    bars.push_back(new pelota(h_limit/2-40,v_limit-100,-10,0,40,40,0,1,2));
+//    bars.push_back(new pelota(h_limit/2,v_limit-100,-10,0,40,40,0,1,2));
+//    bars.push_back(new pelota(h_limit/2-10,v_limit-100,-10,0,40,40,0,1,2));
+//    bars.push_back(new pelota(h_limit/2-20,v_limit-100,-10,0,40,40,0,1,2));
+//    bars.push_back(new pelota(h_limit/2-30,v_limit-100,-10,0,40,40,0,1,2));
+//    bars.push_back(new pelota(h_limit/2-40,v_limit-100,-10,0,40,40,0,1,2));
 
 
 
@@ -80,23 +80,13 @@ void MainWindow::actualizarm()
 {   
     if(bomba->getPX()>600)
         bomba->setU(-1);
-
     bomba->actualizar(v_limit);
     contador_n1->increase_graf();
-//    if(contador_n1->getCon_abs()==20)
-//    {
-//        timer->stop();
-//    }
-//    if(contador_n1->getTimerG()%150==0)
-//    {
-//        if(contador_n1->getTimerG()/150==61)
-//        {
-//            timer->stop();
-//        }
-//        else{
-//            contador_n1->increase_graf();
-//        }
-//    }
+    if(contador_n1->getCon_abs()==20)
+    {
+        contador_n1->reset();
+        //timer->stop();
+    }
 
     if(conVidas->getvidaT()>0)
     {
@@ -129,9 +119,13 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         b->set_vel(b->getVX(),40,b->getPX(),b->getPY());
         //qDebug()<<"ME MOVI CON W";
     }
-    if(event->key() == Qt::Key_Space)
+    if(event->key() == Qt::Key_Space && b->getBalas_jugador().size()==0)
     {
-        qDebug()<<"disparo";
+//        qDebug()<<"disparo";
+//        bala_player.append(new disparo(b->getPX(),b->getPY(),0,20));
+//        bala_player.back()->actualizar(v_limit);
+//        scene->addItem(bala_player.back());
+
         principal->disparo_lis(scene,v_limit);
     }
 }

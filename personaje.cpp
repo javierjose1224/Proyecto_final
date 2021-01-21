@@ -16,7 +16,7 @@ void personaje::eliminar_disparo(int i)
 {
     //qDebug()<<"bala a eliminar"<<i;
     //balas_jugador.clear();
-    //balas_jugador.removeAt(i);
+    balas_jugador.removeAt(i);
     //delete balas_jugador.at(i);
 //sd
 }

@@ -31,6 +31,7 @@ class disparo: public QGraphicsItem
 
 public:
     disparo(float posX_,float posY_,float velX_,float velY_);
+    ~disparo();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) override;
     void setEscala(float s);
