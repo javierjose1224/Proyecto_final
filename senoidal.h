@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <QList>
+#include <math.h>
 
 class senoidal:public QGraphicsItem
 {
