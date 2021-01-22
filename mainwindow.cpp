@@ -81,11 +81,11 @@ void MainWindow::actualizarm()
 {   
     gener_glob->increase();
     contador_n1->increase_graf();
-    if(contador_n1->getCon_abs()==20)
-    {
-        contador_n1->reset();
-        //timer->stop();
-    }
+//    if(contador_n1->getCon_abs()==20)
+//    {
+//        contador_n1->reset();
+//        //timer->stop();
+//    }
 
     if(conVidas->getvidaT()>0)
     {
