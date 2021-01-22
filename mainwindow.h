@@ -50,6 +50,9 @@ private:
 
     nivel *nivel_1;
 
+    nivel *nivel_2;
+    QList<muro *>muros2;
+    QList<pelota *>bars2;
 
 
     senoidal *bomba;

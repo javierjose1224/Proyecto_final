@@ -12,6 +12,8 @@ public:
     puntaje(QGraphicsItem * parent = 0);
     void increase();
     int getScore();
+    void setScore(int value);
+
 private:
     int score;
 };

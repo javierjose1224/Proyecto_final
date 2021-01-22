@@ -19,3 +19,8 @@ int puntaje::getScore()
     return score;
 }
 
+void puntaje::setScore(int value)
+{
+    score = value;
+}
+

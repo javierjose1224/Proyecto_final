@@ -167,7 +167,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         }
         else
         {
-            score->increase();
+            //score->increase();
             scene->removeItem(balls.at(nv));
             balls.removeAt(nv);
         }

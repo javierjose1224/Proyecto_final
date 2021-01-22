@@ -25,20 +25,27 @@ MainWindow::MainWindow(QWidget *parent)
     principal->actualizar(v_limit);
     scene->addItem(principal);
 //MUROS PARA NIVEL 1
-    muros.push_back(new muro(h_limit/2-25,v_limit/2,100,100));
+    //muros.push_back(new muro(h_limit/2-25,v_limit/2,100,100));
 //    muros.push_back(new muro(h_limit/2,v_limit/2,200,50));
+
+    muros2.push_back(new muro(100,v_limit/2,100,100));
+    //bars2.push_back(new pelota(32,300,10,0,80,80,0,1,2));
+
+    bars2.push_back(new pelota(20,300,10,0,50,40,0,1,2));
+    bars2.push_back(new pelota(80,300,10,0,50,40,0,1,2));
 
 //PELOTAS PARA MANDAR AL NIVEL
 
-    bars.push_back(new pelota(32,300,10,0,50,40,0,1,2));
+    //bars.push_back(new pelota(32,300,10,0,50,40,0,1,2));
     bars.push_back(new pelota(80,300,10,0,50,40,0,1,2));
-
+    //bars.push_back(new pelota(200,300,10,0,50,40,0,1,2));
 
 //GLOBOS PARA EL NIVEL 1
     //globs.push_back(new senoidal(0,v_limit/2,1));
 
     nivel_1=new nivel(bars,muros,globs,scene,v_limit);
     //nivel_1->graficar(scene,v_limit);
+
 
     conVidas= new vida();
     conVidas->setPos(0,-30);
@@ -68,22 +75,51 @@ void MainWindow::actualizarm()
     gener_glob->increase();
     contador_n1->increase_graf();
 
-    if(contador_n1->getCon_abs()==20)
-    {
-        contador_n1->reset();
-        //timer->stop();
-    }
-
     if(conVidas->getvidaT()>0)
     {
-        nivel_1->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas,score,gener_glob);
+        if(score->getScore()<7)
+        {
+            nivel_1->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas,score,gener_glob);
+        }
+
+        else if(score->getScore()==7)
+        {
+            //timer->stop();
+            nivel_1->borrar_elementos(scene);
+            nivel_2= new nivel(bars2,muros2,globs,scene,v_limit);
+            principal->setVD(20);
+            score->setScore(8);
+        }
+
+        if(score->getScore()>7 && score->getScore()<22)
+        {
+            nivel_2->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas,score,gener_glob);
+        }
+
+        if(score->getScore()==22)
+        {
+            timer->stop();
+            qDebug()<<"gane";
+        }
     }
-    else
-    {
-        timer->stop();
-        scene->removeItem(principal);
-        nivel_1->borrar_elementos(scene);
-    }
+
+
+//    if(contador_n1->getCon_abs()==20)
+//    {
+//        contador_n1->reset();
+//        //timer->stop();
+//    }
+
+//    if(conVidas->getvidaT()>0)
+//    {
+//        nivel_1->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas,score,gener_glob);
+//    }
+//    else
+//    {
+//        timer->stop();
+//        scene->removeItem(principal);
+//        nivel_1->borrar_elementos(scene);
+//    }
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
