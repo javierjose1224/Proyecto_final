@@ -15,13 +15,18 @@ float disparo::getPY() const
     return PY;
 }
 
-disparo::disparo(float posX_, float posY_, float velX_, float velY_)
+void disparo::setVX(float value)
+{
+    VX = value;
+}
+
+disparo::disparo(float posX_, float posY_, float velY_)
 {
     PX=posX_;
     PY=posY_;
     mass=10;
     R=2.5;
-    VX=velX_;
+    VX=0;
     VY=velY_;
     AX=0;
     AY=0;

@@ -21,8 +21,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->resize(scene->width(),scene->height());
     this->resize(ui->graphicsView->width()+100,ui->graphicsView->height()+100);
 
-
-
     principal = new personaje(0,0,0,0,50,20,0.3,0,5);//0.3k
     principal->actualizar(v_limit);
     scene->addItem(principal);
@@ -30,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     muros.push_back(new muro(h_limit/2-25,v_limit/2,100,100));
 //    muros.push_back(new muro(h_limit/2,v_limit/2,200,50));
 
-    muros.push_back(new muro(h_limit/2-25,v_limit,50,v_limit-100));
+//    muros.push_back(new muro(h_limit/2-25,v_limit,50,v_limit-100));
 
 //PELOTAS PARA MANDAR AL NIVEL 1
     bars.push_back(new pelota(32,300,10,0,50,60,0,1,2));

@@ -23,7 +23,7 @@ void personaje::eliminar_disparo(int i)
 
 void personaje::disparo_lis(QGraphicsScene *scene,float v_limit)
 {
-    balas_jugador.push_back(new disparo(PX+R,PY,0,20));
+    balas_jugador.push_back(new disparo(PX+R,PY,VD));
     balas_jugador.back()->actualizar(v_limit);
     scene->addItem(balas_jugador.back());
 }
@@ -31,6 +31,16 @@ void personaje::disparo_lis(QGraphicsScene *scene,float v_limit)
 QList<disparo *> personaje::getBalas_jugador() const
 {
     return balas_jugador;
+}
+
+float personaje::getVD() const
+{
+    return VD;
+}
+
+void personaje::setVD(float value)
+{
+    VD = value;
 }
 
 personaje::personaje(float posX_, float posY_, float velX_, float velY_, float masa, float radio, float k_, float e_,float G_)
@@ -49,6 +59,7 @@ personaje::personaje(float posX_, float posY_, float velX_, float velY_, float m
      V = 0;
      dt = 0.1;
      escala=1;
+     VD=20;
 }
 
 personaje::~personaje()

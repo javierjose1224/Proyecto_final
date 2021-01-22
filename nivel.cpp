@@ -167,6 +167,29 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
     }
     //+++++++++++++++++++
 
+    //COLISION BALAS CON GLOBOS
+
+    for(int i=0;i<protag->getBalas_jugador().size();i++)
+    {
+        for(int j=0;j<globos.size();j++)
+        {
+            if(protag->getBalas_jugador().at(i)->collidesWithItem(globos.at(j)))
+            {
+                scene->removeItem(protag->getBalas_jugador().at(i));
+                protag->eliminar_disparo(i);
+
+                protag->setVD(30);
+                scene->removeItem(globos.at(j));
+                globos.removeAt(j);
+//                ban=true;
+//                nv=j;
+                break;
+            }
+        }
+    }
+
+
+
     //COLISION BALAS CON MUROS
     for(int i=0;i<protag->getBalas_jugador().size();i++)
     {
@@ -183,7 +206,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
     //+++++++++++++++++++
 
 
-    //COLISION DE LAS BALAS CON EL MURO/PLATAFORMAS
+    //COLISION DE LOS GLOBOS CON EL MURO/PLATAFORMAS
     for(int i=0;i<balls.size();i++)
     {
         for(int j=0;j<floors.size();j++)
@@ -216,6 +239,10 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         }
     }
     //+++++++++++++++++++
+
+
+
+
 
     //ACTUALIZACION DE LAS PELOTAS
     for(int i=0;i<balls.size();i++)

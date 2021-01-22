@@ -26,6 +26,7 @@ private:
     float dt;//var del tiempo
     float escala;    
     int con=0;
+    float VD;
     QList<disparo*> balas_jugador;
 public:
 
@@ -55,6 +56,8 @@ public:
     void eliminar_disparo(int i);
     void disparo_lis(QGraphicsScene *scene,float v_limit);
     QList<disparo *> getBalas_jugador() const;
+    float getVD() const;
+    void setVD(float value);
 };
 
 #endif // PERSONAJE_H
