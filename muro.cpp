@@ -27,6 +27,8 @@ muro::muro(float posx, float posy,float ancho, float alto)
     Ancho=ancho;
     Alto=alto;
     R=1;
+    //setPixmap(QPixmap(":/imagen/ladrillos.jpg"));
+//    pixmap = new QPixmap();
 }
 
 QRectF muro::boundingRect() const
@@ -36,6 +38,9 @@ QRectF muro::boundingRect() const
 
 void muro::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+//    painter->drawPixmap(-Ancho/2, -Alto/2,*pixmap,columnas,filas,ancho,alto);
+//    setScale(0.1);
+
     painter->setBrush(Qt::red);
     painter->drawRect(boundingRect());
 }

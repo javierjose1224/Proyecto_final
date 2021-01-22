@@ -1,18 +1,19 @@
 #include "nivel.h"
 
-nivel::nivel(QList<pelota *> balls_,QList<muro *> floors_,QList<senoidal*>globos_)
+nivel::nivel(QList<pelota *> balls_,QList<muro *> floors_,QList<senoidal*>globos_,QGraphicsScene *scene, float v_limit)
 {
     balls=balls_;
     floors=floors_;
     globos=globos_;
+    this->graficar(scene,v_limit);
 }
 
 
 nivel::~nivel()
 {
     balls.clear();
-    //delete protag;
-    floors.clear();
+    floors.clear();    
+    globos.clear();
     qDebug()<<"borre el nivel";
 }
 
@@ -27,6 +28,12 @@ void nivel::borrar_elementos(QGraphicsScene *scene)
     {
         scene->removeItem(floors.at(i));
     }
+
+    for(int i=0;i<balls.size();i++)
+    {
+        scene->removeItem(balls.at(i));
+    }
+
     this->~nivel();
 }
 
@@ -60,7 +67,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
 {
     if(cont_abs->getCon_abs()==10)
     {
-        globos.push_back(new senoidal(0,v_limit/3,1));
+        globos.push_back(new senoidal(0,v_limit-200,1));
         scene->addItem(globos.back());
         cont_abs->reset();
         //qDebug()<<"ya llego el lechero";
@@ -108,7 +115,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
             if(conVidas->getvidaT()>0)
             {
                 conVidas->decrease();
-                qDebug()<<"Me golpeo";
+                qDebug()<<"Me golpeo";               
                 protag->setPos(0,0);
                 protag->setPX(0);
                 protag->setPY(0);
@@ -148,14 +155,14 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         float posy=balls.at(nv)->getPY();
         float rad=balls.at(nv)->getR()/2;
 
-        if(rad>=2)
+        if(rad>=10)
         {
             scene->removeItem(balls.at(nv));
             balls.removeAt(nv);
-            balls.push_back(new pelota(posx,posy,10,20,50,rad,0,1,2));
+            balls.push_back(new pelota(posx,posy,10,15,50,rad,0,1,2));
             scene->addItem(balls.back());
 
-            balls.push_back(new pelota(posx,posy,-10,20,50,rad,0,1,2));
+            balls.push_back(new pelota(posx,posy,-10,15,50,rad,0,1,2));
             scene->addItem(balls.back());
         }
         else
@@ -179,6 +186,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
                 protag->eliminar_disparo(i);
 
                 protag->setVD(30);
+
                 scene->removeItem(globos.at(j));
                 globos.removeAt(j);
 //                ban=true;
@@ -256,7 +264,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
     for(int i=0;i<globos.size();i++)
     {
         globos.at(i)->actualizar(v_limit);
-        if(globos.at(i)->getPX()>h_limit)
+        if(globos.at(i)->getPX()+globos.at(i)->getR()>h_limit)
         {
             scene->removeItem(globos.at(i));
             globos.removeAt(i);

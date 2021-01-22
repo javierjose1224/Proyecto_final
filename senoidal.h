@@ -28,6 +28,7 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) override;
     void setU(float value);
     float getPX() const;
+    float getR() const;
 };
 
 #endif // SENOIDAL_H

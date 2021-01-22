@@ -28,6 +28,7 @@ public:
 
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void cambiar_nivel();
 
 public slots:
 
@@ -48,6 +49,9 @@ private:
     int v_limit;
 
     nivel *nivel_1;
+
+
+
     senoidal *bomba;
     tiempo_juego *contador_n1;
     tiempo_juego *gener_glob;

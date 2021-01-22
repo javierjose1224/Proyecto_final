@@ -10,6 +10,11 @@ float senoidal::getPX() const
     return PX;
 }
 
+float senoidal::getR() const
+{
+    return R;
+}
+
 senoidal::senoidal(float posx, float posy,float w_)
 {
     R=20;

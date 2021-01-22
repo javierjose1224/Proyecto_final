@@ -26,7 +26,7 @@ public slots:
 
 public:
     explicit nivel(QObject *parent = nullptr);
-    nivel(QList<pelota*>balls_,QList<muro*>floors_,QList<senoidal*>globos_);
+    nivel(QList<pelota*>balls_,QList<muro*>floors_,QList<senoidal*>globos_,QGraphicsScene *scene, float v_limit);
     ~nivel();
 
     void borrar_elementos(QGraphicsScene *scene);

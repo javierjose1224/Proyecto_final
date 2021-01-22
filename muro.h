@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <stdlib.h>
 #include <time.h>
+#include <QPixmap>
 
 class muro:public QGraphicsItem
 {
@@ -14,6 +15,7 @@ private:
     float R;
     float Ancho;
     float Alto;
+    QPixmap *pixmap;
 
 public:
     muro(float posx,float posy,float ancho, float alto);

@@ -2,10 +2,23 @@
 #include <math.h>
 #include <cmath>
 
+float pelota::getPY0() const
+{
+    return PY0;
+}
+
+float pelota::getPX0() const
+{
+    return PX0;
+}
+
 pelota::pelota(float posX_, float posY_, float velX_, float velY_, float masa, float radio, float k_, float e_,float G_)
 {
      PX=posX_;
      PY=posY_;
+     PX0=posX_;
+     PY0=posY_;
+
      mass=masa;
      R=radio;
      VX=velX_;

@@ -28,29 +28,17 @@ MainWindow::MainWindow(QWidget *parent)
     muros.push_back(new muro(h_limit/2-25,v_limit/2,100,100));
 //    muros.push_back(new muro(h_limit/2,v_limit/2,200,50));
 
-//    muros.push_back(new muro(h_limit/2-25,v_limit,50,v_limit-100));
+//PELOTAS PARA MANDAR AL NIVEL
 
-//PELOTAS PARA MANDAR AL NIVEL 1
-    bars.push_back(new pelota(32,300,10,0,50,60,0,1,2));
+    bars.push_back(new pelota(32,300,10,0,50,40,0,1,2));
+    bars.push_back(new pelota(80,300,10,0,50,40,0,1,2));
 
-    bars.push_back(new pelota(600,300,-10,0,50,100,0,1,2));
-
-//    bars.push_back(new pelota(30,100,-10,0,50,10,0,1,2));
-
-//    bars.push_back(new pelota(32,300,30,0,50,10,0,1,7));
-//    bars.push_back(new pelota(32,300,10,0,50,20,0,1,1));
-
-//    bars.push_back(new pelota(h_limit/2,v_limit-100,-10,0,40,40,0,1,2));
-//    bars.push_back(new pelota(h_limit/2-10,v_limit-100,-10,0,40,40,0,1,2));
-//    bars.push_back(new pelota(h_limit/2-20,v_limit-100,-10,0,40,40,0,1,2));
-//    bars.push_back(new pelota(h_limit/2-30,v_limit-100,-10,0,40,40,0,1,2));
-//    bars.push_back(new pelota(h_limit/2-40,v_limit-100,-10,0,40,40,0,1,2));
 
 //GLOBOS PARA EL NIVEL 1
     //globs.push_back(new senoidal(0,v_limit/2,1));
 
-    nivel_1=new nivel(bars,muros,globs);
-    nivel_1->graficar(scene,v_limit);
+    nivel_1=new nivel(bars,muros,globs,scene,v_limit);
+    //nivel_1->graficar(scene,v_limit);
 
     conVidas= new vida();
     conVidas->setPos(0,-30);
@@ -76,14 +64,15 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::actualizarm()
-{   
+{
     gener_glob->increase();
     contador_n1->increase_graf();
-//    if(contador_n1->getCon_abs()==20)
-//    {
-//        contador_n1->reset();
-//        //timer->stop();
-//    }
+
+    if(contador_n1->getCon_abs()==20)
+    {
+        contador_n1->reset();
+        //timer->stop();
+    }
 
     if(conVidas->getvidaT()>0)
     {
