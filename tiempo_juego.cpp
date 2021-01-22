@@ -28,6 +28,7 @@ void tiempo_juego::setCon_abs(int value)
 void tiempo_juego::increase()
 {
     contador++;
+    con_abs=contador/200;
 }
 
 void tiempo_juego::reset()

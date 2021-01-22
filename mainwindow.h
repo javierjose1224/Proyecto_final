@@ -38,24 +38,23 @@ private:
     Ui::MainWindow *ui;
     QTimer *timer;
     QGraphicsScene *scene;
+
+    QList<muro *>muros;
+    QList<pelota *>bars;
+    QList<senoidal *>globs;
+
     float dt;
     int h_limit;
     int v_limit;
-    void borderColilision(pelota *b);
-    void borderColilisionPer(personaje *b);
-    void keyPressEvent(QKeyEvent *event);
+
     nivel *nivel_1;
-
-    QList <disparo *> bala_player;
-
     senoidal *bomba;
-    //plataforma *suelo;
     tiempo_juego *contador_n1;
+    tiempo_juego *gener_glob;
     puntaje *score;
     vida *conVidas;
-
     personaje *principal;
-    QList<muro *>muros;
-    QList<pelota *>bars;
+
+    void keyPressEvent(QKeyEvent *event);
 };
 #endif // MAINWINDOW_H

@@ -1,9 +1,10 @@
 #include "nivel.h"
 
-nivel::nivel(QList<pelota *> balls_,QList<muro *> floors_)
+nivel::nivel(QList<pelota *> balls_,QList<muro *> floors_,QList<senoidal*>globos_)
 {
     balls=balls_;
     floors=floors_;
+    globos=globos_;
 }
 
 
@@ -47,10 +48,24 @@ void nivel::graficar(QGraphicsScene *scene, float v_limit)
         balls.at(i)->actualizar(v_limit);
         scene->addItem(balls.at(i));
     }
+
+    for(int i=0;i<globos.size();i++)
+    {
+        globos.at(i)->actualizar(v_limit);
+        scene->addItem(globos.at(i));
+    }
 }
 
-void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,personaje *protag,QTimer *timer,vida *conVidas,puntaje *score)
+void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,personaje *protag,QTimer *timer,vida *conVidas,puntaje *score,tiempo_juego *cont_abs)
 {
+    if(cont_abs->getCon_abs()==10)
+    {
+        globos.push_back(new senoidal(0,v_limit/3,1));
+        scene->addItem(globos.back());
+        cont_abs->reset();
+        //qDebug()<<"ya llego el lechero";
+    }
+
     protag->actualizar(v_limit);
     protag->colision_lados_escena(v_limit,h_limit);
     //COLISION DE LOS MUROS/PLATAFORMAS CON EL PERONAJE
@@ -82,18 +97,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
             }
         }
     }
-    //ACTUALIZACION MOVIMIENTO DE LAS BALAS
-    for(int i=0;i<protag->getBalas_jugador().size();i++)
-    {
-        protag->getBalas_jugador().at(i)->actualizar(v_limit);
-        if(protag->getBalas_jugador().at(i)->getPY()>=v_limit)
-        {
-            //protag->getBalas_jugador().removeAt(i);
-            scene->removeItem(protag->getBalas_jugador().at(i));
-            protag->eliminar_disparo(i);
-
-        }
-    }
+    //+++++++++++++++++++
 
     //COLISION DEL PERSONAJE CON LAS PELOTAS
     for(int i=0;i<balls.size();i++)
@@ -117,6 +121,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
 //            }
         }
     }
+    //+++++++++++++++++++
 
     //COLISION DE LAS BALAS CON LAS PELOTAS
     bool ban=false;
@@ -129,7 +134,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
             {
                 scene->removeItem(protag->getBalas_jugador().at(i));
                 protag->eliminar_disparo(i);
-
+                score->increase();
                 ban=true;
                 nv=j;
                 break;
@@ -155,62 +160,27 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         }
         else
         {
+            score->increase();
             scene->removeItem(balls.at(nv));
             balls.removeAt(nv);
         }
     }
+    //+++++++++++++++++++
 
-//    for(int i=0;i<protag->getBalas_jugador().size();i++)
-//    {
-//        for(int j=0;j<balls.size();j++)
-//        {
-//            if(protag->getBalas_jugador().at(i)->collidesWithItem(balls.at(j)))
-//            {
-//                score->increase();
-//                //this->remove_bullet(protag,i);
-
-//                scene->removeItem(protag->getBalas_jugador().at(i));
-
-//                //protag->getBalas_jugador().removeAt(i);
-//                float posx_b=protag->getBalas_jugador().at(i)->getPX();
-
-//                protag->eliminar_disparo(i);
-
-//                //scene->removeItem(protag->getBalas_jugador().at(i));
-//                //qDebug()<<"colisione"<< protag->getBalas_jugador().at(i);
-//                if(balls.at(j)->getR()>=10)
-//                {
-
-//                    float posx=balls.at(j)->getPX();
-//                    float posy=balls.at(j)->getPY();
-//                    float rad=balls.at(j)->getR()/2;
-
-//                    qDebug()<<"bala a eliminar"<< i;
-
-//                    scene->removeItem(balls.at(j));
-//                    balls.removeAt(j);
-
-//                    if(posx>posx_b)
-//                    {
-//                        balls.push_back(new pelota(posx,posy,10,20,50,rad,0,1,2));
-//                        scene->addItem(balls.back());
-
-//                        balls.push_back(new pelota(posx_b-2*rad,posy,-10,20,50,rad,0,1,2));
-//                        scene->addItem(balls.back());
-//                     }
-//                }
-//                else
-//                {
-//                    scene->removeItem(balls.at(j));
-//                    balls.removeAt(j);
-//                    score->increase();
-//                }
-
-//            }
-
-//        }
-//    }
-
+    //COLISION BALAS CON MUROS
+    for(int i=0;i<protag->getBalas_jugador().size();i++)
+    {
+        for(int j=0;j<floors.size();j++)
+        {
+            if(protag->getBalas_jugador().at(i)->collidesWithItem(floors.at(j)))
+            {
+                scene->removeItem(protag->getBalas_jugador().at(i));
+                protag->eliminar_disparo(i);
+                break;
+            }
+        }
+    }
+    //+++++++++++++++++++
 
 
     //COLISION DE LAS BALAS CON EL MURO/PLATAFORMAS
@@ -245,12 +215,45 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
             }
         }
     }
+    //+++++++++++++++++++
+
     //ACTUALIZACION DE LAS PELOTAS
     for(int i=0;i<balls.size();i++)
     {
         balls.at(i)->actualizar(v_limit);
         balls.at(i)->collision_lados_escena(v_limit,h_limit);
     }
+    //+++++++++++++++++++
+
+    //ACTUALIZACION DE LOS GLOBOS
+    for(int i=0;i<globos.size();i++)
+    {
+        globos.at(i)->actualizar(v_limit);
+        if(globos.at(i)->getPX()>h_limit)
+        {
+            scene->removeItem(globos.at(i));
+            globos.removeAt(i);
+        }
+    }
+    //+++++++++++++++++++
+
+    //ACTUALIZACION MOVIMIENTO DE LAS BALAS
+    for(int i=0;i<protag->getBalas_jugador().size();i++)
+    {
+        protag->getBalas_jugador().at(i)->actualizar(v_limit);
+        if(protag->getBalas_jugador().at(i)->getPY()>=v_limit)
+        {
+            scene->removeItem(protag->getBalas_jugador().at(i));
+            protag->eliminar_disparo(i);
+        }
+    }
+    //+++++++++++++++++++
+
+}
+
+void nivel::agregar_globo(senoidal *a)
+{
+    globos.push_back(a);
 }
 
 nivel::nivel(QObject *parent)

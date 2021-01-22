@@ -21,19 +21,18 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->resize(scene->width(),scene->height());
     this->resize(ui->graphicsView->width()+100,ui->graphicsView->height()+100);
 
+
+
+    principal = new personaje(0,0,0,0,50,20,0.3,0,5);//0.3k
+    principal->actualizar(v_limit);
+    scene->addItem(principal);
+//MUROS PARA NIVEL 1
     muros.push_back(new muro(h_limit/2-25,v_limit/2,100,100));
 //    muros.push_back(new muro(h_limit/2,v_limit/2,200,50));
 
     muros.push_back(new muro(h_limit/2-25,v_limit,50,v_limit-100));
 
-    principal = new personaje(0,0,0,0,50,20,0.3,0,5);//0.3k
-    principal->actualizar(v_limit);
-    scene->addItem(principal);
-
-
-    bomba= new senoidal(0,v_limit/2,1);
-    scene->addItem(bomba);
-
+//PELOTAS PARA MANDAR AL NIVEL 1
     bars.push_back(new pelota(32,300,10,0,50,60,0,1,2));
 
     bars.push_back(new pelota(600,300,-10,0,50,100,0,1,2));
@@ -49,13 +48,12 @@ MainWindow::MainWindow(QWidget *parent)
 //    bars.push_back(new pelota(h_limit/2-30,v_limit-100,-10,0,40,40,0,1,2));
 //    bars.push_back(new pelota(h_limit/2-40,v_limit-100,-10,0,40,40,0,1,2));
 
+//GLOBOS PARA EL NIVEL 1
+    //globs.push_back(new senoidal(0,v_limit/2,1));
 
-
-    nivel_1=new nivel(bars,muros);
-
+    nivel_1=new nivel(bars,muros,globs);
     nivel_1->graficar(scene,v_limit);
-    //AÑADIDO DE LOS ELEMENTOS EN LA ESCENA
-    //++++++++++++++++++++++++++++++++++++++++++++
+
     conVidas= new vida();
     conVidas->setPos(0,-30);
     scene->addItem(conVidas);
@@ -63,6 +61,8 @@ MainWindow::MainWindow(QWidget *parent)
     score = new puntaje();
     score->setPos(h_limit-150,-30);
     scene->addItem(score);
+
+    gener_glob = new tiempo_juego();
 
     contador_n1= new tiempo_juego();
     contador_n1->setPos(h_limit/2-50,-30);
@@ -79,9 +79,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::actualizarm()
 {   
-    if(bomba->getPX()>600)
-        bomba->setU(-1);
-    bomba->actualizar(v_limit);
+    gener_glob->increase();
     contador_n1->increase_graf();
     if(contador_n1->getCon_abs()==20)
     {
@@ -91,7 +89,7 @@ void MainWindow::actualizarm()
 
     if(conVidas->getvidaT()>0)
     {
-        nivel_1->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas,score);
+        nivel_1->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas,score,gener_glob);
     }
     else
     {
@@ -122,11 +120,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     }
     if(event->key() == Qt::Key_Space && b->getBalas_jugador().size()==0)
     {
-//        qDebug()<<"disparo";
-//        bala_player.append(new disparo(b->getPX(),b->getPY(),0,20));
-//        bala_player.back()->actualizar(v_limit);
-//        scene->addItem(bala_player.back());
-
         principal->disparo_lis(scene,v_limit);
     }
 }
