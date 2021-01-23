@@ -128,10 +128,14 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
     {
         if(protag->collidesWithItem(puas.at(i)))
         {
-            conVidas->decrease();
-            protag->setPos(0,0);
-            protag->setPX(0);
-            protag->setPY(0);
+            if(protag->getGolpe()==true)
+            {
+                conVidas->decrease();
+                protag->setPos(0,0);
+                protag->setPX(0);
+                protag->setPY(0);
+                protag->setGolpe(false);
+            }
         }
     }
     //+++++++++++++++++++
@@ -142,14 +146,14 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
     {
         if(protag->collidesWithItem(balls.at(i)))
         {
-//            qDebug()<<"COLISIONE PEZ";
-//            if(conVidas->getvidaT()>0)
-//            {
-                conVidas->decrease();           
+            if(protag->getGolpe()==true)
+            {
+                conVidas->decrease();
                 protag->setPos(0,0);
                 protag->setPX(0);
                 protag->setPY(0);
-            //}
+                protag->setGolpe(false);
+            }
         }
     }
     //+++++++++++++++++++

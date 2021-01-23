@@ -27,6 +27,7 @@ private:
     float escala;    
     int con=0;
     float VD;
+    bool golpe;
     QList<disparo*> balas_jugador;
 public:
 
@@ -58,6 +59,8 @@ public:
     QList<disparo *> getBalas_jugador() const;
     float getVD() const;
     void setVD(float value);
+    bool getGolpe() const;
+    void setGolpe(bool value);
 };
 
 #endif // PERSONAJE_H

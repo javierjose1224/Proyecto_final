@@ -2,6 +2,36 @@
 #include <math.h>
 #include <cmath>
 
+personaje::personaje(float posX_, float posY_, float velX_, float velY_, float radio, float k_, float e_,float G_)
+{
+     PX=posX_;
+     PY=posY_;
+     mass=50;
+     R=radio;
+     VX=velX_;
+     VY=velY_;
+     AX=0;
+     AY=0;
+     G=G_;//2
+     K=k_;
+     e=e_;
+     V = 0;
+     dt = 0.1;
+     escala=1;
+     VD=20;
+     golpe=true;
+}
+
+bool personaje::getGolpe() const
+{
+    return golpe;
+}
+
+void personaje::setGolpe(bool value)
+{
+    golpe = value;
+}
+
 void personaje::setPX(float value)
 {
     PX = value;
@@ -41,25 +71,6 @@ float personaje::getVD() const
 void personaje::setVD(float value)
 {
     VD = value;
-}
-
-personaje::personaje(float posX_, float posY_, float velX_, float velY_, float radio, float k_, float e_,float G_)
-{
-     PX=posX_;
-     PY=posY_;
-     mass=50;
-     R=radio;
-     VX=velX_;
-     VY=velY_;
-     AX=0;
-     AY=0;
-     G=G_;//2
-     K=k_;
-     e=e_;
-     V = 0;
-     dt = 0.1;
-     escala=1;
-     VD=20;
 }
 
 personaje::~personaje()

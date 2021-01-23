@@ -28,13 +28,13 @@ MainWindow::MainWindow(QWidget *parent)
 
 //NIVEL 1
 {
-//MUROS PARA NIVEL 1
+//PUAS PARA NIVEL 1
     puas.push_back(new pua(3*h_limit/4,25,50,25));
 
 
 //PELOTAS PARA NIVEL 1
 
-    //bars.push_back(new pelota(80,300,10,0,50,40,0,1,2));
+    bars.push_back(new pelota(80,300,10,0,50,40,0,1,2));
 
 }
 
@@ -111,7 +111,7 @@ void MainWindow::actualizarm()
             principal->setVD(20);
             qDebug()<<"nivel 3";
             score->setScore(8);
-            score->setScore(22);
+            //score->setScore(22);
         }
 
         else if(score->getScore()>7 && score->getScore()<22)
@@ -171,20 +171,24 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_D)
     {
         b->set_vel(15,b->getVY(),b->getPX(),b->getPY());
+        b->setGolpe(true);
         //qDebug()<<"ME MOVI CON D";
     }
     if(event->key() == Qt::Key_A)
     {
         b->set_vel(-15,b->getVY(),b->getPX(),b->getPY());
+        b->setGolpe(true);
         //qDebug()<<"ME MOVI CON A";
     }
     if(event->key() == Qt::Key_W && b->getPY()<=b->getR())
     {
         b->set_vel(b->getVX(),40,b->getPX(),b->getPY());
+        b->setGolpe(true);
         //qDebug()<<"ME MOVI CON W";
     }
     if(event->key() == Qt::Key_Space && b->getBalas_jugador().size()==0)
     {
         principal->disparo_lis(scene,v_limit);
+        b->setGolpe(true);
     }
 }
