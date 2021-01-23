@@ -1,10 +1,11 @@
 #include "nivel.h"
 
-nivel::nivel(QList<pelota *> balls_,QList<muro *> floors_,QList<senoidal*>globos_,QGraphicsScene *scene, float v_limit)
+nivel::nivel(QList<pelota *> balls_,QList<muro *> floors_,QList<senoidal*>globos_,QList<pua*>puas_,QGraphicsScene *scene, float v_limit)
 {
     balls=balls_;
     floors=floors_;
     globos=globos_;
+    puas=puas_;
     this->graficar(scene,v_limit);
 }
 
@@ -14,6 +15,7 @@ nivel::~nivel()
     balls.clear();
     floors.clear();    
     globos.clear();
+    puas.clear();
     qDebug()<<"borre el nivel";
 }
 
@@ -29,9 +31,14 @@ void nivel::borrar_elementos(QGraphicsScene *scene)
         scene->removeItem(floors.at(i));
     }
 
-    for(int i=0;i<balls.size();i++)
+    for(int i=0;i<globos.size();i++)
     {
-        scene->removeItem(balls.at(i));
+        scene->removeItem(globos.at(i));
+    }
+
+    for(int i=0;i<puas.size();i++)
+    {
+        scene->removeItem(puas.at(i));
     }
 
     this->~nivel();
@@ -61,10 +68,17 @@ void nivel::graficar(QGraphicsScene *scene, float v_limit)
         globos.at(i)->actualizar(v_limit);
         scene->addItem(globos.at(i));
     }
+
+    for(int i=0;i<puas.size();i++)
+    {
+        puas.at(i)->posicionar(v_limit);
+        scene->addItem(puas.at(i));
+    }
 }
 
 void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,personaje *protag,QTimer *timer,vida *conVidas,puntaje *score,tiempo_juego *cont_abs)
 {
+    //ACTUALIZACION DE TIMER GENERADOR DE GLOBOS
     if(cont_abs->getCon_abs()==10)
     {
         globos.push_back(new senoidal(0,v_limit-200,1));
@@ -72,9 +86,11 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         cont_abs->reset();
         //qDebug()<<"ya llego el lechero";
     }
+    //+++++++++++++
 
     protag->actualizar(v_limit);
     protag->colision_lados_escena(v_limit,h_limit);
+
     //COLISION DE LOS MUROS/PLATAFORMAS CON EL PERONAJE
     for(int i=0;i<floors.size();i++)
     {
@@ -106,29 +122,38 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
     }
     //+++++++++++++++++++
 
+
+    //COLISION PERSONAJE CON LAS PUAS
+    for(int i=0;i<puas.size();i++)
+    {
+        if(protag->collidesWithItem(puas.at(i)))
+        {
+            conVidas->decrease();
+            protag->setPos(0,0);
+            protag->setPX(0);
+            protag->setPY(0);
+        }
+    }
+    //+++++++++++++++++++
+
+
     //COLISION DEL PERSONAJE CON LAS PELOTAS
     for(int i=0;i<balls.size();i++)
     {
         if(protag->collidesWithItem(balls.at(i)))
         {
-            qDebug()<<"COLISIONE PEZ";
-            if(conVidas->getvidaT()>0)
-            {
-                conVidas->decrease();
-                qDebug()<<"Me golpeo";               
+//            qDebug()<<"COLISIONE PEZ";
+//            if(conVidas->getvidaT()>0)
+//            {
+                conVidas->decrease();           
                 protag->setPos(0,0);
                 protag->setPX(0);
                 protag->setPY(0);
-            }
-//            else
-//            {
-//                scene->removeItem(protag);
-//                timer->stop();
-//                this->~nivel();
-//            }
+            //}
         }
     }
     //+++++++++++++++++++
+
 
     //COLISION DE LAS BALAS CON LAS PELOTAS
     bool ban=false;
@@ -167,7 +192,6 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         }
         else
         {
-            //score->increase();
             scene->removeItem(balls.at(nv));
             balls.removeAt(nv);
         }
@@ -189,13 +213,11 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
 
                 scene->removeItem(globos.at(j));
                 globos.removeAt(j);
-//                ban=true;
-//                nv=j;
                 break;
             }
         }
     }
-
+    //+++++++++++++++++++
 
 
     //COLISION BALAS CON MUROS
@@ -249,9 +271,6 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
     //+++++++++++++++++++
 
 
-
-
-
     //ACTUALIZACION DE LAS PELOTAS
     for(int i=0;i<balls.size();i++)
     {
@@ -259,6 +278,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         balls.at(i)->collision_lados_escena(v_limit,h_limit);
     }
     //+++++++++++++++++++
+
 
     //ACTUALIZACION DE LOS GLOBOS
     for(int i=0;i<globos.size();i++)
@@ -272,6 +292,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
     }
     //+++++++++++++++++++
 
+
     //ACTUALIZACION MOVIMIENTO DE LAS BALAS
     for(int i=0;i<protag->getBalas_jugador().size();i++)
     {
@@ -283,6 +304,7 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         }
     }
     //+++++++++++++++++++
+
 
 }
 

@@ -15,6 +15,14 @@ void vida::decrease()
     setPlainText(QString("Vidas: ")+ QString::number(vidaT));
 }
 
+void vida::increase()
+{
+    vidaT++;
+    setPlainText(QString("Vidas: ")+ QString::number(vidaT));
+}
+
+
+
 int vida::getvidaT()
 {
     return vidaT;

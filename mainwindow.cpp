@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     timer=new QTimer(this);
     scene=new QGraphicsScene(this);
     scene->setSceneRect(0,0,h_limit,v_limit);
+    scene->setBackgroundBrush(Qt::yellow);
 
     ui->graphicsView->setScene(scene);
     ui->centralwidget ->adjustSize();
@@ -21,29 +22,47 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->resize(scene->width(),scene->height());
     this->resize(ui->graphicsView->width()+100,ui->graphicsView->height()+100);
 
-    principal = new personaje(0,0,0,0,50,20,0.3,0,5);//0.3k
+    principal = new personaje(h_limit/2,0,0,0,20,0.3,0,5);//0.3k
     principal->actualizar(v_limit);
     scene->addItem(principal);
+
+//NIVEL 1
+{
 //MUROS PARA NIVEL 1
-    //muros.push_back(new muro(h_limit/2-25,v_limit/2,100,100));
-//    muros.push_back(new muro(h_limit/2,v_limit/2,200,50));
+    puas.push_back(new pua(3*h_limit/4,25,50,25));
 
+
+//PELOTAS PARA NIVEL 1
+
+    //bars.push_back(new pelota(80,300,10,0,50,40,0,1,2));
+
+}
+
+//NIVEL 2
+{
+//MUROS NIVEL 2
     muros2.push_back(new muro(100,v_limit/2,100,100));
-    //bars2.push_back(new pelota(32,300,10,0,80,80,0,1,2));
+    muros2.push_back(new muro(h_limit-200,v_limit/2,100,100));
 
+
+//PELOTAS NIVEL 2
     bars2.push_back(new pelota(20,300,10,0,50,40,0,1,2));
     bars2.push_back(new pelota(80,300,10,0,50,40,0,1,2));
+}
 
-//PELOTAS PARA MANDAR AL NIVEL
+//NIVEL 3
+{
+//PELOTAS NIVEL 3
+    bars3.push_back(new pelota((300),400,10,0,50,40,0,1,2));
+    bars3.push_back(new pelota((300)+40,400,10,0,50,40,0,1,2));
+    bars3.push_back(new pelota((300)+80,400,10,0,50,40,0,1,2));
 
-    //bars.push_back(new pelota(32,300,10,0,50,40,0,1,2));
-    bars.push_back(new pelota(80,300,10,0,50,40,0,1,2));
-    //bars.push_back(new pelota(200,300,10,0,50,40,0,1,2));
-
-//GLOBOS PARA EL NIVEL 1
-    //globs.push_back(new senoidal(0,v_limit/2,1));
-
-    nivel_1=new nivel(bars,muros,globs,scene,v_limit);
+//MUROS NIVEL 3
+    muros3.push_back(new muro(100,v_limit/2,100,100));
+    muros3.push_back(new muro(h_limit-200,v_limit/2,100,100));
+    muros3.push_back(new muro(h_limit/2-50,v_limit/3,100,50));
+}
+    nivel_1=new nivel(bars,muros,globs,puas,scene,v_limit);
     //nivel_1->graficar(scene,v_limit);
 
 
@@ -61,6 +80,7 @@ MainWindow::MainWindow(QWidget *parent)
     contador_n1->setPos(h_limit/2-50,-30);
 
     scene->addItem(contador_n1);
+
     timer->start(5);//5
     connect(timer,SIGNAL(timeout()),this,SLOT(actualizarm()));
 }
@@ -84,25 +104,47 @@ void MainWindow::actualizarm()
 
         else if(score->getScore()==7)
         {
+            conVidas->increase();
             //timer->stop();
             nivel_1->borrar_elementos(scene);
-            nivel_2= new nivel(bars2,muros2,globs,scene,v_limit);
+            nivel_2= new nivel(bars2,muros2,globs,puas2,scene,v_limit);
             principal->setVD(20);
+            qDebug()<<"nivel 3";
             score->setScore(8);
+            score->setScore(22);
         }
 
-        if(score->getScore()>7 && score->getScore()<22)
+        else if(score->getScore()>7 && score->getScore()<22)
         {
             nivel_2->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas,score,gener_glob);
         }
 
-        if(score->getScore()==22)
+        else if(score->getScore()==22)
+        {
+            conVidas->increase();
+            nivel_2->borrar_elementos(scene);
+            nivel_3= new nivel(bars3,muros3,globs,puas3,scene,v_limit);
+            principal->setVD(20);
+            score->setScore(23);
+            //timer->stop();
+            qDebug()<<"nivel 3";
+        }
+
+        else if(score->getScore()>22 && score->getScore()<44)
+        {
+            nivel_3->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas,score,gener_glob);
+        }
+
+        if(score->getScore()==44)
         {
             timer->stop();
-            qDebug()<<"gane";
         }
     }
-
+    else
+    {
+        timer->stop();
+        scene->removeItem(principal);
+    }
 
 //    if(contador_n1->getCon_abs()==20)
 //    {

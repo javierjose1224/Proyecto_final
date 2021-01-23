@@ -10,6 +10,7 @@
 #include "senoidal.h"
 #include "puntaje.h"
 #include "tiempo_juego.h"
+#include "pua.h"
 
 class nivel:public QObject
 {
@@ -19,6 +20,7 @@ private:
     QList<pelota*>balls;
     QList<muro*>floors;
     QList<senoidal*>globos;
+    QList<pua*>puas;
     tiempo_juego *cont_globos;
 
 public slots:
@@ -26,7 +28,7 @@ public slots:
 
 public:
     explicit nivel(QObject *parent = nullptr);
-    nivel(QList<pelota*>balls_,QList<muro*>floors_,QList<senoidal*>globos_,QGraphicsScene *scene, float v_limit);
+    nivel(QList<pelota*>balls_,QList<muro*>floors_,QList<senoidal*>globos_,QList<pua*>puas_,QGraphicsScene *scene, float v_limit);
     ~nivel();
 
     void borrar_elementos(QGraphicsScene *scene);

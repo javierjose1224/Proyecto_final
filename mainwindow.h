@@ -14,7 +14,7 @@
 #include "disparo.h"
 #include "tiempo_juego.h"
 #include "senoidal.h"
-
+#include "pua.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -40,8 +40,7 @@ private:
     QTimer *timer;
     QGraphicsScene *scene;
 
-    QList<muro *>muros;
-    QList<pelota *>bars;
+
     QList<senoidal *>globs;
 
     float dt;
@@ -49,11 +48,19 @@ private:
     int v_limit;
 
     nivel *nivel_1;
+    QList<muro *>muros;
+    QList<pelota *>bars;
+    QList<pua*>puas;
 
     nivel *nivel_2;
     QList<muro *>muros2;
     QList<pelota *>bars2;
+    QList<pua*>puas2;
 
+    nivel *nivel_3;
+    QList<muro*>muros3;
+    QList<pelota*>bars3;
+    QList<pua*>puas3;
 
     senoidal *bomba;
     tiempo_juego *contador_n1;

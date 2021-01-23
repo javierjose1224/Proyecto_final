@@ -10,6 +10,7 @@ class vida:public QGraphicsTextItem
 public:
     vida(QGraphicsItem * parent = 0);
     void decrease();
+    void increase();
     int getvidaT();
 private:
     int vidaT;

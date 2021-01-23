@@ -30,7 +30,7 @@ private:
     QList<disparo*> balas_jugador;
 public:
 
-    personaje(float posX_,float posY_,float velX_,float velY_,float masa,float radio,float k_,float e_,float G_);
+    personaje(float posX_,float posY_,float velX_,float velY_,float radio,float k_,float e_,float G_);
     ~personaje();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) override;
