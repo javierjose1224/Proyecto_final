@@ -40,7 +40,6 @@ private:
     QTimer *timer;
     QGraphicsScene *scene;
 
-
     QList<senoidal *>globs;
 
     float dt;

@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     timer=new QTimer(this);
     scene=new QGraphicsScene(this);
     scene->setSceneRect(0,0,h_limit,v_limit);
-    scene->setBackgroundBrush(Qt::yellow);
+    //scene->setBackgroundBrush(Qt::yellow);
 
     ui->graphicsView->setScene(scene);
     ui->centralwidget ->adjustSize();
@@ -63,9 +63,8 @@ MainWindow::MainWindow(QWidget *parent)
     muros3.push_back(new muro(h_limit/2-50,v_limit/3,100,50));
 }
     nivel_1=new nivel(bars,muros,globs,puas,scene,v_limit);
-    //nivel_1->graficar(scene,v_limit);
 
-
+//VIDAS, PUNTAJE Y TIEMPO
     conVidas= new vida();
     conVidas->setPos(0,-30);
     scene->addItem(conVidas);
@@ -74,13 +73,13 @@ MainWindow::MainWindow(QWidget *parent)
     score->setPos(h_limit-150,-30);
     scene->addItem(score);
 
-    gener_glob = new tiempo_juego();
-
     contador_n1= new tiempo_juego();
     contador_n1->setPos(h_limit/2-50,-30);
-
     scene->addItem(contador_n1);
 
+//+++++++++++++++++++++++++++
+
+    gener_glob = new tiempo_juego();
     timer->start(5);//5
     connect(timer,SIGNAL(timeout()),this,SLOT(actualizarm()));
 }
@@ -126,7 +125,6 @@ void MainWindow::actualizarm()
             nivel_3= new nivel(bars3,muros3,globs,puas3,scene,v_limit);
             principal->setVD(20);
             score->setScore(23);
-            //timer->stop();
             qDebug()<<"nivel 3";
         }
 
@@ -145,23 +143,6 @@ void MainWindow::actualizarm()
         timer->stop();
         scene->removeItem(principal);
     }
-
-//    if(contador_n1->getCon_abs()==20)
-//    {
-//        contador_n1->reset();
-//        //timer->stop();
-//    }
-
-//    if(conVidas->getvidaT()>0)
-//    {
-//        nivel_1->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas,score,gener_glob);
-//    }
-//    else
-//    {
-//        timer->stop();
-//        scene->removeItem(principal);
-//        nivel_1->borrar_elementos(scene);
-//    }
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
@@ -172,23 +153,19 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     {
         b->set_vel(15,b->getVY(),b->getPX(),b->getPY());
         b->setGolpe(true);
-        //qDebug()<<"ME MOVI CON D";
     }
     if(event->key() == Qt::Key_A)
     {
         b->set_vel(-15,b->getVY(),b->getPX(),b->getPY());
         b->setGolpe(true);
-        //qDebug()<<"ME MOVI CON A";
     }
     if(event->key() == Qt::Key_W && b->getPY()<=b->getR())
     {
         b->set_vel(b->getVX(),40,b->getPX(),b->getPY());
         b->setGolpe(true);
-        //qDebug()<<"ME MOVI CON W";
     }
-    if(event->key() == Qt::Key_Space && b->getBalas_jugador().size()==0)
+    if((event->key() == Qt::Key_Space && b->getBalas_jugador().size()==0) && b->getGolpe()==true)
     {
         principal->disparo_lis(scene,v_limit);
-        b->setGolpe(true);
     }
 }
