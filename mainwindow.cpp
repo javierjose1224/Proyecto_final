@@ -23,6 +23,11 @@ MainWindow::MainWindow(QWidget *parent)
     this->resize(ui->graphicsView->width()+100,ui->graphicsView->height()+100);
 
     principal = new personaje(h_limit/2,0,0,0,20,0.3,0,5);//0.3k
+    jugadores.push_back(principal);
+
+    segundo_plyr = new personaje(h_limit/2,0,0,0,20,0.3,0,5);
+    jugadores.push_back(segundo_plyr);
+
     principal->actualizar(v_limit);
     scene->addItem(principal);
 
@@ -98,13 +103,11 @@ void MainWindow::actualizarm()
     {
         if(score->getScore()<7)
         {
-            nivel_1->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas,score,gener_glob);
+            nivel_1->actualizar_nivel(scene,v_limit,h_limit,jugadores.at(0),timer,conVidas,score,gener_glob);
         }
 
         else if(score->getScore()==7)
         {
-            conVidas->increase();
-            //timer->stop();
             nivel_1->borrar_elementos(scene);
             nivel_2= new nivel(bars2,muros2,globs,puas2,scene,v_limit);
             principal->setVD(20);
@@ -115,12 +118,11 @@ void MainWindow::actualizarm()
 
         else if(score->getScore()>7 && score->getScore()<22)
         {
-            nivel_2->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas,score,gener_glob);
+            nivel_2->actualizar_nivel(scene,v_limit,h_limit,jugadores.at(0),timer,conVidas,score,gener_glob);
         }
 
         else if(score->getScore()==22)
         {
-            conVidas->increase();
             nivel_2->borrar_elementos(scene);
             nivel_3= new nivel(bars3,muros3,globs,puas3,scene,v_limit);
             principal->setVD(20);
@@ -130,7 +132,7 @@ void MainWindow::actualizarm()
 
         else if(score->getScore()>22 && score->getScore()<44)
         {
-            nivel_3->actualizar_nivel(scene,v_limit,h_limit,principal,timer,conVidas,score,gener_glob);
+            nivel_3->actualizar_nivel(scene,v_limit,h_limit,jugadores.at(0),timer,conVidas,score,gener_glob);
         }
 
         if(score->getScore()==44)
@@ -141,14 +143,16 @@ void MainWindow::actualizarm()
     else
     {
         timer->stop();
-        scene->removeItem(principal);
+        scene->removeItem(jugadores.at(0));
     }
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    personaje *b = principal;
+    personaje *b = jugadores.at(0);
+    personaje *b2 = jugadores.at(1);
 
+    //CONTROLES JUGADOR PRINCIPAL
     if(event->key() == Qt::Key_D)
     {
         b->set_vel(15,b->getVY(),b->getPX(),b->getPY());
@@ -164,8 +168,39 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         b->set_vel(b->getVX(),40,b->getPX(),b->getPY());
         b->setGolpe(true);
     }
-    if((event->key() == Qt::Key_Space && b->getBalas_jugador().size()==0) && b->getGolpe()==true)
+    if((event->key() == Qt::Key_F && b->getBalas_jugador().size()==0) && b->getGolpe()==true)
     {
-        principal->disparo_lis(scene,v_limit);
+        b->disparo_lis(scene,v_limit);
+    }
+
+    //CONTROLES DEL SEGUNDO JUGADOR
+    if(event->key() == Qt::Key_L)
+    {
+        b->set_vel(15,b->getVY(),b->getPX(),b->getPY());
+        b->setGolpe(true);
+    }
+
+    if(event->key() == Qt::Key_J)
+    {
+        b2->set_vel(-15,b2->getVY(),b2->getPX(),b2->getPY());
+        b2->setGolpe(true);
+    }
+    if(event->key() == Qt::Key_I && b2->getPY()<=b2->getR())
+    {
+        b2->set_vel(b2->getVX(),40,b2->getPX(),b2->getPY());
+        b2->setGolpe(true);
+    }
+    if((event->key() == Qt::Key_H && b2->getBalas_jugador().size()==0) && b2->getGolpe()==true)
+    {
+        b2->disparo_lis(scene,v_limit);
     }
 }
+
+
+
+
+
+
+
+
+

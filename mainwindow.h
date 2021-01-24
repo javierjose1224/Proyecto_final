@@ -66,7 +66,9 @@ private:
     tiempo_juego *gener_glob;
     puntaje *score;
     vida *conVidas;
+    QList<personaje*>jugadores;
     personaje *principal;
+    personaje *segundo_plyr;
 
     void keyPressEvent(QKeyEvent *event);
 };

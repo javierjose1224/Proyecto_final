@@ -312,10 +312,6 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
 
 }
 
-void nivel::agregar_globo(senoidal *a)
-{
-    globos.push_back(a);
-}
 
 nivel::nivel(QObject *parent)
 {
