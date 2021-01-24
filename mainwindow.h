@@ -15,6 +15,8 @@
 #include "tiempo_juego.h"
 #include "senoidal.h"
 #include "pua.h"
+#include "sesion.h"
+#include "hd_nivel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -39,7 +41,7 @@ private:
     Ui::MainWindow *ui;
     QTimer *timer;
     QGraphicsScene *scene;
-
+    sesion *iniciar_juego;
     QList<senoidal *>globs;
 
     float dt;
@@ -66,6 +68,7 @@ private:
     tiempo_juego *gener_glob;
     puntaje *score;
     vida *conVidas;
+    hd_nivel *nivel_graf;
     QList<personaje*>jugadores;
     personaje *principal;
     personaje *segundo_plyr;

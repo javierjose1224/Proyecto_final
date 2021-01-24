@@ -5,7 +5,6 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    srand(time(NULL));
     ui->setupUi(this);
 
     h_limit=1000;
@@ -75,13 +74,16 @@ MainWindow::MainWindow(QWidget *parent)
     scene->addItem(conVidas);
 
     score = new puntaje();
-    score->setPos(h_limit-150,-30);
+    score->setPos(h_limit-100,-30);//-150
     scene->addItem(score);
 
     contador_n1= new tiempo_juego();
-    contador_n1->setPos(h_limit/2-50,-30);
+    contador_n1->setPos(h_limit/2+100,-30);//-50
     scene->addItem(contador_n1);
 
+    nivel_graf= new hd_nivel();
+    nivel_graf->setPos(h_limit/2-200,-30);
+    scene->addItem(nivel_graf);
 //+++++++++++++++++++++++++++
 
     gener_glob = new tiempo_juego();
@@ -111,6 +113,7 @@ void MainWindow::actualizarm()
             nivel_1->borrar_elementos(scene);
             nivel_2= new nivel(bars2,muros2,globs,puas2,scene,v_limit);
             principal->setVD(20);
+            nivel_graf->increase();
             qDebug()<<"nivel 3";
             score->setScore(8);
             //score->setScore(22);
@@ -126,6 +129,7 @@ void MainWindow::actualizarm()
             nivel_2->borrar_elementos(scene);
             nivel_3= new nivel(bars3,muros3,globs,puas3,scene,v_limit);
             principal->setVD(20);
+            nivel_graf->increase();
             score->setScore(23);
             qDebug()<<"nivel 3";
         }
@@ -138,12 +142,19 @@ void MainWindow::actualizarm()
         if(score->getScore()==44)
         {
             timer->stop();
+            iniciar_juego = new sesion(score->getScore(),contador_n1->getCon_abs(),nivel_graf->getNivel_act());
+            this->close();
+            iniciar_juego->show();
+
         }
     }
     else
     {
         timer->stop();
         scene->removeItem(jugadores.at(0));
+        iniciar_juego = new sesion(score->getScore(),contador_n1->getCon_abs(),nivel_graf->getNivel_act());
+        this->close();
+        iniciar_juego->show();
     }
 }
 
@@ -194,6 +205,13 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     {
         b2->disparo_lis(scene,v_limit);
     }
+
+//    if(event->key() == Qt::Key_Z)
+//    {
+//        iniciar_juego = new sesion(score->getScore(),contador_n1->getCon_abs());
+//        this->close();
+//        iniciar_juego->show();
+//    }
 }
 
 

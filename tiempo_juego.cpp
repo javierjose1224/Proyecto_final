@@ -3,7 +3,7 @@
 tiempo_juego::tiempo_juego(QGraphicsItem *parent): QGraphicsTextItem(parent)
 {
     contador = 0;  
-    setPlainText(QString("tiempo: ")+ QString::number(contador));
+    setPlainText(QString("Tiempo: ")+ QString::number(contador));
     setDefaultTextColor(Qt::black);
     setFont(QFont("times",16));
 }
@@ -12,7 +12,7 @@ void tiempo_juego::increase_graf()
 {
     contador++;
     con_abs=contador/200;
-    setPlainText(QString("tiempo: ")+ QString::number(con_abs));
+    setPlainText(QString("Tiempo: ")+ QString::number(con_abs));
 }
 
 int tiempo_juego::getCon_abs() const
