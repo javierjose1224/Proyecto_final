@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     disparo.cpp \
+    endgame.cpp \
     hd_nivel.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -29,11 +30,13 @@ SOURCES += \
     puntaje.cpp \
     senoidal.cpp \
     sesion.cpp \
+    sesion.cpp \
     tiempo_juego.cpp \
     vida.cpp
 
 HEADERS += \
     disparo.h \
+    endgame.h \
     hd_nivel.h \
     mainwindow.h \
     muro.h \
@@ -44,11 +47,15 @@ HEADERS += \
     puntaje.h \
     senoidal.h \
     sesion.h \
+    sesion.h \
     tiempo_juego.h \
     vida.h
 
 FORMS += \
+    endgame.ui \
     mainwindow.ui \
+    sesion.ui \
+    sesion.ui \
     sesion.ui
 
 # Default rules for deployment.
