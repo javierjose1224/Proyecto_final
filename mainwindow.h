@@ -16,6 +16,7 @@
 #include "senoidal.h"
 #include "pua.h"
 #include "hd_nivel.h"
+#include "endgame.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -70,6 +71,7 @@ private:
     QList<personaje*>jugadores;
     personaje *principal;
     personaje *segundo_plyr;
+    EndGame *pasar;
 
     void keyPressEvent(QKeyEvent *event);
 };

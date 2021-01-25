@@ -30,12 +30,12 @@ SOURCES += \
     puntaje.cpp \
     senoidal.cpp \
     sesion.cpp \
-    sesion.cpp \
     tiempo_juego.cpp \
     vida.cpp
 
 HEADERS += \
     disparo.h \
+    endgame.h \
     endgame.h \
     hd_nivel.h \
     mainwindow.h \
@@ -55,8 +55,6 @@ FORMS += \
     endgame.ui \
     mainwindow.ui \
     sesion.ui \
-    sesion.ui \
-    sesion.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

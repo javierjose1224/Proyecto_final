@@ -37,14 +37,17 @@
       <rect>
        <x>224</x>
        <y>22</y>
-       <width>261</width>
+       <width>281</width>
        <height>41</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <family>Droid Sans</family>
-       <pointsize>-1</pointsize>
+       <family>Segoe Script</family>
+       <pointsize>26</pointsize>
+       <weight>9</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
@@ -52,7 +55,8 @@
 color: #393;
 margin: 0 auto;
 font-size: 35px;
-font-family: 'Droid Sans';</string>
+font-family: 'Droid Sans';
+font: 75 26pt &quot;Segoe Script&quot;;</string>
      </property>
      <property name="text">
       <string>HOOK HIT</string>

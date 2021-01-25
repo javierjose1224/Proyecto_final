@@ -142,6 +142,9 @@ void MainWindow::actualizarm()
         if(score->getScore()==44)
         {
             timer->stop();
+            pasar = new EndGame;
+            pasar->show();
+            this->close();
         }
     }
     else
