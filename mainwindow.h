@@ -15,7 +15,6 @@
 #include "tiempo_juego.h"
 #include "senoidal.h"
 #include "pua.h"
-#include "sesion.h"
 #include "hd_nivel.h"
 
 QT_BEGIN_NAMESPACE
@@ -41,7 +40,6 @@ private:
     Ui::MainWindow *ui;
     QTimer *timer;
     QGraphicsScene *scene;
-    sesion *iniciar_juego;
     QList<senoidal *>globs;
 
     float dt;

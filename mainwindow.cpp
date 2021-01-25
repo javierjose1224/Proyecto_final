@@ -142,19 +142,12 @@ void MainWindow::actualizarm()
         if(score->getScore()==44)
         {
             timer->stop();
-            iniciar_juego = new sesion(score->getScore(),contador_n1->getCon_abs(),nivel_graf->getNivel_act());
-            this->close();
-            iniciar_juego->show();
-
         }
     }
     else
     {
         timer->stop();
         scene->removeItem(jugadores.at(0));
-        iniciar_juego = new sesion(score->getScore(),contador_n1->getCon_abs(),nivel_graf->getNivel_act());
-        this->close();
-        iniciar_juego->show();
     }
 }
 

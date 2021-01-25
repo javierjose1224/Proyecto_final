@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     disparo.cpp \
     hd_nivel.cpp \
+    loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
     muro.cpp \
@@ -27,13 +28,13 @@ SOURCES += \
     pua.cpp \
     puntaje.cpp \
     senoidal.cpp \
-    sesion.cpp \
     tiempo_juego.cpp \
     vida.cpp
 
 HEADERS += \
     disparo.h \
     hd_nivel.h \
+    loginwindow.h \
     mainwindow.h \
     muro.h \
     nivel.h \
@@ -42,13 +43,12 @@ HEADERS += \
     pua.h \
     puntaje.h \
     senoidal.h \
-    sesion.h \
     tiempo_juego.h \
     vida.h
 
 FORMS += \
-    mainwindow.ui \
-    sesion.ui
+    loginwindow.ui \
+    mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
