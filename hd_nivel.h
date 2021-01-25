@@ -19,6 +19,7 @@ public:
 
 private:
     int nivel_act;
+    //incluido push
 };
 
 #endif // HD_NIVEL_H
