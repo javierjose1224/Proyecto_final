@@ -1,4 +1,4 @@
-#include "loginwindow.h"
+#include "sesion.h"
 
 #include <QApplication>
 
@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 //    MainWindow w;
-    LoginWindow w;
+    Sesion w;
     w.show();
     return a.exec();
 }
