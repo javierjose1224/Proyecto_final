@@ -6,6 +6,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+}
+
+MainWindow::MainWindow(QString name):ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    nombre_jugador=name;
 
     h_limit=1000;
     v_limit= 500;
@@ -142,7 +148,7 @@ void MainWindow::actualizarm()
         if(score->getScore()==44)
         {
             timer->stop();
-            pasar = new EndGame;
+            pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act());
             pasar->show();
             this->close();
         }
@@ -151,7 +157,7 @@ void MainWindow::actualizarm()
     {
         timer->stop();
         scene->removeItem(jugadores.at(0));
-        pasar = new EndGame;
+        pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act());
         pasar->show();
         this->close();
     }

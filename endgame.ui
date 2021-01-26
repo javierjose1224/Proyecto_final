@@ -471,9 +471,9 @@
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>230</x>
+       <x>160</x>
        <y>110</y>
-       <width>281</width>
+       <width>401</width>
        <height>41</height>
       </rect>
      </property>
@@ -495,7 +495,7 @@ font-family: 'Droid Sans';
 font: 75 26pt &quot;Segoe Script&quot;;</string>
      </property>
      <property name="text">
-      <string>GANASTE</string>
+      <string>FIN DE JUEGO :)</string>
      </property>
     </widget>
     <widget class="QPushButton" name="loginButton">
@@ -514,7 +514,7 @@ Background: #393;
 Color: #fefefe;</string>
      </property>
      <property name="text">
-      <string>JUGAR DESDE EL INICIO</string>
+      <string>GUARDAR PARTIDA</string>
      </property>
     </widget>
     <widget class="QPushButton" name="regButton">

@@ -29,6 +29,7 @@ class MainWindow : public QMainWindow
 public:
 
     MainWindow(QWidget *parent = nullptr);
+    MainWindow(QString name);
     ~MainWindow();
     void cambiar_nivel();
 
@@ -39,6 +40,7 @@ public slots:
 private:
 
     Ui::MainWindow *ui;
+    QString nombre_jugador;
     QTimer *timer;
     QGraphicsScene *scene;
     QList<senoidal *>globs;

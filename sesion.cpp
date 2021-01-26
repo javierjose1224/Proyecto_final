@@ -32,7 +32,7 @@ void Sesion::on_loginButton_clicked()
 //        qDebug()<<"(5) - Exitoso";
         if(query.next()){
             if(password==query.value(2).toString()){
-                jugar = new MainWindow();
+                jugar = new MainWindow(name);
                 jugar->show();
                 this->close();
             }else{
@@ -45,7 +45,7 @@ void Sesion::on_loginButton_clicked()
         }else{
             //ventana de dialogo
             //usuario no registrado
-            msgBox.setText("usuario no registrado");
+            msgBox.setText("Usuario no registrado");
             msgBox.setIcon(QMessageBox::Critical);
             msgBox.exec();
         }
@@ -97,7 +97,7 @@ bool Sesion::conexionBaseDatos()
 bool Sesion::crearBaseDatos()
 {
     baseDatos = QSqlDatabase::addDatabase("QSQLITE");
-    baseDatos.setDatabaseName("registro.sqlite");
+    baseDatos.setDatabaseName("database.sqlite");
 //    qDebug()<<"(2) - Crear Base de Datos";
     if(baseDatos.open()){
 //        qDebug()<<"(2) - Exitoso";
@@ -113,7 +113,7 @@ bool Sesion::crearTablaUsuarios()
     QString crear;
     QSqlQuery query;
 
-    crear.append("CREATE TABLE IF NOT EXISTS usuarios (id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR(20), password VARCHAR(20))");
+    crear.append("CREATE TABLE IF NOT EXISTS usuarios (id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR(20), password VARCHAR(20),life INTEGER(20),score INTEGER(20),nivel INTEGER(20),time INTEGER(20))");
     query.prepare(crear);
 //    qDebug()<<"(3) - Tabla";
     if(query.exec()){
@@ -129,7 +129,7 @@ void Sesion::insertar()
 {
     QString insertarDato;
     QSqlQuery query;
-    insertarDato.append("INSERT INTO usuarios (name,password) VALUES ('"+name+"','"+password+"')");
+    insertarDato.append("INSERT INTO usuarios (name,password,life,score,nivel,time) VALUES ('"+name+"','"+password+"','0','12','13','8')");
     query.prepare(insertarDato);
 //    qDebug()<<"(4) - Insertar";
     if(query.exec()){
@@ -151,12 +151,13 @@ void Sesion::insertar()
     }else{
 //        qDebug()<<"(5) - Error";
     }
-}
 
+}
 
 void Sesion::on_loginButton_2_clicked()
 {
-    jugar = new MainWindow;
+
+    jugar = new MainWindow("Invitado");
     jugar->show();
     this->close();
 }

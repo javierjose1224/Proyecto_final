@@ -2,6 +2,12 @@
 #define ENDGAME_H
 
 #include <QMainWindow>
+#include<QString>
+#include<QMessageBox>
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQuery>
+#include <QDebug>
+
 
 namespace Ui {
 class EndGame;
@@ -13,6 +19,8 @@ class EndGame : public QMainWindow
 
 public:
     explicit EndGame(QWidget *parent = nullptr);
+    EndGame(QString nombre, float puntos,float t, float vidas, float nivel);
+    void imprimir_datos();
     ~EndGame();
 
 private slots:
@@ -22,6 +30,12 @@ private slots:
 
 private:
     Ui::EndGame *ui;
+    QString name;
+    int idt;
+    float score;
+    float tiempo;
+    float level;
+    float life;
 };
 
 #endif // ENDGAME_H
