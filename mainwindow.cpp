@@ -151,6 +151,9 @@ void MainWindow::actualizarm()
     {
         timer->stop();
         scene->removeItem(jugadores.at(0));
+        pasar = new EndGame;
+        pasar->show();
+        this->close();
     }
 }
 

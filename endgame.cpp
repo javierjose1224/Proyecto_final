@@ -1,5 +1,6 @@
 #include "endgame.h"
 #include "ui_endgame.h"
+#include "mainwindow.h"
 
 EndGame::EndGame(QWidget *parent) :
     QMainWindow(parent),
@@ -20,5 +21,8 @@ void EndGame::on_regButton_clicked()
 
 void EndGame::on_loginButton_clicked()
 {
-
+    MainWindow * again;
+    again = new MainWindow;
+    again->show();
+    this->close();
 }
