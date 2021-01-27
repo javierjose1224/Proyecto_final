@@ -30,7 +30,7 @@ class MainWindow : public QMainWindow
 public:
 
     MainWindow(QWidget *parent = nullptr);
-    MainWindow(QString name);
+    MainWindow(QString name,int id_lvl,bool cargar_NL);
     ~MainWindow();
     void cambiar_nivel();
     void setcheckpoint();
@@ -53,6 +53,8 @@ private:
     float dt;
     int h_limit;
     int v_limit;
+    bool id_carga;
+    int id_niv;
 
     nivel *nivel_1;
     QList<muro *>muros;

@@ -32,7 +32,13 @@ void Sesion::on_loginButton_clicked()
 //        qDebug()<<"(5) - Exitoso";
         if(query.next()){
             if(password==query.value(2).toString()){
-                jugar = new MainWindow(name);
+                jugar = new Partidas(name,query.value(5).toInt(),false);
+
+                qDebug()<<"passw "<<query.value(2).toString();
+                qDebug()<<"life"<<query.value(3).toString();
+                qDebug()<<"score "<<query.value(4).toString();
+                qDebug()<<"nivel "<<query.value(5).toString();
+
                 jugar->show();
                 this->close();
             }else{
@@ -129,7 +135,7 @@ void Sesion::insertar()
 {
     QString insertarDato;
     QSqlQuery query;
-    insertarDato.append("INSERT INTO usuarios (name,password,life,score,nivel,time) VALUES ('"+name+"','"+password+"','0','12','13','8')");
+    insertarDato.append("INSERT INTO usuarios (name,password,life,score,nivel,time) VALUES ('"+name+"','"+password+"','10','0','1','0')");
     query.prepare(insertarDato);
 //    qDebug()<<"(4) - Insertar";
     if(query.exec()){
@@ -173,8 +179,22 @@ void Sesion::on_loginButton_2_clicked()
     }else{
 //        qDebug()<<"(5) - Error";
     }
-    jugar = new MainWindow(name);
+    jugar = new Partidas(name,0,false);
     jugar->show();
     this->close();
 }
+
+
+//void Sesion::on_pushButton_clicked()
+//{
+//    jugar = new MainWindow(name,22,true);
+//    jugar->show();
+//    this->close();
+//}
+
+
+
+
+
+
 

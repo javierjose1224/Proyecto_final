@@ -17,6 +17,7 @@ public:
     void reset();
     int getNivel_act() const;
 
+    void setNivel_graf(int value);
 private:
     int nivel_act;
     //incluido push

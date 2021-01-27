@@ -25,3 +25,9 @@ int hd_nivel::getNivel_act() const
 {
     return nivel_act;
 }
+
+void hd_nivel::setNivel_graf(int value)
+{
+    nivel_act = value;
+    setPlainText(QString("Nivel: ")+ QString::number(nivel_act));
+}

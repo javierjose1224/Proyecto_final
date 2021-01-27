@@ -8,10 +8,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 }
 
-MainWindow::MainWindow(QString name):ui(new Ui::MainWindow)
+MainWindow::MainWindow(QString name,int id_lvl,bool cargar_NL):ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     nombre_jugador=name;
+    id_carga=cargar_NL;
+
+    id_niv=id_lvl;
 
     h_limit=1000;
     v_limit= 500;
@@ -82,8 +85,23 @@ MainWindow::MainWindow(QString name):ui(new Ui::MainWindow)
     scene->addItem(conVidas);
 
     score = new puntaje();
+    //score->setScore(score_in);
     score->setPos(h_limit-100,-30);//-150
     scene->addItem(score);
+
+    if(id_niv==1)
+    {
+        score->setScore(0);
+    }
+    else if(id_niv==2)
+    {
+        score->setScore(7);
+    }
+    else if(id_niv==3)
+    {
+        score->setScore(22);
+    }
+
 
     contador_n1= new tiempo_juego();
     contador_n1->setPos(h_limit/2+100,-30);//-50
@@ -163,10 +181,10 @@ void MainWindow::actualizarm()
             nivel_1->borrar_elementos(scene);
             nivel_2= new nivel(bars2,muros2,globs,puas2,scene,v_limit);
             principal->setVD(20);
-            nivel_graf->increase();
+            nivel_graf->setNivel_graf(2);
             qDebug()<<"nivel 3";
             score->setScore(8);
-            score_pasar=8;
+            score_pasar=7;
             //score->setScore(22);
         }
 
@@ -178,12 +196,20 @@ void MainWindow::actualizarm()
         else if(score->getScore()==22)
         {
             tpn=contador_n1->getCon_abs();
-            nivel_2->borrar_elementos(scene);
+            if(id_carga==false)
+            {
+                nivel_2->borrar_elementos(scene);
+            }
+            else
+            {
+                nivel_1->borrar_elementos(scene);
+            }
+            //nivel_1->borrar_elementos(scene);
             nivel_3= new nivel(bars3,muros3,globs,puas3,scene,v_limit);
             principal->setVD(20);
-            nivel_graf->increase();
+            nivel_graf->setNivel_graf(3);
             score->setScore(23);
-            score_pasar=23;
+            score_pasar=22;
             qDebug()<<"nivel 3";
         }
 
@@ -290,8 +316,4 @@ void MainWindow::on_pushButton_clicked()
         delete discardButton;
 
     }
-//    else
-//    {
-//        timer->start();
-//    }
 }

@@ -8,8 +8,8 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QDebug>
-#include"mainwindow.h"
-
+//#include"mainwindow.h"
+#include "partidas.h"
 
 using namespace std;
 
@@ -35,7 +35,7 @@ private slots:
 
 private:
     Ui::Sesion *ui;
-    MainWindow * jugar;
+    Partidas *jugar;
     QString name;
     QString password;
     int idt;

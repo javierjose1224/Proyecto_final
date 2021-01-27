@@ -24,6 +24,7 @@ SOURCES += \
     mainwindow.cpp \
     muro.cpp \
     nivel.cpp \
+    partidas.cpp \
     pelota.cpp \
     personaje.cpp \
     pua.cpp \
@@ -41,6 +42,7 @@ HEADERS += \
     mainwindow.h \
     muro.h \
     nivel.h \
+    partidas.h \
     pelota.h \
     personaje.h \
     pua.h \
@@ -54,6 +56,7 @@ HEADERS += \
 FORMS += \
     endgame.ui \
     mainwindow.ui \
+    partidas.ui \
     sesion.ui \
 
 # Default rules for deployment.
