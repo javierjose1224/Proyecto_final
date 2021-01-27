@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>Imagenes/user.png</file>
+        <file>Imagenes/X.png</file>
+        <file>Imagenes/logo_hook_hit.png</file>
     </qresource>
 </RCC>

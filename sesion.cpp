@@ -34,11 +34,6 @@ void Sesion::on_loginButton_clicked()
             if(password==query.value(2).toString()){
                 jugar = new Partidas(name,query.value(5).toInt(),false);
 
-                qDebug()<<"passw "<<query.value(2).toString();
-                qDebug()<<"life"<<query.value(3).toString();
-                qDebug()<<"score "<<query.value(4).toString();
-                qDebug()<<"nivel "<<query.value(5).toString();
-
                 jugar->show();
                 this->close();
             }else{

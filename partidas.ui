@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>334</width>
-    <height>275</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,11 +17,17 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>50</y>
-      <width>75</width>
-      <height>23</height>
+      <x>50</x>
+      <y>90</y>
+      <width>101</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">Padding: 1px;
+Border-radius: 5px;
+Background: #393;
+Color: #fefefe;</string>
     </property>
     <property name="text">
      <string>Nivel 1</string>
@@ -33,11 +39,17 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>90</y>
-      <width>75</width>
-      <height>23</height>
+      <x>50</x>
+      <y>140</y>
+      <width>101</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">Padding: 1px;
+Border-radius: 5px;
+Background: #393;
+Color: #fefefe;</string>
     </property>
     <property name="text">
      <string>Nivel 2</string>
@@ -49,23 +61,137 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>130</y>
-      <width>75</width>
-      <height>23</height>
+      <x>50</x>
+      <y>190</y>
+      <width>101</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">Padding: 1px;
+Border-radius: 5px;
+Background: #393;
+Color: #fefefe;</string>
     </property>
     <property name="text">
      <string>Nivel 3</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>10</y>
+      <width>281</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe Script</family>
+      <pointsize>26</pointsize>
+      <weight>9</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">text-align: center;
+color: #393;
+margin: 0 auto;
+font-size: 35px;
+font-family: 'Droid Sans';
+font: 75 26pt &quot;Segoe Script&quot;;</string>
+    </property>
+    <property name="text">
+     <string>HOOK HIT</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="x_1">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>140</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/Imagenes/X.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="x_2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>190</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/Imagenes/X.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>120</y>
+      <width>141</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/Imagenes/logo_hook_hit.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>400</width>
+      <height>300</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qconicalgradient(cx:0.494318, cy:0.506, angle:138, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(255, 255, 255, 255));</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <zorder>label_2</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>pushButton_2</zorder>
+   <zorder>pushButton_3</zorder>
+   <zorder>label_4</zorder>
+   <zorder>x_1</zorder>
+   <zorder>x_2</zorder>
+   <zorder>label</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>334</width>
+     <width>400</width>
      <height>21</height>
     </rect>
    </property>
