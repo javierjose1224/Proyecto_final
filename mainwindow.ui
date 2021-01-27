@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>735</width>
+    <height>352</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,6 +18,13 @@
     <item row="0" column="0">
      <widget class="QGraphicsView" name="graphicsView"/>
     </item>
+    <item row="1" column="0" alignment="Qt::AlignRight">
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>PAUSAR</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -25,7 +32,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>735</width>
      <height>21</height>
     </rect>
    </property>

@@ -24,7 +24,7 @@ MainWindow::MainWindow(QString name):ui(new Ui::MainWindow)
     ui->graphicsView->setScene(scene);
     ui->centralwidget ->adjustSize();
     scene->addRect(scene->sceneRect());//para ver los limites de la escne
-    ui->graphicsView->resize(scene->width(),scene->height());
+    ui->graphicsView->resize(scene->width(),scene->height()+20);
     this->resize(ui->graphicsView->width()+100,ui->graphicsView->height()+100);
 
     principal = new personaje(h_limit/2,0,0,0,20,0.3,0,5);//0.3k
@@ -219,11 +219,14 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 //    }
 }
 
-
-
-
-
-
-
-
-
+void MainWindow::on_pushButton_clicked()
+{
+    if(timer->isActive())
+    {
+        timer->stop();
+    }
+    else
+    {
+        timer->start();
+    }
+}
