@@ -17,6 +17,7 @@
 #include "pua.h"
 #include "hd_nivel.h"
 #include "endgame.h"
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -66,6 +67,8 @@ private:
     QList<muro*>muros3;
     QList<pelota*>bars3;
     QList<pua*>puas3;
+
+    QMessageBox msgBox;
 
     senoidal *bomba;
     tiempo_juego *contador_n1;

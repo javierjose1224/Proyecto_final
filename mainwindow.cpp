@@ -224,9 +224,26 @@ void MainWindow::on_pushButton_clicked()
     if(timer->isActive())
     {
         timer->stop();
+        msgBox.setIcon(QMessageBox::Question);
+        msgBox.setText("Pausa");
+        QPushButton *saveButton = msgBox.addButton(tr("Salir y guardar partida"), QMessageBox::AcceptRole);
+        QPushButton *discardButton = msgBox.addButton(tr("Volver al juego"), QMessageBox::RejectRole);
+
+        msgBox.exec();
+        if (msgBox.clickedButton() == discardButton)
+        {
+            msgBox.close();
+            timer->start();
+        } else if (msgBox.clickedButton() == saveButton) {
+            //setCheckpoint();
+            this->close();
+        }
+        delete saveButton;
+        delete discardButton;
+
     }
-    else
-    {
-        timer->start();
-    }
+//    else
+//    {
+//        timer->start();
+//    }
 }
