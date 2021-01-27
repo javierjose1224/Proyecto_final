@@ -36,6 +36,8 @@ MainWindow::MainWindow(QString name):ui(new Ui::MainWindow)
     principal->actualizar(v_limit);
     scene->addItem(principal);
 
+    score_pasar=0;
+
 //NIVEL 1
 {
 //PUAS PARA NIVEL 1
@@ -102,6 +104,47 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::setcheckpoint()
+{
+    QString update;
+    QSqlQuery query;
+
+    //life
+    update.append("UPDATE usuarios SET life='"+QString::number(conVidas->getvidaT())+"',score='"+QString::number(score_pasar)+"',nivel='"+QString::number(nivel_graf->getNivel_act())+"',time='"+QString::number(tpn)+"' WHERE name='"+nombre_jugador+"'");
+    query.prepare(update);
+        qDebug()<<"(15) - update";
+    if(query.exec()){
+//            qDebug()<<"(15) - Exitoso";
+        if(query.next()){
+//                qDebug()<<"hecho";
+        }
+    }else{
+//            qDebug()<<"(15) - Error";
+    }
+    update.clear();
+
+    QString consultarDato;
+    consultarDato.append("SELECT * FROM usuarios WHERE name='"+nombre_jugador+"'");
+    query.prepare(consultarDato);
+//    qDebug()<<"(6) - consultar";
+    if(query.exec()){
+//        qDebug()<<"(6) - Exitoso";
+        if (query.next()) {
+            qDebug()<<"hecho";
+            qDebug()<<"Numero de usuario: "<<query.value(0).toString();
+            qDebug()<<"Nombre: "<<query.value(1).toString();
+            qDebug()<<"Contraseña: "<<query.value(2).toString();
+            qDebug()<<"Vidas: "<<query.value(3).toString();
+            qDebug()<<"Nivel: "<<query.value(5).toString();
+            qDebug()<<"Tiempo: "<<query.value(6).toString();
+            qDebug()<<"Puntaje final: "<<query.value(4).toString();
+        }
+    }else{
+//                qDebug()<<"(15) - Error";
+    }
+    this->close();
+}
+
 void MainWindow::actualizarm()
 {
     gener_glob->increase();
@@ -116,12 +159,14 @@ void MainWindow::actualizarm()
 
         else if(score->getScore()==7)
         {
+            tpn=contador_n1->getCon_abs();
             nivel_1->borrar_elementos(scene);
             nivel_2= new nivel(bars2,muros2,globs,puas2,scene,v_limit);
             principal->setVD(20);
             nivel_graf->increase();
             qDebug()<<"nivel 3";
             score->setScore(8);
+            score_pasar=8;
             //score->setScore(22);
         }
 
@@ -132,11 +177,13 @@ void MainWindow::actualizarm()
 
         else if(score->getScore()==22)
         {
+            tpn=contador_n1->getCon_abs();
             nivel_2->borrar_elementos(scene);
             nivel_3= new nivel(bars3,muros3,globs,puas3,scene,v_limit);
             principal->setVD(20);
             nivel_graf->increase();
             score->setScore(23);
+            score_pasar=23;
             qDebug()<<"nivel 3";
         }
 
@@ -147,6 +194,7 @@ void MainWindow::actualizarm()
 
         if(score->getScore()==44)
         {
+            tpn=contador_n1->getCon_abs();
             timer->stop();
             pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act());
             pasar->show();
@@ -235,7 +283,7 @@ void MainWindow::on_pushButton_clicked()
             msgBox.close();
             timer->start();
         } else if (msgBox.clickedButton() == saveButton) {
-            //setCheckpoint();
+            setcheckpoint();
             this->close();
         }
         delete saveButton;

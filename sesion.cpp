@@ -156,8 +156,24 @@ void Sesion::insertar()
 
 void Sesion::on_loginButton_2_clicked()
 {
+    QString consultarDato;
+    QSqlQuery query;
+    name = "Invitado";
 
-    jugar = new MainWindow("Invitado");
+    consultarDato.append("SELECT * FROM usuarios WHERE name='"+name+"'");
+    query.prepare(consultarDato);
+//    qDebug()<<"(5) - consultar";
+    if(query.exec()){
+//        qDebug()<<"(5) - Exitoso";
+        if(query.next()){
+        }else{
+            password= "0000";
+            insertar();
+        }
+    }else{
+//        qDebug()<<"(5) - Error";
+    }
+    jugar = new MainWindow(name);
     jugar->show();
     this->close();
 }

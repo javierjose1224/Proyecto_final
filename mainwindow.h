@@ -33,6 +33,7 @@ public:
     MainWindow(QString name);
     ~MainWindow();
     void cambiar_nivel();
+    void setcheckpoint();
 
 public slots:
 
@@ -80,6 +81,8 @@ private:
     personaje *principal;
     personaje *segundo_plyr;
     EndGame *pasar;
+    int tpn;
+    int score_pasar;
 
     void keyPressEvent(QKeyEvent *event);
 };
