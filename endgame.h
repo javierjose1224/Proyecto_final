@@ -19,7 +19,7 @@ class EndGame : public QMainWindow
 
 public:
     explicit EndGame(QWidget *parent = nullptr);
-    EndGame(QString nombre, float puntos,float t, float vidas, float nivel);
+    EndGame(QString nombre, float puntos,float t, float vidas, float nivel, bool);
     void imprimir_datos();
     ~EndGame();
 

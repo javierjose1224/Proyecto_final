@@ -9,7 +9,7 @@ EndGame::EndGame(QWidget *parent) :
     ui->setupUi(this);
 }
 
-EndGame::EndGame(QString nombre, float puntos, float t, float vidas, float nivel):ui(new Ui::EndGame)
+EndGame::EndGame(QString nombre, float puntos, float t, float vidas, float nivel, bool fin):ui(new Ui::EndGame)
 {
     ui->setupUi(this);
     name=nombre;
@@ -17,6 +17,14 @@ EndGame::EndGame(QString nombre, float puntos, float t, float vidas, float nivel
     tiempo=t;
     level=nivel;
     life=vidas;
+    if (fin==true) {
+        ui->label_5->hide();
+        ui->label_4->show();
+    }
+    else {
+        ui->label_4->hide();
+        ui->label_5->show();
+    }
 }
 
 void EndGame::imprimir_datos()

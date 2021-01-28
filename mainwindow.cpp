@@ -199,7 +199,7 @@ void MainWindow::actualizarm()
         {
             tpn=contador_n1->getCon_abs();
             timer->stop();
-            pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act());
+            pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act(),true);
             pasar->show();
             this->close();
         }
@@ -208,7 +208,7 @@ void MainWindow::actualizarm()
     {
         timer->stop();
         scene->removeItem(jugadores.at(0));
-        pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act());
+        pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act(),false);
         pasar->show();
         this->close();
     }
