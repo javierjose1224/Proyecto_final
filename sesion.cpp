@@ -171,7 +171,7 @@ void Sesion::insertar()
 
 void Sesion::keyPressEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_Enter)
+    if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
     {
         on_loginButton_clicked();
     }

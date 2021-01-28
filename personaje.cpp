@@ -89,13 +89,21 @@ void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 {
     if(color==1)
     {
-        painter->setBrush(Qt::darkRed);
-        painter->drawRect(boundingRect());
+//        painter->setBrush(Qt::darkRed);
+//        painter->drawRect(boundingRect());
+
+        QPixmap pixmap;
+        pixmap.load(":/Imagenes/player1.png");
+        painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
     }
     else if(color==2)
     {
-        painter->setBrush(Qt::yellow);
-        painter->drawRect(boundingRect());
+//        painter->setBrush(Qt::yellow);
+//        painter->drawRect(boundingRect());
+
+        QPixmap pixmap;
+        pixmap.load(":/Imagenes/player2.png");
+        painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
     }
 
 }
