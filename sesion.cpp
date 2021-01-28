@@ -63,31 +63,36 @@ void Sesion::on_loginButton_clicked()
 void Sesion::on_regButton_clicked()
 {
     name=ui->usernameBox->text();
+    password=ui->passwordBox->text();
 
     QString consultarDato;
     QSqlQuery query;
 
-    consultarDato.append("SELECT * FROM usuarios WHERE name='"+name+"'");
-    query.prepare(consultarDato);
-//    qDebug()<<"(5) - consultar";
-    if(query.exec()){
-//        qDebug()<<"(5) - Exitoso";
+    if (name=="" || password=="") {
+        msgBox.setText("Debe ingresar los datos");
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.exec();
+    }
+    else {
+        consultarDato.append("SELECT * FROM usuarios WHERE name='"+name+"'");
+        query.prepare(consultarDato);
+    //    qDebug()<<"(5) - consultar";
+        if(query.exec()){
+    //        qDebug()<<"(5) - Exitoso";
 
-        if(query.next()){
-            //ventana de dialogo
-            //Usuario ya registrado
-            msgBox.setText("Este usuario ya está registrado");
-            msgBox.setIcon(QMessageBox::Warning);
-            msgBox.exec();
-        }else{
-            password=ui->passwordBox->text();
-            insertar();
-            msgBox.setText("Registro Exitoso");
-            msgBox.setIcon(QMessageBox::Information);
-            msgBox.exec();
+            if(query.next()){
+                //ventana de dialogo
+                //Usuario ya registrado
+                msgBox.setText("Este usuario ya está registrado");
+                msgBox.setIcon(QMessageBox::Warning);
+                msgBox.exec();
+            }else{
+                insertar();
+                msgBox.setText("Registro Exitoso");
+                msgBox.setIcon(QMessageBox::Information);
+                msgBox.exec();
+            }
         }
-    }else{
-//        qDebug()<<"(5) - Error";
     }
 }
 
