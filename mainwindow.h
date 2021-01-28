@@ -34,7 +34,7 @@ public:
     ~MainWindow();
     void cambiar_nivel();
     void setcheckpoint();
-    int reiniciar_lvl();
+    void reiniciar_lvl();
 
 public slots:
 

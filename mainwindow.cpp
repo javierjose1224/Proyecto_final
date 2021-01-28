@@ -304,7 +304,7 @@ void MainWindow::on_pushButton_clicked()
         }
         else if (msgBox.clickedButton() == restartButton)
         {
-            score->setScore(reiniciar_lvl());
+            reiniciar_lvl();
             timer->start();
             qDebug()<<"funciona";
         }
@@ -315,7 +315,7 @@ void MainWindow::on_pushButton_clicked()
     }
 }
 
-int MainWindow::reiniciar_lvl()
+void MainWindow::reiniciar_lvl()
 {
     if(nivel_graf->getNivel_act()==1)
     {
@@ -324,8 +324,7 @@ int MainWindow::reiniciar_lvl()
         bars.clear();
         muros.clear();
         puas.clear();
-        return -1;
-        //score->setScore(-1);
+        score->setScore(-1);
     }
     else if(nivel_graf->getNivel_act()==2)
     {
@@ -334,8 +333,7 @@ int MainWindow::reiniciar_lvl()
         bars2.clear();
         muros2.clear();
         puas2.clear();
-        return 7;
-        //score->setScore(7);
+        score->setScore(7);
     }
     else if(nivel_graf->getNivel_act()==3)
     {
@@ -344,8 +342,7 @@ int MainWindow::reiniciar_lvl()
         bars3.clear();
         puas3.clear();
         muros3.clear();
-        return 22;
-        //score->setScore(22);
+        score->setScore(22);
     }
 
 }
