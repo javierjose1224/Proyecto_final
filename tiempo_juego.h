@@ -14,10 +14,11 @@ public:
     tiempo_juego(QGraphicsItem * parent = 0);    
     void increase();
     void reset();
+    void reset_neg();
     int getTimerG();
     void setContador(int value);
     void increase_graf();
-
+    void decrese();
     int getCon_abs() const;
     void setCon_abs(int value);
 

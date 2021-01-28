@@ -8,11 +8,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 }
 
-MainWindow::MainWindow(QString name,int id_lvl,bool cargar_NL):ui(new Ui::MainWindow)
+MainWindow::MainWindow(QString name,int id_lvl):ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     nombre_jugador=name;
-    id_carga=cargar_NL;
 
     id_niv=id_lvl;
 
@@ -44,40 +43,40 @@ MainWindow::MainWindow(QString name,int id_lvl,bool cargar_NL):ui(new Ui::MainWi
 //NIVEL 1
 {
 //PUAS PARA NIVEL 1
-    puas.push_back(new pua(3*h_limit/4,25,50,25));
+//    puas.push_back(new pua(3*h_limit/4,25,50,25));
 
 
 //PELOTAS PARA NIVEL 1
 
-    bars.push_back(new pelota(80,300,10,0,50,40,0,1,2));
+//    bars.push_back(new pelota(80,300,10,0,50,40,0,1,2));
 
 }
 
 //NIVEL 2
 {
 //MUROS NIVEL 2
-    muros2.push_back(new muro(100,v_limit/2,100,100));
-    muros2.push_back(new muro(h_limit-200,v_limit/2,100,100));
+//    muros2.push_back(new muro(100,v_limit/2,100,100));
+//    muros2.push_back(new muro(h_limit-200,v_limit/2,100,100));
 
 
 //PELOTAS NIVEL 2
-    bars2.push_back(new pelota(20,300,10,0,50,40,0,1,2));
-    bars2.push_back(new pelota(80,300,10,0,50,40,0,1,2));
+//    bars2.push_back(new pelota(20,300,10,0,50,40,0,1,2));
+//    bars2.push_back(new pelota(80,300,10,0,50,40,0,1,2));
 }
 
 //NIVEL 3
 {
 //PELOTAS NIVEL 3
-    bars3.push_back(new pelota((300),400,10,0,50,40,0,1,2));
-    bars3.push_back(new pelota((300)+40,400,10,0,50,40,0,1,2));
-    bars3.push_back(new pelota((300)+80,400,10,0,50,40,0,1,2));
+//    bars3.push_back(new pelota((300),400,10,0,50,40,0,1,2));
+//    bars3.push_back(new pelota((300)+40,400,10,0,50,40,0,1,2));
+//    bars3.push_back(new pelota((300)+80,400,10,0,50,40,0,1,2));
 
 //MUROS NIVEL 3
-    muros3.push_back(new muro(100,v_limit/2,100,100));
-    muros3.push_back(new muro(h_limit-200,v_limit/2,100,100));
-    muros3.push_back(new muro(h_limit/2-50,v_limit/3,100,50));
+//    muros3.push_back(new muro(100,v_limit/2,100,100));
+//    muros3.push_back(new muro(h_limit-200,v_limit/2,100,100));
+//    muros3.push_back(new muro(h_limit/2-50,v_limit/3,100,50));
 }
-    nivel_1=new nivel(bars,muros,globs,puas,scene,v_limit);
+//    nivel_1=new nivel(bars,muros,globs,puas,scene,v_limit);
 
 //VIDAS, PUNTAJE Y TIEMPO
     conVidas= new vida();
@@ -91,17 +90,19 @@ MainWindow::MainWindow(QString name,int id_lvl,bool cargar_NL):ui(new Ui::MainWi
 
     if(id_niv==1)
     {
-        score->setScore(0);
+        score->setScore(-1);
+        is_lineal=false;
     }
     else if(id_niv==2)
     {
         score->setScore(7);
+        is_lineal=false;
     }
     else if(id_niv==3)
     {
         score->setScore(22);
+        is_lineal=false;
     }
-
 
     contador_n1= new tiempo_juego();
     contador_n1->setPos(h_limit/2+100,-30);//-50
@@ -117,60 +118,25 @@ MainWindow::MainWindow(QString name,int id_lvl,bool cargar_NL):ui(new Ui::MainWi
     connect(timer,SIGNAL(timeout()),this,SLOT(actualizarm()));
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
-void MainWindow::setcheckpoint()
-{
-    QString update;
-    QSqlQuery query;
-
-    //life
-    update.append("UPDATE usuarios SET life='"+QString::number(conVidas->getvidaT())+"',score='"+QString::number(score_pasar)+"',nivel='"+QString::number(nivel_graf->getNivel_act())+"',time='"+QString::number(tpn)+"' WHERE name='"+nombre_jugador+"'");
-    query.prepare(update);
-        qDebug()<<"(15) - update";
-    if(query.exec()){
-//            qDebug()<<"(15) - Exitoso";
-        if(query.next()){
-//                qDebug()<<"hecho";
-        }
-    }else{
-//            qDebug()<<"(15) - Error";
-    }
-    update.clear();
-
-    QString consultarDato;
-    consultarDato.append("SELECT * FROM usuarios WHERE name='"+nombre_jugador+"'");
-    query.prepare(consultarDato);
-//    qDebug()<<"(6) - consultar";
-    if(query.exec()){
-//        qDebug()<<"(6) - Exitoso";
-        if (query.next()) {
-            qDebug()<<"hecho";
-            qDebug()<<"Numero de usuario: "<<query.value(0).toString();
-            qDebug()<<"Nombre: "<<query.value(1).toString();
-            qDebug()<<"Contraseña: "<<query.value(2).toString();
-            qDebug()<<"Vidas: "<<query.value(3).toString();
-            qDebug()<<"Nivel: "<<query.value(5).toString();
-            qDebug()<<"Tiempo: "<<query.value(6).toString();
-            qDebug()<<"Puntaje final: "<<query.value(4).toString();
-        }
-    }else{
-//                qDebug()<<"(15) - Error";
-    }
-    this->close();
-}
-
 void MainWindow::actualizarm()
 {
     gener_glob->increase();
-    contador_n1->increase_graf();
-
+    contador_n1->decrese();
+    //contador_n1->increase_graf();
     if(conVidas->getvidaT()>0)
     {
-        if(score->getScore()<7)
+        if(score->getScore()==-1)
+        {
+            puas.push_back(new pua(3*h_limit/4,25,50,25));
+        //PELOTAS PARA NIVEL 1
+            bars.push_back(new pelota(80,300,10,0,50,40,0,1,2));
+            nivel_1=new nivel(bars,muros,globs,puas,scene,v_limit);
+            score->setScore(0);
+            is_lineal=true;
+            contador_n1->setContador(15);
+            //contador_n1->reset_neg();
+        }
+        if(score->getScore()>-1 && score->getScore()<7)
         {
             nivel_1->actualizar_nivel(scene,v_limit,h_limit,jugadores.at(0),timer,conVidas,score,gener_glob);
         }
@@ -178,13 +144,26 @@ void MainWindow::actualizarm()
         else if(score->getScore()==7)
         {
             tpn=contador_n1->getCon_abs();
-            nivel_1->borrar_elementos(scene);
+            if(is_lineal==true)
+            {
+                nivel_1->borrar_elementos(scene);
+            }
+            muros2.push_back(new muro(100,v_limit/2,100,100));
+            muros2.push_back(new muro(h_limit-200,v_limit/2,100,100));
+
+        //PELOTAS NIVEL 2
+            bars2.push_back(new pelota(20,300,10,0,50,40,0,1,2));
+            bars2.push_back(new pelota(80,300,10,0,50,40,0,1,2));
+
             nivel_2= new nivel(bars2,muros2,globs,puas2,scene,v_limit);
             principal->setVD(20);
             nivel_graf->setNivel_graf(2);
             qDebug()<<"nivel 3";
             score->setScore(8);
             score_pasar=7;
+            is_lineal=true;
+            //contador_n1->reset_neg();
+            contador_n1->setContador(30);
             //score->setScore(22);
         }
 
@@ -196,20 +175,29 @@ void MainWindow::actualizarm()
         else if(score->getScore()==22)
         {
             tpn=contador_n1->getCon_abs();
-            if(id_carga==false)
+            if(is_lineal==true)
             {
                 nivel_2->borrar_elementos(scene);
             }
-            else
-            {
-                nivel_1->borrar_elementos(scene);
-            }
             //nivel_1->borrar_elementos(scene);
+            bars3.push_back(new pelota((300),400,10,0,50,40,0,1,2));
+            bars3.push_back(new pelota((300)+40,400,10,0,50,40,0,1,2));
+            bars3.push_back(new pelota((300)+80,400,10,0,50,40,0,1,2));
+
+        //MUROS NIVEL 3
+            muros3.push_back(new muro(100,v_limit/2+100,100,100));
+            muros3.push_back(new muro(h_limit-200,v_limit/2+100,100,100));
+            muros3.push_back(new muro(h_limit/2-50,v_limit/3,100,50));
+
             nivel_3= new nivel(bars3,muros3,globs,puas3,scene,v_limit);
+
             principal->setVD(20);
             nivel_graf->setNivel_graf(3);
             score->setScore(23);
             score_pasar=22;
+            //contador_n1->reset_neg();
+            contador_n1->setContador(60);
+            is_lineal=true;
             qDebug()<<"nivel 3";
         }
 
@@ -301,6 +289,7 @@ void MainWindow::on_pushButton_clicked()
         msgBox.setIcon(QMessageBox::Question);
         msgBox.setText("Pausa");
         QPushButton *saveButton = msgBox.addButton(tr("Salir y guardar partida"), QMessageBox::AcceptRole);
+        QPushButton *restartButton = msgBox.addButton(tr("Reiniciar Nivel"), QMessageBox::RejectRole);
         QPushButton *discardButton = msgBox.addButton(tr("Volver al juego"), QMessageBox::RejectRole);
 
         msgBox.exec();
@@ -308,12 +297,103 @@ void MainWindow::on_pushButton_clicked()
         {
             msgBox.close();
             timer->start();
-        } else if (msgBox.clickedButton() == saveButton) {
+        }
+        else if (msgBox.clickedButton() == saveButton) {
             setcheckpoint();
             this->close();
         }
+        else if (msgBox.clickedButton() == restartButton)
+        {
+            score->setScore(reiniciar_lvl());
+            timer->start();
+            qDebug()<<"funciona";
+        }
+        delete restartButton;
         delete saveButton;
         delete discardButton;
 
     }
 }
+
+int MainWindow::reiniciar_lvl()
+{
+    if(nivel_graf->getNivel_act()==1)
+    {
+        is_lineal=false;
+        nivel_1->borrar_elementos(scene);
+        bars.clear();
+        muros.clear();
+        puas.clear();
+        return -1;
+        //score->setScore(-1);
+    }
+    else if(nivel_graf->getNivel_act()==2)
+    {
+        is_lineal=false;
+        nivel_2->borrar_elementos(scene);
+        bars2.clear();
+        muros2.clear();
+        puas2.clear();
+        return 7;
+        //score->setScore(7);
+    }
+    else if(nivel_graf->getNivel_act()==3)
+    {
+        is_lineal=false;
+        nivel_3->borrar_elementos(scene);
+        bars3.clear();
+        puas3.clear();
+        muros3.clear();
+        return 22;
+        //score->setScore(22);
+    }
+
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::setcheckpoint()
+{
+    QString update;
+    QSqlQuery query;
+
+    //life
+    update.append("UPDATE usuarios SET life='"+QString::number(conVidas->getvidaT())+"',score='"+QString::number(score_pasar)+"',nivel='"+QString::number(nivel_graf->getNivel_act())+"',time='"+QString::number(tpn)+"' WHERE name='"+nombre_jugador+"'");
+    query.prepare(update);
+        qDebug()<<"(15) - update";
+    if(query.exec()){
+//            qDebug()<<"(15) - Exitoso";
+        if(query.next()){
+//                qDebug()<<"hecho";
+        }
+    }else{
+//            qDebug()<<"(15) - Error";
+    }
+    update.clear();
+
+    QString consultarDato;
+    consultarDato.append("SELECT * FROM usuarios WHERE name='"+nombre_jugador+"'");
+    query.prepare(consultarDato);
+//    qDebug()<<"(6) - consultar";
+    if(query.exec()){
+//        qDebug()<<"(6) - Exitoso";
+        if (query.next()) {
+            qDebug()<<"hecho";
+            qDebug()<<"Numero de usuario: "<<query.value(0).toString();
+            qDebug()<<"Nombre: "<<query.value(1).toString();
+            qDebug()<<"Contraseña: "<<query.value(2).toString();
+            qDebug()<<"Vidas: "<<query.value(3).toString();
+            qDebug()<<"Nivel: "<<query.value(5).toString();
+            qDebug()<<"Tiempo: "<<query.value(6).toString();
+            qDebug()<<"Puntaje final: "<<query.value(4).toString();
+        }
+    }else{
+//                qDebug()<<"(15) - Error";
+    }
+    this->close();
+}
+
+

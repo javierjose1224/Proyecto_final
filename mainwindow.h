@@ -30,10 +30,11 @@ class MainWindow : public QMainWindow
 public:
 
     MainWindow(QWidget *parent = nullptr);
-    MainWindow(QString name,int id_lvl,bool cargar_NL);
+    MainWindow(QString name,int id_lvl);
     ~MainWindow();
     void cambiar_nivel();
     void setcheckpoint();
+    int reiniciar_lvl();
 
 public slots:
 
@@ -54,6 +55,7 @@ private:
     int h_limit;
     int v_limit;
     bool id_carga;
+    bool is_lineal=true;
     int id_niv;
 
     nivel *nivel_1;

@@ -53,6 +53,8 @@ public:
     void set_vel(float vx,float vy, float px,float py);
     float getPY0() const;
     float getPX0() const;
+    void setPX(float value);
+    void setPY(float value);
 };
 
 #endif // PELOTA_H

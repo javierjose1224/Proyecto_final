@@ -12,6 +12,16 @@ float pelota::getPX0() const
     return PX0;
 }
 
+void pelota::setPX(float value)
+{
+    PX = value;
+}
+
+void pelota::setPY(float value)
+{
+    PY = value;
+}
+
 pelota::pelota(float posX_, float posY_, float velX_, float velY_, float masa, float radio, float k_, float e_,float G_)
 {
      PX=posX_;

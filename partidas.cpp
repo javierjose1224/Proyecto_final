@@ -37,7 +37,7 @@ Partidas::~Partidas()
 void Partidas::on_pushButton_clicked()
 {
     nivel=1;
-    juego = new MainWindow(name,nivel,id_niv);
+    juego = new MainWindow(name,nivel);
     juego->show();
     this->close();
 }
@@ -45,7 +45,7 @@ void Partidas::on_pushButton_clicked()
 void Partidas::on_pushButton_2_clicked()
 {
     nivel=2;
-    juego = new MainWindow(name,nivel,false);
+    juego = new MainWindow(name,nivel);
     juego->show();
     this->close();
 }
@@ -53,7 +53,7 @@ void Partidas::on_pushButton_2_clicked()
 void Partidas::on_pushButton_3_clicked()
 {
     nivel=3;
-    juego = new MainWindow(name,nivel,true);
+    juego = new MainWindow(name,nivel);
     juego->show();
     this->close();
 }

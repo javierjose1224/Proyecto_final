@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QGraphicsView" name="graphicsView"/>
     </item>
-    <item row="1" column="0" alignment="Qt::AlignRight">
+    <item row="2" column="0" alignment="Qt::AlignRight">
      <widget class="QPushButton" name="pushButton">
       <property name="text">
        <string>PAUSAR</string>

@@ -2,7 +2,7 @@
 
 puntaje::puntaje(QGraphicsItem *parent): QGraphicsTextItem(parent)
 {
-    score = 0;
+    score = -1;
     setPlainText(QString("Puntos: ")+ QString::number(score));
     setDefaultTextColor(Qt::darkBlue);
     setFont(QFont("times",16));
@@ -22,5 +22,6 @@ int puntaje::getScore()
 void puntaje::setScore(int value)
 {
     score = value;
+    setPlainText(QString("Puntos: ")+ QString::number(score));
 }
 
