@@ -51,39 +51,45 @@ void EndGame::on_loginButton_clicked()
     QString update;
     QSqlQuery query;
 
-    //life
-    update.append("UPDATE usuarios SET life='"+QString::number(life)+"',score='"+QString::number(score)+"',nivel='"+QString::number(level)+"',time='"+QString::number(tiempo)+"' WHERE name='"+name+"'");
-    query.prepare(update);
-        qDebug()<<"(15) - update";
-    if(query.exec()){
-//            qDebug()<<"(15) - Exitoso";
-        if(query.next()){
-//                qDebug()<<"hecho";
-        }
-    }else{
-//            qDebug()<<"(15) - Error";
+    if (name=="Invitado") {
+        msgBox.setText("No puede guardar en modo invitado.\nPara guardar debe registrarse.");
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.exec();
     }
-    update.clear();
-
-    QString consultarDato;
-    consultarDato.append("SELECT * FROM usuarios WHERE name='"+name+"'");
-    query.prepare(consultarDato);
-//    qDebug()<<"(6) - consultar";
-    if(query.exec()){
-//        qDebug()<<"(6) - Exitoso";
-        if (query.next()) {
-//            qDebug()<<"hecho";
-//            qDebug()<<"Numero de usuario: "<<query.value(0).toString();
-//            qDebug()<<"Nombre: "<<query.value(1).toString();
-//            qDebug()<<"Contraseña: "<<query.value(2).toString();
-//            qDebug()<<"Vidas: "<<query.value(3).toString();
-//            qDebug()<<"Puntaje final: "<<query.value(4).toString();
-//            qDebug()<<"Nivel: "<<query.value(5).toString();
-//            qDebug()<<"Tiempo: "<<query.value(6).toString();
+    else {
+        //life
+        update.append("UPDATE usuarios SET life='"+QString::number(life)+"',score='"+QString::number(score)+"',nivel='"+QString::number(level)+"',time='"+QString::number(tiempo)+"' WHERE name='"+name+"'");
+        query.prepare(update);
+            qDebug()<<"(15) - update";
+        if(query.exec()){
+    //            qDebug()<<"(15) - Exitoso";
+            if(query.next()){
+    //                qDebug()<<"hecho";
+            }
+        }else{
+    //            qDebug()<<"(15) - Error";
         }
-    }else{
-//                qDebug()<<"(15) - Error";
-    }
+        update.clear();
 
-    this->close();
+        QString consultarDato;
+        consultarDato.append("SELECT * FROM usuarios WHERE name='"+name+"'");
+        query.prepare(consultarDato);
+    //    qDebug()<<"(6) - consultar";
+        if(query.exec()){
+    //        qDebug()<<"(6) - Exitoso";
+            if (query.next()) {
+    //            qDebug()<<"hecho";
+    //            qDebug()<<"Numero de usuario: "<<query.value(0).toString();
+    //            qDebug()<<"Nombre: "<<query.value(1).toString();
+    //            qDebug()<<"Contraseña: "<<query.value(2).toString();
+    //            qDebug()<<"Vidas: "<<query.value(3).toString();
+    //            qDebug()<<"Puntaje final: "<<query.value(4).toString();
+    //            qDebug()<<"Nivel: "<<query.value(5).toString();
+    //            qDebug()<<"Tiempo: "<<query.value(6).toString();
+            }
+        }else{
+    //                qDebug()<<"(15) - Error";
+        }
+        this->close();
+    }
 }

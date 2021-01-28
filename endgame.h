@@ -32,6 +32,7 @@ private:
     Ui::EndGame *ui;
     QString name;
     int idt;
+    QMessageBox msgBox;
     float score;
     float tiempo;
     float level;

@@ -293,8 +293,16 @@ void MainWindow::on_pushButton_clicked()
             timer->start();
         }
         else if (msgBox.clickedButton() == saveButton) {
-            setcheckpoint();
-            this->close();
+            if (nombre_jugador=="Invitado") {
+                msm.setText("No puede guardar en modo invitado.\nPara guardar debe registrarse.");
+                msm.setIcon(QMessageBox::Warning);
+                msm.exec();
+                timer->start();
+            }
+            else {
+                setcheckpoint();
+                this->close();
+            }
         }
         else if (msgBox.clickedButton() == restartButton)
         {

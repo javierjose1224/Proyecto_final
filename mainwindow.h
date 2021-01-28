@@ -75,6 +75,7 @@ private:
     QList<pua*>puas3;
 
     QMessageBox msgBox;
+    QMessageBox msm;
 
     senoidal *bomba;
     tiempo_juego *contador_n1;

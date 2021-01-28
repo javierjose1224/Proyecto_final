@@ -87,6 +87,8 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,Q
     }
     if(cont_abs2->getCon_abs()==20)
     {
+        scene->removeItem(globos.back());
+        globos.clear();
         globos.push_back(new senoidal(0,v_limit-200,1,2));
         scene->addItem(globos.back());
         cont_abs2->reset();

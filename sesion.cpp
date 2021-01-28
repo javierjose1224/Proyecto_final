@@ -182,6 +182,7 @@ void Sesion::on_loginButton_2_clicked()
     QString consultarDato;
     QSqlQuery query;
     name = "Invitado";
+    password= "0000";
 
     consultarDato.append("SELECT * FROM usuarios WHERE name='"+name+"'");
     query.prepare(consultarDato);
@@ -190,7 +191,6 @@ void Sesion::on_loginButton_2_clicked()
 //        qDebug()<<"(5) - Exitoso";
         if(query.next()){
         }else{
-            password= "0000";
             insertar();
         }
     }else{
