@@ -16,8 +16,11 @@ QRectF pua::boundingRect() const
 
 void pua::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::gray);
-    painter->drawRect(boundingRect());
+//    painter->setBrush(Qt::gray);
+//    painter->drawRect(boundingRect());
+    QPixmap pixmap;
+    pixmap.load(":/Imagenes/puas.png");
+    painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
 }
 
 void pua::posicionar(float v_limit)

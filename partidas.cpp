@@ -34,10 +34,36 @@ Partidas::~Partidas()
     delete ui;
 }
 
+void Partidas::num_players()
+{
+    msgBox.setIcon(QMessageBox::Question);
+    msgBox.setText("Pausa");
+
+    QPushButton *one_pButton = msgBox.addButton(tr("1 Jugador"), QMessageBox::RejectRole);
+    QPushButton *two_pButton = msgBox.addButton(tr("2 Jugadores"), QMessageBox::RejectRole);
+
+    msgBox.exec();
+    if (msgBox.clickedButton() == one_pButton)
+    {
+        ver_num_pls=false;
+        msgBox.close();
+    }
+    else if (msgBox.clickedButton() == two_pButton) {
+
+        ver_num_pls=true;
+        this->close();
+    }
+
+    delete one_pButton;
+    delete two_pButton;
+
+}
+
 void Partidas::on_pushButton_clicked()
 {
     nivel=1;
-    juego = new MainWindow(name,nivel);
+    num_players();
+    juego = new MainWindow(name,nivel,ver_num_pls);
     juego->show();
     this->close();
 }
@@ -45,7 +71,8 @@ void Partidas::on_pushButton_clicked()
 void Partidas::on_pushButton_2_clicked()
 {
     nivel=2;
-    juego = new MainWindow(name,nivel);
+    num_players();
+    juego = new MainWindow(name,nivel,ver_num_pls);
     juego->show();
     this->close();
 }
@@ -53,9 +80,9 @@ void Partidas::on_pushButton_2_clicked()
 void Partidas::on_pushButton_3_clicked()
 {
     nivel=3;
-    juego = new MainWindow(name,nivel);
+    num_players();
+    juego = new MainWindow(name,nivel,ver_num_pls);
     juego->show();
     this->close();
 }
-
 

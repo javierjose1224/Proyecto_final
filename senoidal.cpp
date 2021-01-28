@@ -43,7 +43,11 @@ QRectF senoidal::boundingRect() const
 
 void senoidal::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::magenta);
-    painter->drawEllipse(boundingRect());
+//    painter->setBrush(Qt::magenta);
+//    painter->drawEllipse(boundingRect());
+    QPixmap pixmap;
+    pixmap.load(":/Imagenes/potenciador.png");
+    painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
+
 }
 

@@ -30,7 +30,7 @@ class MainWindow : public QMainWindow
 public:
 
     MainWindow(QWidget *parent = nullptr);
-    MainWindow(QString name,int id_lvl);
+    MainWindow(QString name,int id_lvl,bool num_pls);
     ~MainWindow();
     void cambiar_nivel();
     void setcheckpoint();

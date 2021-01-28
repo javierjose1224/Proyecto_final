@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "mainwindow.h"
+#include <QMessageBox>
 
 namespace Ui {
 class Partidas;
@@ -16,6 +17,7 @@ public:
     explicit Partidas(QWidget *parent = nullptr);
     Partidas(QString nombre,int level,bool id_lev);
     ~Partidas();
+    void num_players();
 
 private slots:
     void on_pushButton_3_clicked();
@@ -27,7 +29,9 @@ private slots:
 private:
     Ui::Partidas *ui;
     QString name;
+    QMessageBox msgBox;
     MainWindow *juego;
+    bool ver_num_pls;
     int nivel;
     bool id_niv;
 };

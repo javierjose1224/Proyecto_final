@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 }
 
-MainWindow::MainWindow(QString name,int id_lvl):ui(new Ui::MainWindow)
+MainWindow::MainWindow(QString name,int id_lvl,bool num_pls):ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     nombre_jugador=name;
@@ -26,61 +26,25 @@ MainWindow::MainWindow(QString name,int id_lvl):ui(new Ui::MainWindow)
     ui->graphicsView->setScene(scene);
     ui->centralwidget ->adjustSize();
     scene->addRect(scene->sceneRect());//para ver los limites de la escne
+    scene->setBackgroundBrush(QBrush(QImage(":/Imagenes/paisaje_sat.png")));
     ui->graphicsView->resize(scene->width(),scene->height()+20);
     this->resize(ui->graphicsView->width()+100,ui->graphicsView->height()+100);
 
-    principal = new personaje(h_limit/2,0,0,0,20,0.3,0,5);//0.3k
+    principal = new personaje(h_limit/2,0,0,0,20,0.3,0,5,1);//0.3k
     jugadores.push_back(principal);
-
-    segundo_plyr = new personaje(h_limit/2,0,0,0,20,0.3,0,5);
-    jugadores.push_back(segundo_plyr);
-
     principal->actualizar(v_limit);
     scene->addItem(principal);
 
+    segundo_plyr = new personaje(h_limit/2+100,0,0,0,20,0.3,0,5,2);
+    jugadores.push_back(segundo_plyr);
+
+
     score_pasar=0;
-
-//NIVEL 1
-{
-//PUAS PARA NIVEL 1
-//    puas.push_back(new pua(3*h_limit/4,25,50,25));
-
-
-//PELOTAS PARA NIVEL 1
-
-//    bars.push_back(new pelota(80,300,10,0,50,40,0,1,2));
-
-}
-
-//NIVEL 2
-{
-//MUROS NIVEL 2
-//    muros2.push_back(new muro(100,v_limit/2,100,100));
-//    muros2.push_back(new muro(h_limit-200,v_limit/2,100,100));
-
-
-//PELOTAS NIVEL 2
-//    bars2.push_back(new pelota(20,300,10,0,50,40,0,1,2));
-//    bars2.push_back(new pelota(80,300,10,0,50,40,0,1,2));
-}
-
-//NIVEL 3
-{
-//PELOTAS NIVEL 3
-//    bars3.push_back(new pelota((300),400,10,0,50,40,0,1,2));
-//    bars3.push_back(new pelota((300)+40,400,10,0,50,40,0,1,2));
-//    bars3.push_back(new pelota((300)+80,400,10,0,50,40,0,1,2));
-
-//MUROS NIVEL 3
-//    muros3.push_back(new muro(100,v_limit/2,100,100));
-//    muros3.push_back(new muro(h_limit-200,v_limit/2,100,100));
-//    muros3.push_back(new muro(h_limit/2-50,v_limit/3,100,50));
-}
-//    nivel_1=new nivel(bars,muros,globs,puas,scene,v_limit);
 
 //VIDAS, PUNTAJE Y TIEMPO
     conVidas= new vida();
     conVidas->setPos(0,-30);
+    conVidas->setVidaT(6);
     scene->addItem(conVidas);
 
     score = new puntaje();
@@ -102,6 +66,13 @@ MainWindow::MainWindow(QString name,int id_lvl):ui(new Ui::MainWindow)
     {
         score->setScore(22);
         is_lineal=false;
+    }
+
+    if(num_pls==true)
+    {
+        conVidas->setVidaT(10);
+        segundo_plyr->actualizar(v_limit);
+        scene->addItem(segundo_plyr);
     }
 
     contador_n1= new tiempo_juego();
@@ -241,52 +212,57 @@ void MainWindow::actualizarm()
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
-{
-    personaje *b = jugadores.at(0);
-    personaje *b2 = jugadores.at(1);
+{    
+
+        personaje *b = jugadores.at(0);
+        personaje *b2 = jugadores.at(1);
+
+        if(event->key() == Qt::Key_D)
+        {
+            b->set_vel(15,b->getVY(),b->getPX(),b->getPY());
+            b->setGolpe(true);
+        }
+        if(event->key() == Qt::Key_A)
+        {
+            b->set_vel(-15,b->getVY(),b->getPX(),b->getPY());
+            b->setGolpe(true);
+        }
+        if(event->key() == Qt::Key_W && b->getPY()<=b->getR())
+        {
+            b->set_vel(b->getVX(),40,b->getPX(),b->getPY());
+            b->setGolpe(true);
+        }
+        if((event->key() == Qt::Key_F && b->getBalas_jugador().size()==0) && b->getGolpe()==true)
+        {
+            b->disparo_lis(scene,v_limit);
+        }
+
+        //CONTROLES DEL SEGUNDO JUGADOR
+        if(event->key() == Qt::Key_L)
+        {
+            b2->set_vel(15,b2->getVY(),b2->getPX(),b2->getPY());
+            b2->setGolpe(true);
+        }
+
+        if(event->key() == Qt::Key_J)
+        {
+            b2->set_vel(-15,b2->getVY(),b2->getPX(),b2->getPY());
+            b2->setGolpe(true);
+        }
+        if(event->key() == Qt::Key_I && b2->getPY()<=b2->getR())
+        {
+            b2->set_vel(b2->getVX(),40,b2->getPX(),b2->getPY());
+            b2->setGolpe(true);
+        }
+        if((event->key() == Qt::Key_H && b2->getBalas_jugador().size()==0) && b2->getGolpe()==true && b2->isActive())
+        {
+            b2->disparo_lis(scene,v_limit);
+        }
+
+
 
     //CONTROLES JUGADOR PRINCIPAL
-    if(event->key() == Qt::Key_D)
-    {
-        b->set_vel(15,b->getVY(),b->getPX(),b->getPY());
-        b->setGolpe(true);
-    }
-    if(event->key() == Qt::Key_A)
-    {
-        b->set_vel(-15,b->getVY(),b->getPX(),b->getPY());
-        b->setGolpe(true);
-    }
-    if(event->key() == Qt::Key_W && b->getPY()<=b->getR())
-    {
-        b->set_vel(b->getVX(),40,b->getPX(),b->getPY());
-        b->setGolpe(true);
-    }
-    if((event->key() == Qt::Key_F && b->getBalas_jugador().size()==0) && b->getGolpe()==true)
-    {
-        b->disparo_lis(scene,v_limit);
-    }
 
-    //CONTROLES DEL SEGUNDO JUGADOR
-    if(event->key() == Qt::Key_L)
-    {
-        b->set_vel(15,b->getVY(),b->getPX(),b->getPY());
-        b->setGolpe(true);
-    }
-
-    if(event->key() == Qt::Key_J)
-    {
-        b2->set_vel(-15,b2->getVY(),b2->getPX(),b2->getPY());
-        b2->setGolpe(true);
-    }
-    if(event->key() == Qt::Key_I && b2->getPY()<=b2->getR())
-    {
-        b2->set_vel(b2->getVX(),40,b2->getPX(),b2->getPY());
-        b2->setGolpe(true);
-    }
-    if((event->key() == Qt::Key_H && b2->getBalas_jugador().size()==0) && b2->getGolpe()==true)
-    {
-        b2->disparo_lis(scene,v_limit);
-    }
 
 //    if(event->key() == Qt::Key_Z)
 //    {
@@ -359,7 +335,6 @@ void MainWindow::reiniciar_lvl()
         muros3.clear();
         score->setScore(22);
     }
-
 }
 
 MainWindow::~MainWindow()

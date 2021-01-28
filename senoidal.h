@@ -9,6 +9,7 @@
 #include <time.h>
 #include <QList>
 #include <math.h>
+#include <QPixmap>
 
 class senoidal:public QGraphicsItem
 {

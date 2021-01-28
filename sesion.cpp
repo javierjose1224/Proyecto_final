@@ -67,6 +67,7 @@ void Sesion::on_regButton_clicked()
 //    qDebug()<<"(5) - consultar";
     if(query.exec()){
 //        qDebug()<<"(5) - Exitoso";
+
         if(query.next()){
             //ventana de dialogo
             //Usuario ya registrado
@@ -76,6 +77,9 @@ void Sesion::on_regButton_clicked()
         }else{
             password=ui->passwordBox->text();
             insertar();
+            msgBox.setText("Registro Exitoso");
+            msgBox.setIcon(QMessageBox::Information);
+            msgBox.exec();
         }
     }else{
 //        qDebug()<<"(5) - Error";
@@ -155,6 +159,14 @@ void Sesion::insertar()
 
 }
 
+void Sesion::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Enter)
+    {
+        on_loginButton_clicked();
+    }
+}
+
 void Sesion::on_loginButton_2_clicked()
 {
     QString consultarDato;
@@ -179,13 +191,6 @@ void Sesion::on_loginButton_2_clicked()
     this->close();
 }
 
-
-//void Sesion::on_pushButton_clicked()
-//{
-//    jugar = new MainWindow(name,22,true);
-//    jugar->show();
-//    this->close();
-//}
 
 
 

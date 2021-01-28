@@ -51,8 +51,12 @@ QRectF disparo::boundingRect() const
 
 void disparo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::darkGray);
-    painter->drawRect(boundingRect());
+//    painter->setBrush(Qt::darkGray);
+//    painter->drawRect(boundingRect());
+
+    QPixmap pixmap;
+    pixmap.load(":/Imagenes/gancho.png");
+    painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
 }
 
 void disparo::actualizar(float v_limit)

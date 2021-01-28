@@ -4,6 +4,7 @@
 #include <QPainter>
 #include <QGraphicsScene>
 #include <stdlib.h>
+#include <QPixmap>
 
 class pua:public QGraphicsItem
 {

@@ -12,6 +12,8 @@ public:
     void decrease();
     void increase();
     int getvidaT();
+    void setVidaT(int value);
+
 private:
     int vidaT;
 };

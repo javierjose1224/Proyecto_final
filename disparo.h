@@ -10,6 +10,7 @@
 #include <QList>
 #include <QDebug>
 #include <cmath>
+#include <QPixmap>
 
 class disparo: public QGraphicsItem
 {

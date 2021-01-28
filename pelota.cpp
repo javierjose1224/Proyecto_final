@@ -55,8 +55,12 @@ QRectF pelota::boundingRect() const
 
 void pelota::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::blue);
-    painter->drawEllipse(boundingRect());
+//    painter->setBrush(Qt::blue);
+//    painter->drawEllipse(boundingRect());
+
+    QPixmap pixmap;
+    pixmap.load(":/Imagenes/pelota.png");
+    painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
 }
 
 void pelota::setEscala(float s)

@@ -4,12 +4,14 @@
 #include <QMainWindow>
 #include<fstream>
 #include<QString>
+#include <QKeyEvent>
 #include<QMessageBox>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QDebug>
 //#include"mainwindow.h"
 #include "partidas.h"
+
 
 using namespace std;
 
@@ -45,6 +47,8 @@ private:
     bool crearBaseDatos();
     bool crearTablaUsuarios();
     void insertar();
+
+    void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // SESION_H
