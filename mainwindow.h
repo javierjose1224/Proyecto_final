@@ -19,6 +19,7 @@
 #include "endgame.h"
 #include <QMessageBox>
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -78,6 +79,7 @@ private:
     senoidal *bomba;
     tiempo_juego *contador_n1;
     tiempo_juego *gener_glob;
+    tiempo_juego *gener_glob2;
     puntaje *score;
     vida *conVidas;
     hd_nivel *nivel_graf;

@@ -35,7 +35,8 @@ MainWindow::MainWindow(QString name,int id_lvl,bool num_pls):ui(new Ui::MainWind
     principal->actualizar(v_limit);
     scene->addItem(principal);
 
-    segundo_plyr = new personaje(h_limit/2+100,0,0,0,20,0.3,0,5,2);
+    segundo_plyr = new personaje(h_limit/2,-0,0,0,20,0.3,0,5,2);
+    segundo_plyr->setGolpe(false);
     jugadores.push_back(segundo_plyr);
 
 
@@ -71,6 +72,7 @@ MainWindow::MainWindow(QString name,int id_lvl,bool num_pls):ui(new Ui::MainWind
     if(num_pls==true)
     {
         conVidas->setVidaT(10);
+        segundo_plyr->setPY(0);
         segundo_plyr->actualizar(v_limit);
         scene->addItem(segundo_plyr);
     }
@@ -83,7 +85,7 @@ MainWindow::MainWindow(QString name,int id_lvl,bool num_pls):ui(new Ui::MainWind
     nivel_graf->setPos(h_limit/2-200,-30);
     scene->addItem(nivel_graf);
 //+++++++++++++++++++++++++++
-
+    gener_glob2 = new tiempo_juego();
     gener_glob = new tiempo_juego();
     timer->start(5);//5
     connect(timer,SIGNAL(timeout()),this,SLOT(actualizarm()));
@@ -91,6 +93,7 @@ MainWindow::MainWindow(QString name,int id_lvl,bool num_pls):ui(new Ui::MainWind
 
 void MainWindow::actualizarm()
 {
+    gener_glob2->increase();
     gener_glob->increase();
     contador_n1->decrese();
     //contador_n1->increase_graf();
@@ -109,7 +112,7 @@ void MainWindow::actualizarm()
         }
         if(score->getScore()>-1 && score->getScore()<7)
         {
-            nivel_1->actualizar_nivel(scene,v_limit,h_limit,jugadores,timer,conVidas,score,gener_glob);
+            nivel_1->actualizar_nivel(scene,v_limit,h_limit,jugadores,conVidas,score,gener_glob,gener_glob2);
             if(contador_n1->getCon_abs()==0)
             {
                 conVidas->decrease();
@@ -145,7 +148,7 @@ void MainWindow::actualizarm()
 
         else if(score->getScore()>7 && score->getScore()<22)
         {
-            nivel_2->actualizar_nivel(scene,v_limit,h_limit,jugadores,timer,conVidas,score,gener_glob);
+            nivel_2->actualizar_nivel(scene,v_limit,h_limit,jugadores,conVidas,score,gener_glob,gener_glob2);
             if(contador_n1->getCon_abs()==0)
             {
                 conVidas->decrease();
@@ -184,7 +187,7 @@ void MainWindow::actualizarm()
 
         else if(score->getScore()>22 && score->getScore()<44)
         {
-            nivel_3->actualizar_nivel(scene,v_limit,h_limit,jugadores,timer,conVidas,score,gener_glob);
+            nivel_3->actualizar_nivel(scene,v_limit,h_limit,jugadores,conVidas,score,gener_glob,gener_glob2);
             if(contador_n1->getCon_abs()==0)
             {
                 conVidas->decrease();
@@ -238,18 +241,18 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         }
 
         //CONTROLES DEL SEGUNDO JUGADOR
-        if(event->key() == Qt::Key_L)
+        if(event->key() == Qt::Key_L && b2->isActive())
         {
             b2->set_vel(15,b2->getVY(),b2->getPX(),b2->getPY());
             b2->setGolpe(true);
         }
 
-        if(event->key() == Qt::Key_J)
+        if(event->key() == Qt::Key_J && b2->isActive())
         {
             b2->set_vel(-15,b2->getVY(),b2->getPX(),b2->getPY());
             b2->setGolpe(true);
         }
-        if(event->key() == Qt::Key_I && b2->getPY()<=b2->getR())
+        if(event->key() == Qt::Key_I && b2->getPY()<=b2->getR() && b2->isActive())
         {
             b2->set_vel(b2->getVX(),40,b2->getPX(),b2->getPY());
             b2->setGolpe(true);

@@ -76,14 +76,20 @@ void nivel::graficar(QGraphicsScene *scene, float v_limit)
     }
 }
 
-void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,QList<personaje*>players,QTimer *timer,vida *conVidas,puntaje *score,tiempo_juego *cont_abs)
+void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,QList<personaje*>players,vida *conVidas,puntaje *score,tiempo_juego *cont_abs,tiempo_juego *cont_abs2)
 {
     //ACTUALIZACION DE TIMER GENERADOR DE GLOBOS
     if(cont_abs->getCon_abs()==10)
     {
-        globos.push_back(new senoidal(0,v_limit-200,1));
+        globos.push_back(new senoidal(0,v_limit-200,1,1));
         scene->addItem(globos.back());
         cont_abs->reset();
+    }
+    if(cont_abs2->getCon_abs()==20)
+    {
+        globos.push_back(new senoidal(0,v_limit-200,1,2));
+        scene->addItem(globos.back());
+        cont_abs2->reset();
     }
     //+++++++++++++
 //    personaje *protag=players.at(0);
@@ -178,8 +184,6 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,Q
     bool ban=false;
     int nv;
 
-
-
         for(int j=0;j<balls.size();j++)
         {
            for(int k=0;k<players.size();k++)
@@ -233,11 +237,17 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,Q
             {
                 if(players.at(k)->getBalas_jugador().at(i)->collidesWithItem(globos.at(j)))
                 {
+
                     scene->removeItem(players.at(k)->getBalas_jugador().at(i));
                     players.at(k)->eliminar_disparo(i);
-
-                    players.at(k)->setVD(30);
-
+                    if(globos.at(j)->getIdt()==1)
+                    {
+                        players.at(k)->setVD(30);
+                    }
+                    else if(globos.at(j)->getIdt()==2)
+                    {
+                        conVidas->increase();
+                    }
                     scene->removeItem(globos.at(j));
                     globos.removeAt(j);
                     break;

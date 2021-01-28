@@ -15,5 +15,6 @@
         <file>Imagenes/menu.png</file>
         <file>Imagenes/player1.png</file>
         <file>Imagenes/player2.png</file>
+        <file>Imagenes/vida++.png</file>
     </qresource>
 </RCC>
