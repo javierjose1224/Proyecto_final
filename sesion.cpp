@@ -207,3 +207,13 @@ void Sesion::on_pushButton_clicked()
     controles->show();
     this->close();
 }
+
+void Sesion::on_show_pass_clicked(bool clicked)
+{
+    if (clicked) {
+        ui->passwordBox->setEchoMode(QLineEdit::Normal);
+    }
+    else {
+        ui->passwordBox->setEchoMode(QLineEdit::Password);
+    }
+}

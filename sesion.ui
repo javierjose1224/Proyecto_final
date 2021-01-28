@@ -522,7 +522,7 @@ background: #333;
 color: #fefefe;</string>
      </property>
      <property name="inputMethodHints">
-      <set>Qt::ImhNone</set>
+      <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
      </property>
      <property name="inputMask">
       <string/>
@@ -532,6 +532,9 @@ color: #fefefe;</string>
      </property>
      <property name="frame">
       <bool>false</bool>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
      </property>
      <property name="cursorPosition">
       <number>0</number>
@@ -629,6 +632,29 @@ background-color: rgb(213, 189, 93);</string>
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="show_pass">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>360</y>
+       <width>161</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">padding-left: 20px;
+padding-right: 20px;
+border-radius: 20px;
+color: #fefefe;
+radius-background-color: rgb(51, 51, 51);</string>
+     </property>
+     <property name="text">
+      <string>Mostrar contraseña</string>
      </property>
     </widget>
    </widget>

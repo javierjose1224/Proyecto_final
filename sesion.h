@@ -38,6 +38,8 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_show_pass_clicked(bool clicked);
+
 private:
     Ui::Sesion *ui;
     Partidas *jugar;
