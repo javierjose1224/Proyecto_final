@@ -31,6 +31,7 @@ SOURCES += \
     puntaje.cpp \
     senoidal.cpp \
     sesion.cpp \
+    settingswindow.cpp \
     tiempo_juego.cpp \
     vida.cpp
 
@@ -50,6 +51,7 @@ HEADERS += \
     senoidal.h \
     sesion.h \
     sesion.h \
+    settingswindow.h \
     tiempo_juego.h \
     vida.h
 
@@ -58,6 +60,7 @@ FORMS += \
     mainwindow.ui \
     partidas.ui \
     sesion.ui \
+    settingswindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

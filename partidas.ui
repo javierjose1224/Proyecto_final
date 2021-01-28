@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>750</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,14 +17,15 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>90</y>
-      <width>101</width>
-      <height>41</height>
+      <x>100</x>
+      <y>300</y>
+      <width>120</width>
+      <height>60</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">Padding: 1px;
+font: 16pt &quot;MV Boli&quot;;
 Border-radius: 5px;
 Background: #393;
 Color: #fefefe;</string>
@@ -39,14 +40,15 @@ Color: #fefefe;</string>
     </property>
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>140</y>
-      <width>101</width>
-      <height>41</height>
+      <x>300</x>
+      <y>300</y>
+      <width>120</width>
+      <height>60</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">Padding: 1px;
+font: 16pt &quot;MV Boli&quot;;
 Border-radius: 5px;
 Background: #393;
 Color: #fefefe;</string>
@@ -61,16 +63,17 @@ Color: #fefefe;</string>
     </property>
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>190</y>
-      <width>101</width>
-      <height>41</height>
+      <x>500</x>
+      <y>300</y>
+      <width>120</width>
+      <height>60</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">Padding: 1px;
 Border-radius: 5px;
 Background: #393;
+font: 16pt &quot;MV Boli&quot;;
 Color: #fefefe;</string>
     </property>
     <property name="text">
@@ -80,10 +83,10 @@ Color: #fefefe;</string>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>10</y>
-      <width>281</width>
-      <height>41</height>
+      <x>150</x>
+      <y>20</y>
+      <width>451</width>
+      <height>121</height>
      </rect>
     </property>
     <property name="font">
@@ -104,7 +107,7 @@ font-family: 'Droid Sans';
 font: 75 26pt &quot;Segoe Script&quot;;</string>
     </property>
     <property name="text">
-     <string>HOOK HIT</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:48pt;&quot;&gt;HOOK HIT&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="x_1">
@@ -113,8 +116,8 @@ font: 75 26pt &quot;Segoe Script&quot;;</string>
     </property>
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>140</y>
+      <x>540</x>
+      <y>280</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -132,8 +135,8 @@ font: 75 26pt &quot;Segoe Script&quot;;</string>
     </property>
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>190</y>
+      <x>340</x>
+      <y>280</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -148,10 +151,10 @@ font: 75 26pt &quot;Segoe Script&quot;;</string>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>230</x>
       <y>120</y>
-      <width>141</width>
-      <height>91</height>
+      <width>301</width>
+      <height>181</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -166,8 +169,8 @@ font: 75 26pt &quot;Segoe Script&quot;;</string>
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>400</width>
-      <height>300</height>
+      <width>750</width>
+      <height>450</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -191,7 +194,7 @@ font: 75 26pt &quot;Segoe Script&quot;;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>750</width>
      <height>21</height>
     </rect>
    </property>

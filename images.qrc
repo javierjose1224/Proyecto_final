@@ -6,12 +6,12 @@
         <file>Imagenes/fondo.jpg</file>
         <file>Imagenes/fondoEsc.png</file>
         <file>Imagenes/pelota.png</file>
-        <file>Imagenes/ladrillos .png</file>
-        <file>Imagenes/globo_red.png</file>
         <file>Imagenes/piedras .png</file>
         <file>Imagenes/paisaje_sat.png</file>
         <file>Imagenes/gancho.png</file>
         <file>Imagenes/potenciador.png</file>
         <file>Imagenes/puas.png</file>
+        <file>Imagenes/settings icon.png</file>
+        <file>Imagenes/menu.png</file>
     </qresource>
 </RCC>

@@ -5,8 +5,8 @@ hd_nivel::hd_nivel(QGraphicsItem *parent)
 {
     nivel_act = 1;
     setPlainText(QString("Nivel: ")+ QString::number(nivel_act));
-    setDefaultTextColor(Qt::blue);
-    setFont(QFont("times",16));
+    setDefaultTextColor(Qt::black);
+    setFont(QFont("Segoe Script",16));
 }
 
 void hd_nivel::increase()

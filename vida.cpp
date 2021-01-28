@@ -5,8 +5,8 @@ vida::vida(QGraphicsItem *parent): QGraphicsTextItem(parent)
 {
     vidaT = 10;
     setPlainText(QString("Vidas: ")+ QString::number(vidaT));
-    setDefaultTextColor(Qt::red);
-    setFont(QFont("times",16));
+    setDefaultTextColor(Qt::black);
+    setFont(QFont("Segoe Script",16));
 }
 
 void vida::decrease()

@@ -471,17 +471,17 @@
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>160</x>
-       <y>110</y>
-       <width>401</width>
-       <height>41</height>
+       <x>50</x>
+       <y>100</y>
+       <width>651</width>
+       <height>101</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <family>Segoe Script</family>
-       <pointsize>26</pointsize>
-       <weight>9</weight>
+       <family>MV Boli</family>
+       <pointsize>48</pointsize>
+       <weight>50</weight>
        <italic>false</italic>
        <bold>false</bold>
       </font>
@@ -492,7 +492,7 @@ color: #393;
 margin: 0 auto;
 font-size: 35px;
 font-family: 'Droid Sans';
-font: 75 26pt &quot;Segoe Script&quot;;</string>
+font: 48pt &quot;MV Boli&quot;;</string>
      </property>
      <property name="text">
       <string>FIN DE JUEGO :)</string>
@@ -501,14 +501,15 @@ font: 75 26pt &quot;Segoe Script&quot;;</string>
     <widget class="QPushButton" name="loginButton">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>130</x>
        <y>250</y>
-       <width>151</width>
-       <height>31</height>
+       <width>221</width>
+       <height>51</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">Padding: 1px;
+font: 16pt &quot;MV Boli&quot;;
 Border-radius: 5px;
 Background: #393;
 Color: #fefefe;</string>
@@ -522,12 +523,13 @@ Color: #fefefe;</string>
       <rect>
        <x>400</x>
        <y>250</y>
-       <width>131</width>
-       <height>31</height>
+       <width>221</width>
+       <height>51</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">Padding: 1px;
+font: 16pt &quot;MV Boli&quot;;
 Border-radius: 5px;
 Background: #933;
 Color: #fefefe;</string>

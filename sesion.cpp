@@ -25,33 +25,38 @@ void Sesion::on_loginButton_clicked()
     name=ui->usernameBox->text();
     password=ui->passwordBox->text();
 
-    consultarDato.append("SELECT * FROM usuarios WHERE name='"+name+"'");
-    query.prepare(consultarDato);
-//    qDebug()<<"(5) - consultar";
-    if(query.exec()){
-//        qDebug()<<"(5) - Exitoso";
-        if(query.next()){
-            if(password==query.value(2).toString()){
-                jugar = new Partidas(name,query.value(5).toInt(),false);
+    if (name=="" || password=="") {
+        msgBox.setText("Debe ingresar los datos");
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.exec();
+    }
+    else {
+        consultarDato.append("SELECT * FROM usuarios WHERE name='"+name+"'");
+        query.prepare(consultarDato);
+    //    qDebug()<<"(5) - consultar";
+        if(query.exec()){
+    //        qDebug()<<"(5) - Exitoso";
+            if(query.next()){
+                if(password==query.value(2).toString()){
+                    jugar = new Partidas(name,query.value(5).toInt(),false);
 
-                jugar->show();
-                this->close();
+                    jugar->show();
+                    this->close();
+                }else{
+                    //ventana de dialogo
+                    //contraseña incorrecta
+                    msgBox.setText("Contraseña incorrecta");
+                    msgBox.setIcon(QMessageBox::Critical);
+                    msgBox.exec();
+                }
             }else{
                 //ventana de dialogo
-                //contraseña incorrecta
-                msgBox.setText("Contraseña incorrecta");
+                //usuario no registrado
+                msgBox.setText("Usuario no registrado");
                 msgBox.setIcon(QMessageBox::Critical);
                 msgBox.exec();
             }
-        }else{
-            //ventana de dialogo
-            //usuario no registrado
-            msgBox.setText("Usuario no registrado");
-            msgBox.setIcon(QMessageBox::Critical);
-            msgBox.exec();
         }
-    }else{
-//        qDebug()<<"(5) - Error";
     }
 }
 
@@ -191,10 +196,9 @@ void Sesion::on_loginButton_2_clicked()
     this->close();
 }
 
-
-
-
-
-
-
-
+void Sesion::on_pushButton_clicked()
+{
+    controles = new SettingsWindow;
+    controles->show();
+    this->close();
+}

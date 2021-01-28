@@ -4,8 +4,8 @@ puntaje::puntaje(QGraphicsItem *parent): QGraphicsTextItem(parent)
 {
     score = -1;
     setPlainText(QString("Puntos: ")+ QString::number(score));
-    setDefaultTextColor(Qt::darkBlue);
-    setFont(QFont("times",16));
+    setDefaultTextColor(Qt::black);
+    setFont(QFont("Segoe Script",16));
 }
 
 void puntaje::increase()

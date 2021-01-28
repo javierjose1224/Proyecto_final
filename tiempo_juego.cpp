@@ -5,7 +5,7 @@ tiempo_juego::tiempo_juego(QGraphicsItem *parent): QGraphicsTextItem(parent)
     contador = 0;
     setPlainText(QString("Tiempo: ")+ QString::number(contador));
     setDefaultTextColor(Qt::black);
-    setFont(QFont("times",16));
+    setFont(QFont("Segoe Script",16));
 }
 
 void tiempo_juego::increase_graf()

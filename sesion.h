@@ -11,6 +11,7 @@
 #include <QDebug>
 //#include"mainwindow.h"
 #include "partidas.h"
+#include "settingswindow.h"
 
 
 using namespace std;
@@ -35,9 +36,12 @@ private slots:
 
     void on_loginButton_2_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::Sesion *ui;
     Partidas *jugar;
+    SettingsWindow *controles;
     QString name;
     QString password;
     int idt;
