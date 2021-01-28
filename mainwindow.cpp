@@ -138,7 +138,7 @@ void MainWindow::actualizarm()
         }
         if(score->getScore()>-1 && score->getScore()<7)
         {
-            nivel_1->actualizar_nivel(scene,v_limit,h_limit,jugadores.at(0),timer,conVidas,score,gener_glob);
+            nivel_1->actualizar_nivel(scene,v_limit,h_limit,jugadores,timer,conVidas,score,gener_glob);
             if(contador_n1->getCon_abs()==0)
             {
                 conVidas->decrease();
@@ -174,7 +174,7 @@ void MainWindow::actualizarm()
 
         else if(score->getScore()>7 && score->getScore()<22)
         {
-            nivel_2->actualizar_nivel(scene,v_limit,h_limit,jugadores.at(0),timer,conVidas,score,gener_glob);
+            nivel_2->actualizar_nivel(scene,v_limit,h_limit,jugadores,timer,conVidas,score,gener_glob);
             if(contador_n1->getCon_abs()==0)
             {
                 conVidas->decrease();
@@ -213,7 +213,7 @@ void MainWindow::actualizarm()
 
         else if(score->getScore()>22 && score->getScore()<44)
         {
-            nivel_3->actualizar_nivel(scene,v_limit,h_limit,jugadores.at(0),timer,conVidas,score,gener_glob);
+            nivel_3->actualizar_nivel(scene,v_limit,h_limit,jugadores,timer,conVidas,score,gener_glob);
             if(contador_n1->getCon_abs()==0)
             {
                 conVidas->decrease();

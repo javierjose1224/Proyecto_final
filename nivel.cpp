@@ -76,7 +76,7 @@ void nivel::graficar(QGraphicsScene *scene, float v_limit)
     }
 }
 
-void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,personaje *protag,QTimer *timer,vida *conVidas,puntaje *score,tiempo_juego *cont_abs)
+void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,QList<personaje*>players,QTimer *timer,vida *conVidas,puntaje *score,tiempo_juego *cont_abs)
 {
     //ACTUALIZACION DE TIMER GENERADOR DE GLOBOS
     if(cont_abs->getCon_abs()==10)
@@ -87,11 +87,12 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,p
         //qDebug()<<"ya llego el lechero";
     }
     //+++++++++++++
+    personaje *protag=players.at(0);
 
     protag->actualizar(v_limit);
     protag->colision_lados_escena(v_limit,h_limit);
 
-    //COLISION DE LOS MUROS/PLATAFORMAS CON EL PERONAJE
+    //COLISION DE LOS MUROS/PLATAFORMAS CON LOS PERONAJES
     for(int i=0;i<floors.size();i++)
     {
         muro *floo= floors.at(i);

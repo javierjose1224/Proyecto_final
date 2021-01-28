@@ -18,7 +18,7 @@ void tiempo_juego::increase_graf()
 void tiempo_juego::decrese()
 {
     contador--;
-    con_abs=(contador/200)+90;
+    con_abs=(contador/200)+20;
     setPlainText(QString("Tiempo: ")+ QString::number(con_abs));
 }
 
