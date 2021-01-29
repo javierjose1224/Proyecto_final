@@ -116,7 +116,7 @@ font: 75 26pt &quot;Segoe Script&quot;;</string>
     </property>
     <property name="geometry">
      <rect>
-      <x>540</x>
+      <x>340</x>
       <y>280</y>
       <width>41</width>
       <height>41</height>
@@ -135,7 +135,7 @@ font: 75 26pt &quot;Segoe Script&quot;;</string>
     </property>
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>540</x>
       <y>280</y>
       <width>41</width>
       <height>41</height>
