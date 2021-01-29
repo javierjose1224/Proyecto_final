@@ -115,6 +115,8 @@ void MainWindow::actualizarm()
         //PELOTAS PARA NIVEL 1
             bars.push_back(new pelota(80,300,10,0,50,40,0,1,2));
             nivel_1=new nivel(bars,muros,globs,puas,scene,v_limit);
+            principal->setVD(20);
+            segundo_plyr->setVD(20);
             score->setScore(0);
             is_lineal=true;
             contador_n1->setContador(15);
@@ -156,6 +158,7 @@ void MainWindow::actualizarm()
 
             nivel_2= new nivel(bars2,muros2,globs,puas2,scene,v_limit);
             principal->setVD(20);
+            segundo_plyr->setVD(20);
             nivel_graf->setNivel_graf(2);
 //            qDebug()<<"nivel 3";
             score->setScore(8);
@@ -207,6 +210,7 @@ void MainWindow::actualizarm()
             nivel_3= new nivel(bars3,muros3,globs,puas3,scene,v_limit);
 
             principal->setVD(20);
+            segundo_plyr->setVD(20);
             nivel_graf->setNivel_graf(3);
             score->setScore(23);
             score_pasar=22;
