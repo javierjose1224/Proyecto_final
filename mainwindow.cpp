@@ -137,7 +137,7 @@ void MainWindow::actualizarm()
             nivel_2= new nivel(bars2,muros2,globs,puas2,scene,v_limit);
             principal->setVD(20);
             nivel_graf->setNivel_graf(2);
-            qDebug()<<"nivel 3";
+//            qDebug()<<"nivel 3";
             score->setScore(8);
             score_pasar=7;
             is_lineal=true;
@@ -182,7 +182,7 @@ void MainWindow::actualizarm()
             //contador_n1->reset_neg();
             contador_n1->setContador(60);
             is_lineal=true;
-            qDebug()<<"nivel 3";
+//            qDebug()<<"nivel 3";
         }
 
         else if(score->getScore()>22 && score->getScore()<44)
@@ -197,6 +197,7 @@ void MainWindow::actualizarm()
 
         if(score->getScore()==44)
         {
+            setcheckpoint();
             tpn=contador_n1->getCon_abs();
             timer->stop();
             pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act(),true);
@@ -206,6 +207,7 @@ void MainWindow::actualizarm()
     }
     else
     {
+        setcheckpoint();
         timer->stop();
         scene->removeItem(jugadores.at(0));
         pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act(),false);
@@ -235,7 +237,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             b->set_vel(b->getVX(),40,b->getPX(),b->getPY());
             b->setGolpe(true);
         }
-        if((event->key() == Qt::Key_F && b->getBalas_jugador().size()==0) && b->getGolpe()==true)
+        if((event->key() == Qt::Key_E && b->getBalas_jugador().size()==0) && b->getGolpe()==true)
         {
             b->disparo_lis(scene,v_limit);
         }
@@ -257,7 +259,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             b2->set_vel(b2->getVX(),40,b2->getPX(),b2->getPY());
             b2->setGolpe(true);
         }
-        if((event->key() == Qt::Key_H && b2->getBalas_jugador().size()==0) && b2->getGolpe()==true && b2->isActive())
+        if((event->key() == Qt::Key_U && b2->getBalas_jugador().size()==0) && b2->getGolpe()==true && b2->isActive())
         {
             b2->disparo_lis(scene,v_limit);
         }
@@ -308,7 +310,7 @@ void MainWindow::on_pushButton_clicked()
         {
             reiniciar_lvl();
             timer->start();
-            qDebug()<<"funciona";
+//            qDebug()<<"funciona";
         }
         delete restartButton;
         delete saveButton;
@@ -359,9 +361,9 @@ void MainWindow::setcheckpoint()
     QSqlQuery query;
 
     //life
-    update.append("UPDATE usuarios SET life='"+QString::number(conVidas->getvidaT())+"',score='"+QString::number(score_pasar)+"',nivel='"+QString::number(nivel_graf->getNivel_act())+"',time='"+QString::number(tpn)+"' WHERE name='"+nombre_jugador+"'");
+    update.append("UPDATE usuarios SET life='"+QString::number(conVidas->getvidaT())+"',score='"+QString::number(score->getScore())+"',nivel='"+QString::number(nivel_graf->getNivel_act())+"',time='"+QString::number(contador_n1->getCon_abs())+"' WHERE name='"+nombre_jugador+"'");
     query.prepare(update);
-        qDebug()<<"(15) - update";
+//        qDebug()<<"(15) - update";
     if(query.exec()){
 //            qDebug()<<"(15) - Exitoso";
         if(query.next()){
@@ -379,18 +381,18 @@ void MainWindow::setcheckpoint()
     if(query.exec()){
 //        qDebug()<<"(6) - Exitoso";
         if (query.next()) {
-            qDebug()<<"hecho";
-            qDebug()<<"Numero de usuario: "<<query.value(0).toString();
-            qDebug()<<"Nombre: "<<query.value(1).toString();
-            qDebug()<<"Contraseña: "<<query.value(2).toString();
-            qDebug()<<"Vidas: "<<query.value(3).toString();
-            qDebug()<<"Nivel: "<<query.value(5).toString();
-            qDebug()<<"Tiempo: "<<query.value(6).toString();
-            qDebug()<<"Puntaje final: "<<query.value(4).toString();
+//            qDebug()<<"hecho";
+//            qDebug()<<"Numero de usuario: "<<query.value(0).toString();
+//            qDebug()<<"Nombre: "<<query.value(1).toString();
+//            qDebug()<<"Contraseña: "<<query.value(2).toString();
+//            qDebug()<<"Vidas: "<<query.value(3).toString();
+//            qDebug()<<"Nivel: "<<query.value(5).toString();
+//            qDebug()<<"Tiempo: "<<query.value(6).toString();
+//            qDebug()<<"Puntaje final: "<<query.value(4).toString();
         }
-    }else{
-//                qDebug()<<"(15) - Error";
     }
+    pasar = new EndGame;
+    pasar->show();
     this->close();
 }
 

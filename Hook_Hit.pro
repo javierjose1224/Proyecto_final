@@ -19,6 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     disparo.cpp \
     endgame.cpp \
+    globalscore.cpp \
     hd_nivel.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -39,6 +40,7 @@ HEADERS += \
     disparo.h \
     endgame.h \
     endgame.h \
+    globalscore.h \
     hd_nivel.h \
     mainwindow.h \
     muro.h \
@@ -57,6 +59,7 @@ HEADERS += \
 
 FORMS += \
     endgame.ui \
+    globalscore.ui \
     mainwindow.ui \
     partidas.ui \
     sesion.ui \

@@ -19,12 +19,12 @@ Partidas::Partidas(QString nombre, int level, bool id_lev):ui(new Ui::Partidas)
         ui->pushButton_2->setEnabled(true);
         ui->pushButton_3->setEnabled(true);
         delete ui->x_1;
-        ui->x_2->deleteLater();
+        delete ui->x_2;
     }
     else if(nivel==2)
     {
         ui->pushButton_2->setEnabled(true);
-        ui->x_1->deleteLater();
+        delete ui->x_1;
     }
 
 }
@@ -37,7 +37,7 @@ Partidas::~Partidas()
 void Partidas::num_players()
 {
     msgBox.setIcon(QMessageBox::Question);
-    msgBox.setText("Pausa");
+    msgBox.setText("Numero de jugadores");
 
     QPushButton *one_pButton = msgBox.addButton(tr("1 Jugador"), QMessageBox::RejectRole);
     QPushButton *two_pButton = msgBox.addButton(tr("2 Jugadores"), QMessageBox::RejectRole);

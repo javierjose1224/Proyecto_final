@@ -16,7 +16,7 @@ nivel::~nivel()
     floors.clear();    
     globos.clear();
     puas.clear();
-    qDebug()<<"borre el nivel";
+//    qDebug()<<"borre el nivel";
 }
 
 void nivel::borrar_elementos(QGraphicsScene *scene)

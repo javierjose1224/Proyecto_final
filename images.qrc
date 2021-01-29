@@ -16,5 +16,9 @@
         <file>Imagenes/player1.png</file>
         <file>Imagenes/player2.png</file>
         <file>Imagenes/vida++.png</file>
+        <file>Imagenes/teclas.png</file>
+        <file>Imagenes/Reg icon.png</file>
+        <file>Imagenes/play icon.png</file>
+        <file>Imagenes/invitado icon.png</file>
     </qresource>
 </RCC>

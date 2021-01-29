@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>HOOK HIT</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="term" native="true">
@@ -501,26 +501,6 @@ font: 48pt &quot;MV Boli&quot;;</string>
       <string>GANASTE!!!</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="loginButton">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>250</y>
-       <width>221</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">Padding: 1px;
-font: 16pt &quot;MV Boli&quot;;
-Border-radius: 5px;
-Background: #393;
-Color: #fefefe;</string>
-     </property>
-     <property name="text">
-      <string>GUARDAR PARTIDA</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="regButton">
      <property name="geometry">
       <rect>
@@ -547,9 +527,9 @@ Color: #fefefe;</string>
      </property>
      <property name="geometry">
       <rect>
-       <x>150</x>
+       <x>90</x>
        <y>90</y>
-       <width>481</width>
+       <width>571</width>
        <height>101</height>
       </rect>
      </property>
@@ -571,20 +551,30 @@ font-family: 'Droid Sans';
 font: 48pt &quot;MV Boli&quot;;</string>
      </property>
      <property name="text">
-      <string>PERDISTE...</string>
+      <string>FIN DE JUEGO</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="score">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>250</y>
+       <width>221</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">Padding: 1px;
+font: 16pt &quot;MV Boli&quot;;
+Border-radius: 5px;
+Background: #ffaa00;
+Color: #fefefe;</string>
+     </property>
+     <property name="text">
+      <string>GLOBAL SCORE</string>
      </property>
     </widget>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>750</width>
-     <height>21</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

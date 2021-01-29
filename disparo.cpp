@@ -40,7 +40,6 @@ disparo::disparo(float posX_, float posY_, float velY_)
 
 disparo::~disparo()
 {
-    qDebug()<<"hlola";
     //delete this;
 }
 

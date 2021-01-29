@@ -144,7 +144,7 @@ void Sesion::insertar()
 {
     QString insertarDato;
     QSqlQuery query;
-    insertarDato.append("INSERT INTO usuarios (name,password,life,score,nivel,time) VALUES ('"+name+"','"+password+"','10','0','1','0')");
+    insertarDato.append("INSERT INTO usuarios (name,password,life,score,nivel,time) VALUES ('"+name+"','"+password+"','-','-','-','-')");
     query.prepare(insertarDato);
 //    qDebug()<<"(4) - Insertar";
     if(query.exec()){
