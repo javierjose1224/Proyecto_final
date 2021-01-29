@@ -23,4 +23,7 @@
         <file>Imagenes/info icon</file>
         <file>Imagenes/Titulo</file>
     </qresource>
+    <qresource prefix="/audio">
+        <file>Audio/main song.mp3</file>
+    </qresource>
 </RCC>

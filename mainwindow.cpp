@@ -10,6 +10,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::MainWindow(QString name,int id_lvl,bool num_pls):ui(new Ui::MainWindow)
 {
+    song = new QMediaPlayer;
+    song->setMedia(QUrl("qrc:/audio/Audio/main song.mp3"));
+    song->setVolume(20);
+    song->play();
+
     ui->setupUi(this);
     nombre_jugador=name;
 
@@ -30,12 +35,12 @@ MainWindow::MainWindow(QString name,int id_lvl,bool num_pls):ui(new Ui::MainWind
     ui->graphicsView->resize(scene->width(),scene->height()+20);
     this->resize(ui->graphicsView->width()+100,ui->graphicsView->height()+100);
 
-    principal = new personaje(h_limit/2,0,0,0,20,0.3,0,5,1);//0.3k
+    principal = new personaje(40,0,0,0,20,0.3,0,5,1);//0.3k
     jugadores.push_back(principal);
     principal->actualizar(v_limit);
     scene->addItem(principal);
 
-    segundo_plyr = new personaje(h_limit/2,-0,0,0,20,0.3,0,5,2);
+    segundo_plyr = new personaje(h_limit-40,-0,0,0,20,0.3,0,5,2);
     segundo_plyr->setGolpe(false);
     jugadores.push_back(segundo_plyr);
 
@@ -104,12 +109,12 @@ void MainWindow::actualizarm()
             jugadores.at(0)->setGolpe(false);
             jugadores.at(1)->setGolpe(false);
 
-            jugadores.at(0)->setPos(0,0);
-            jugadores.at(0)->setPX(0);
+            jugadores.at(0)->setPos(40,0);
+            jugadores.at(0)->setPX(40);
             jugadores.at(0)->setPY(0);
 
-            jugadores.at(1)->setPos(0,0);
-            jugadores.at(1)->setPX(0);
+            jugadores.at(1)->setPos(h_limit-40,0);
+            jugadores.at(1)->setPX(h_limit-40);
             jugadores.at(1)->setPY(0);
             puas.push_back(new pua(3*h_limit/4,25,50,25));
         //PELOTAS PARA NIVEL 1
@@ -137,12 +142,12 @@ void MainWindow::actualizarm()
             jugadores.at(0)->setGolpe(false);
             jugadores.at(1)->setGolpe(false);
 
-            jugadores.at(0)->setPos(0,0);
-            jugadores.at(0)->setPX(0);
+            jugadores.at(0)->setPos(40,0);
+            jugadores.at(0)->setPX(40);
             jugadores.at(0)->setPY(0);
 
-            jugadores.at(1)->setPos(0,0);
-            jugadores.at(1)->setPX(0);
+            jugadores.at(1)->setPos(h_limit-40,0);
+            jugadores.at(1)->setPX(h_limit-40);
             jugadores.at(1)->setPY(0);
             tpn=contador_n1->getCon_abs();
             if(is_lineal==true)
@@ -152,6 +157,8 @@ void MainWindow::actualizarm()
             muros2.push_back(new muro(100,v_limit/2,100,100));
             muros2.push_back(new muro(h_limit-200,v_limit/2,100,100));
 
+            puas2.push_back(new pua(h_limit/4-25,25,50,25));
+            puas2.push_back(new pua(3*h_limit/4-25,25,50,25));
         //PELOTAS NIVEL 2
             bars2.push_back(new pelota(20,300,10,0,50,40,0,1,2));
             bars2.push_back(new pelota(80,300,10,0,50,40,0,1,2));
@@ -185,12 +192,12 @@ void MainWindow::actualizarm()
             jugadores.at(0)->setGolpe(false);
             jugadores.at(1)->setGolpe(false);
 
-            jugadores.at(0)->setPos(0,0);
-            jugadores.at(0)->setPX(0);
+            jugadores.at(0)->setPos(40,0);
+            jugadores.at(0)->setPX(40);
             jugadores.at(0)->setPY(0);
 
-            jugadores.at(1)->setPos(0,0);
-            jugadores.at(1)->setPX(0);
+            jugadores.at(1)->setPos(h_limit-40,0);
+            jugadores.at(1)->setPX(h_limit-40);
             jugadores.at(1)->setPY(0);
             tpn=contador_n1->getCon_abs();
             if(is_lineal==true)
@@ -238,6 +245,7 @@ void MainWindow::actualizarm()
             pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act(),true);
             pasar->show();
             this->close();
+            song->stop();
         }
     }
     else
@@ -248,6 +256,7 @@ void MainWindow::actualizarm()
         pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act(),false);
         pasar->show();
         this->close();
+        song->stop();
     }
 }
 
@@ -342,6 +351,7 @@ void MainWindow::on_pushButton_clicked()
                 pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act(),false);
                 pasar->show();
                 this->close();
+                song->stop();
             }
         }
         else if (msgBox.clickedButton() == restartButton)

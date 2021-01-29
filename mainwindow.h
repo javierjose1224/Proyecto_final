@@ -18,6 +18,7 @@
 #include "hd_nivel.h"
 #include "endgame.h"
 #include <QMessageBox>
+#include <QMediaPlayer>
 
 
 QT_BEGIN_NAMESPACE
@@ -88,6 +89,8 @@ private:
     personaje *principal;
     personaje *segundo_plyr;
     EndGame *pasar;
+
+    QMediaPlayer *song;
     int tpn;
     int score_pasar;
 

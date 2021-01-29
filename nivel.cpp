@@ -149,11 +149,20 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,Q
             {
                 if(players.at(j)->getGolpe()==true)
                 {
-                    conVidas->decrease();
-                    players.at(j)->setPos(0,0);
-                    players.at(j)->setPX(0);
-                    players.at(j)->setPY(0);
-                    players.at(j)->setGolpe(false);
+                    if(j==0){
+                        conVidas->decrease();
+                        players.at(j)->setPos(0,0);
+                        players.at(j)->setPX(0);
+                        players.at(j)->setPY(0);
+                        players.at(j)->setGolpe(false);
+                    }
+                    else if(j==1){
+                        conVidas->decrease();
+                        players.at(j)->setPos(h_limit-40,0);
+                        players.at(j)->setPX(h_limit-40);
+                        players.at(j)->setPY(0);
+                        players.at(j)->setGolpe(false);
+                    }
                 }
             }
         }
@@ -170,11 +179,22 @@ void nivel::actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,Q
             {
                 if(players.at(j)->getGolpe()==true)
                 {
-                    conVidas->decrease();
-                    players.at(j)->setPos(0,0);
-                    players.at(j)->setPX(0);
-                    players.at(j)->setPY(0);
-                    players.at(j)->setGolpe(false);
+                    if(j==0){
+                        conVidas->decrease();
+                        players.at(j)->setPos(0,0);
+                        players.at(j)->setPX(0);
+                        players.at(j)->setPY(0);
+                        players.at(j)->setGolpe(false);
+                    }
+                    else if(j==1){
+                        conVidas->decrease();
+                        players.at(j)->setPos(h_limit-40,0);
+                        players.at(j)->setPX(h_limit-40);
+                        players.at(j)->setPY(0);
+                        players.at(j)->setGolpe(false);
+                    }
+
+
                 }
             }
         }
