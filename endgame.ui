@@ -101,6 +101,9 @@ font: 48pt &quot;MV Boli&quot;;
      </property>
     </widget>
     <widget class="QTableWidget" name="tabla">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>50</x>
@@ -210,12 +213,12 @@ font: 48pt &quot;MV Boli&quot;;
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">font: 14pt &quot;MV Boli&quot;;
-background-color: rgb(255, 255, 255);
+      <string notr="true">background-color: rgb(255, 255, 255);
+font: 14pt &quot;MV Boli&quot;;
 </string>
      </property>
      <property name="rowCount">
-      <number>20</number>
+      <number>50</number>
      </property>
      <property name="columnCount">
       <number>3</number>
@@ -246,9 +249,46 @@ background-color: rgb(255, 255, 255);
      <row/>
      <row/>
      <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
      <column>
       <property name="text">
        <string>Nombre</string>
+      </property>
+      <property name="background">
+       <color>
+        <red>36</red>
+        <green>134</green>
+        <blue>134</blue>
+       </color>
       </property>
      </column>
      <column>
@@ -265,7 +305,7 @@ background-color: rgb(255, 255, 255);
     <widget class="QPushButton" name="SALIR">
      <property name="geometry">
       <rect>
-       <x>600</x>
+       <x>590</x>
        <y>360</y>
        <width>131</width>
        <height>51</height>

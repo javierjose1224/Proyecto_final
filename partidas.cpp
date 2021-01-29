@@ -1,5 +1,6 @@
 #include "partidas.h"
 #include "ui_partidas.h"
+#include "sesion.h"
 
 Partidas::Partidas(QWidget *parent) :
     QMainWindow(parent),
@@ -86,3 +87,11 @@ void Partidas::on_pushButton_3_clicked()
     this->close();
 }
 
+
+void Partidas::on_volver_clicked()
+{
+    Sesion *p;
+    p = new Sesion;
+    p->show();
+    this->close();
+}

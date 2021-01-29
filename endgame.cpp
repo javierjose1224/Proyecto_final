@@ -17,14 +17,13 @@ EndGame::EndGame(QString nombre, float puntos, float t, float vidas, float nivel
     tiempo=t;
     level=nivel;
     life=vidas;
+    ui->label->hide();
+    ui->label_2->hide();
+    ui->tabla->setEditTriggers(QAbstractItemView::NoEditTriggers);
     if (fin==true) {
-        ui->label_2->hide();
-        delete ui->label_2;
         ui->label->show();
     }
     else {
-        ui->label->hide();
-        delete ui->label;
         ui->label_2->show();
     }
     actualizar();
@@ -47,7 +46,7 @@ EndGame::~EndGame()
 void EndGame::actualizar()
 {
     idt=0;
-    for (;idt<20;idt++) {
+    for (;idt<=50;idt++) {
         QString consultarDato;
         QSqlQuery query;
         consultarDato.append("SELECT * FROM usuarios WHERE id='"+QString::number(idt)+"'");
@@ -95,5 +94,6 @@ void EndGame::on_Eliminar_clicked()
 
 void EndGame::on_SALIR_clicked()
 {
+    ui->tabla->close();
     this->close();
 }

@@ -322,6 +322,7 @@ void MainWindow::on_pushButton_clicked()
         QPushButton *saveButton = msgBox.addButton(tr("Salir y guardar partida"), QMessageBox::AcceptRole);
         QPushButton *restartButton = msgBox.addButton(tr("Reiniciar Nivel"), QMessageBox::RejectRole);
         QPushButton *discardButton = msgBox.addButton(tr("Volver al juego"), QMessageBox::RejectRole);
+        QPushButton *salir = msgBox.addButton(tr("Salir"), QMessageBox::RejectRole);
 
         msgBox.exec();
         if (msgBox.clickedButton() == discardButton)
@@ -338,6 +339,8 @@ void MainWindow::on_pushButton_clicked()
             }
             else {
                 setcheckpoint();
+                pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act(),false);
+                pasar->show();
                 this->close();
             }
         }
@@ -347,9 +350,14 @@ void MainWindow::on_pushButton_clicked()
             timer->start();
 //            qDebug()<<"funciona";
         }
+        else if (msgBox.clickedButton() == salir)
+        {
+            this->close();
+        }
         delete restartButton;
         delete saveButton;
         delete discardButton;
+        delete salir;
 
     }
 }
@@ -426,9 +434,6 @@ void MainWindow::setcheckpoint()
 //            qDebug()<<"Puntaje final: "<<query.value(4).toString();
         }
     }
-    pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act(),false);
-    pasar->show();
-    this->close();
 }
 
 
