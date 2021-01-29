@@ -101,6 +101,16 @@ void MainWindow::actualizarm()
     {
         if(score->getScore()==-1)
         {
+            jugadores.at(0)->setGolpe(false);
+            jugadores.at(1)->setGolpe(false);
+
+            jugadores.at(0)->setPos(0,0);
+            jugadores.at(0)->setPX(0);
+            jugadores.at(0)->setPY(0);
+
+            jugadores.at(1)->setPos(0,0);
+            jugadores.at(1)->setPX(0);
+            jugadores.at(1)->setPY(0);
             puas.push_back(new pua(3*h_limit/4,25,50,25));
         //PELOTAS PARA NIVEL 1
             bars.push_back(new pelota(80,300,10,0,50,40,0,1,2));
@@ -122,6 +132,16 @@ void MainWindow::actualizarm()
 
         else if(score->getScore()==7)
         {
+            jugadores.at(0)->setGolpe(false);
+            jugadores.at(1)->setGolpe(false);
+
+            jugadores.at(0)->setPos(0,0);
+            jugadores.at(0)->setPX(0);
+            jugadores.at(0)->setPY(0);
+
+            jugadores.at(1)->setPos(0,0);
+            jugadores.at(1)->setPX(0);
+            jugadores.at(1)->setPY(0);
             tpn=contador_n1->getCon_abs();
             if(is_lineal==true)
             {
@@ -148,6 +168,7 @@ void MainWindow::actualizarm()
 
         else if(score->getScore()>7 && score->getScore()<22)
         {
+
             nivel_2->actualizar_nivel(scene,v_limit,h_limit,jugadores,conVidas,score,gener_glob,gener_glob2);
             if(contador_n1->getCon_abs()==0)
             {
@@ -158,6 +179,16 @@ void MainWindow::actualizarm()
 
         else if(score->getScore()==22)
         {
+            jugadores.at(0)->setGolpe(false);
+            jugadores.at(1)->setGolpe(false);
+
+            jugadores.at(0)->setPos(0,0);
+            jugadores.at(0)->setPX(0);
+            jugadores.at(0)->setPY(0);
+
+            jugadores.at(1)->setPos(0,0);
+            jugadores.at(1)->setPX(0);
+            jugadores.at(1)->setPY(0);
             tpn=contador_n1->getCon_abs();
             if(is_lineal==true)
             {
@@ -391,7 +422,7 @@ void MainWindow::setcheckpoint()
 //            qDebug()<<"Puntaje final: "<<query.value(4).toString();
         }
     }
-    pasar = new EndGame;
+    pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act(),false);
     pasar->show();
     this->close();
 }

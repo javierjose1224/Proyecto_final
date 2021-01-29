@@ -18,13 +18,16 @@ EndGame::EndGame(QString nombre, float puntos, float t, float vidas, float nivel
     level=nivel;
     life=vidas;
     if (fin==true) {
-        ui->label_5->hide();
-        ui->label_4->show();
+        ui->label_2->hide();
+        delete ui->label_2;
+        ui->label->show();
     }
-    else{
-        ui->label_4->hide();
-        ui->label_5->show();
+    else {
+        ui->label->hide();
+        delete ui->label;
+        ui->label_2->show();
     }
+    actualizar();
 }
 
 //void EndGame::imprimir_datos()
@@ -41,15 +44,56 @@ EndGame::~EndGame()
     delete ui;
 }
 
-void EndGame::on_regButton_clicked()
+void EndGame::actualizar()
 {
-    this->close();
+    idt=0;
+    for (;idt<20;idt++) {
+        QString consultarDato;
+        QSqlQuery query;
+        consultarDato.append("SELECT * FROM usuarios WHERE id='"+QString::number(idt)+"'");
+        query.prepare(consultarDato);
+    //    qDebug()<<"(6) - consultar";
+        if(query.exec()){
+    //        qDebug()<<"(6) - Exitoso";
+            if(query.next()){
+                QTableWidgetItem *nombre=new QTableWidgetItem();
+                nombre->setText(query.value(1).toString());
+                ui->tabla->setItem(idt-1,0,nombre);
+                QTableWidgetItem *puntos=new QTableWidgetItem();
+                puntos->setText(query.value(4).toString());
+                ui->tabla->setItem(idt-1,1,puntos);
+                QTableWidgetItem *vida=new QTableWidgetItem();
+                vida->setText(query.value(3).toString());
+                ui->tabla->setItem(idt-1,2,vida);
+            }
+        }
+    }
 }
 
-void EndGame::on_score_clicked()
+void EndGame::on_Eliminar_clicked()
 {
-    qDebug()<<"NOMBRE: "<<name;
-    ver_puntos = new GlobalScore(name);
-    ver_puntos->show();
+    QString update;
+    QSqlQuery query;
+
+    //life
+    update.append("UPDATE usuarios SET life='-',score='-',nivel='-',time='-' WHERE name='"+name+"'");
+    query.prepare(update);
+//        qDebug()<<"(15) - update";
+    if(query.exec()){
+//            qDebug()<<"(15) - Exitoso";
+        if(query.next()){
+//                qDebug()<<"hecho";
+        }
+    }
+    update.clear();
+    msgBox.setText("Datos eliminados exitosamente");
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.exec();
+
+    actualizar();
+}
+
+void EndGame::on_SALIR_clicked()
+{
     this->close();
 }

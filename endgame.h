@@ -7,7 +7,6 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QDebug>
-#include "globalscore.h"
 
 namespace Ui {
 class EndGame;
@@ -24,16 +23,18 @@ public:
     ~EndGame();
 
 private slots:
-    void on_regButton_clicked();
 
-    void on_score_clicked();
+    void actualizar();
+
+    void on_Eliminar_clicked();
+
+    void on_SALIR_clicked();
 
 private:
     Ui::EndGame *ui;
     QString name;
     int idt;
     QMessageBox msgBox;
-    GlobalScore *ver_puntos;
     float score;
     float tiempo;
     float level;
