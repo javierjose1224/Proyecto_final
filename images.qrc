@@ -3,8 +3,6 @@
         <file>Imagenes/user.png</file>
         <file>Imagenes/X.png</file>
         <file>Imagenes/logo_hook_hit.png</file>
-        <file>Imagenes/fondo.jpg</file>
-        <file>Imagenes/fondoEsc.png</file>
         <file>Imagenes/pelota.png</file>
         <file>Imagenes/piedras .png</file>
         <file>Imagenes/paisaje_sat.png</file>
@@ -20,5 +18,9 @@
         <file>Imagenes/Reg icon.png</file>
         <file>Imagenes/play icon.png</file>
         <file>Imagenes/invitado icon.png</file>
+        <file>Imagenes/back icon.png</file>
+        <file>Imagenes/control icon.png</file>
+        <file>Imagenes/info icon</file>
+        <file>Imagenes/Titulo</file>
     </qresource>
 </RCC>

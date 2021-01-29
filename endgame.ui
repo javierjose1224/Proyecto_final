@@ -295,7 +295,7 @@ Color: #fefefe;</string>
       <string notr="true">Padding: 1px;
 font: 16pt &quot;MV Boli&quot;;
 Border-radius: 5px;
-Background: #ff0000;
+Background: #aa0000;
 Color: #fefefe;</string>
      </property>
      <property name="text">
