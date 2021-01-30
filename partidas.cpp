@@ -42,6 +42,7 @@ void Partidas::num_players()
 
     QPushButton *one_pButton = msgBox.addButton(tr("1 Jugador"), QMessageBox::RejectRole);
     QPushButton *two_pButton = msgBox.addButton(tr("2 Jugadores"), QMessageBox::RejectRole);
+    QPushButton *three_pButton = msgBox.addButton(tr("cancelar"), QMessageBox::RejectRole);
 
     msgBox.exec();
     if (msgBox.clickedButton() == one_pButton)
@@ -54,6 +55,14 @@ void Partidas::num_players()
         ver_num_pls=true;
         this->close();
     }
+//    else if (msgBox.clickedButton() == three_pButton) {
+
+//        msgBox.close();
+//        Sesion *p;
+//        p = new Sesion;
+//        p->show();
+//        this->close();
+//    }
 
     delete one_pButton;
     delete two_pButton;

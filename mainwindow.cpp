@@ -116,6 +116,8 @@ void MainWindow::actualizarm()
             jugadores.at(1)->setPos(h_limit-40,0);
             jugadores.at(1)->setPX(h_limit-40);
             jugadores.at(1)->setPY(0);
+
+            puas.push_back(new pua(h_limit/4,25,50,25));
             puas.push_back(new pua(3*h_limit/4,25,50,25));
         //PELOTAS PARA NIVEL 1
             bars.push_back(new pelota(80,300,10,0,50,40,0,1,2));
@@ -157,8 +159,8 @@ void MainWindow::actualizarm()
             muros2.push_back(new muro(100,v_limit/2,100,100));
             muros2.push_back(new muro(h_limit-200,v_limit/2,100,100));
 
-            puas2.push_back(new pua(h_limit/4-25,25,50,25));
-            puas2.push_back(new pua(3*h_limit/4-25,25,50,25));
+            puas2.push_back(new pua(h_limit/4,25,50,25));
+            puas2.push_back(new pua(3*h_limit/4-70,25,50,25));
         //PELOTAS NIVEL 2
             bars2.push_back(new pelota(20,300,10,0,50,40,0,1,2));
             bars2.push_back(new pelota(80,300,10,0,50,40,0,1,2));
