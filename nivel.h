@@ -39,7 +39,7 @@ public:
     void remove_bullet(personaje *protag,int j);
 
     void graficar(QGraphicsScene *scene,float v_limit);
-    void actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,personaje *protag,QTimer *timer,vida *conVidas,puntaje *score,tiempo_juego *cont_abs);
+    void actualizar_nivel(QGraphicsScene *scene,float v_limit,float h_limit,QList<personaje*>players,vida *conVidas,puntaje *score,tiempo_juego *cont_abs,tiempo_juego *cont_abs2);
 
     void agregar_globo(senoidal *a);
 };

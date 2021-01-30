@@ -12,6 +12,16 @@ float pelota::getPX0() const
     return PX0;
 }
 
+void pelota::setPX(float value)
+{
+    PX = value;
+}
+
+void pelota::setPY(float value)
+{
+    PY = value;
+}
+
 pelota::pelota(float posX_, float posY_, float velX_, float velY_, float masa, float radio, float k_, float e_,float G_)
 {
      PX=posX_;
@@ -45,8 +55,12 @@ QRectF pelota::boundingRect() const
 
 void pelota::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::blue);
-    painter->drawEllipse(boundingRect());
+//    painter->setBrush(Qt::blue);
+//    painter->drawEllipse(boundingRect());
+
+    QPixmap pixmap;
+    pixmap.load(":/Imagenes/pelota.png");
+    painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
 }
 
 void pelota::setEscala(float s)

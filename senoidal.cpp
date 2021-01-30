@@ -15,7 +15,12 @@ float senoidal::getR() const
     return R;
 }
 
-senoidal::senoidal(float posx, float posy,float w_)
+int senoidal::getIdt() const
+{
+    return idt;
+}
+
+senoidal::senoidal(float posx, float posy,float w_,int idt_)
 {
     R=20;
     W=w_;
@@ -23,6 +28,7 @@ senoidal::senoidal(float posx, float posy,float w_)
     PY=posy;
     dt=0.01;
     u=1;
+    idt=idt_;
 }
 
 void senoidal::actualizar(float v_limit)
@@ -43,7 +49,21 @@ QRectF senoidal::boundingRect() const
 
 void senoidal::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::magenta);
-    painter->drawEllipse(boundingRect());
+//    painter->setBrush(Qt::magenta);
+//    painter->drawEllipse(boundingRect());
+    if(idt==1)
+    {
+        QPixmap pixmap;
+        pixmap.load(":/Imagenes/potenciador.png");
+        painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
+    }
+    else
+    {
+        QPixmap pixmap;
+        pixmap.load(":/Imagenes/vida++.png");
+        painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
+    }
+
+
 }
 

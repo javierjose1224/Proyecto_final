@@ -2,7 +2,7 @@
 #include <math.h>
 #include <cmath>
 
-personaje::personaje(float posX_, float posY_, float velX_, float velY_, float radio, float k_, float e_,float G_)
+personaje::personaje(float posX_, float posY_, float velX_, float velY_, float radio, float k_, float e_,float G_,int col)
 {
      PX=posX_;
      PY=posY_;
@@ -20,6 +20,7 @@ personaje::personaje(float posX_, float posY_, float velX_, float velY_, float r
      escala=1;
      VD=20;
      golpe=true;
+     color=col;
 }
 
 bool personaje::getGolpe() const
@@ -86,8 +87,25 @@ QRectF personaje::boundingRect() const
 
 void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::darkRed);
-    painter->drawRect(boundingRect());
+    if(color==1)
+    {
+//        painter->setBrush(Qt::darkRed);
+//        painter->drawRect(boundingRect());
+
+        QPixmap pixmap;
+        pixmap.load(":/Imagenes/player1.png");
+        painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
+    }
+    else if(color==2)
+    {
+//        painter->setBrush(Qt::yellow);
+//        painter->drawRect(boundingRect());
+
+        QPixmap pixmap;
+        pixmap.load(":/Imagenes/player2.png");
+        painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
+    }
+
 }
 
 void personaje::setEscala(float s)

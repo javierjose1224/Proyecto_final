@@ -41,8 +41,12 @@ void muro::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 //    painter->drawPixmap(-Ancho/2, -Alto/2,*pixmap,columnas,filas,ancho,alto);
 //    setScale(0.1);
 
-    painter->setBrush(Qt::red);
-    painter->drawRect(boundingRect());
+//    painter->setBrush(Qt::red);
+//    painter->drawRect(boundingRect());
+
+    QPixmap pixmap;
+    pixmap.load(":/Imagenes/piedras .png");
+    painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
 }
 
 void muro::posicionar(float v_limit)

@@ -1,5 +1,6 @@
 QT       += core gui
 QT       += sql
+QT       += multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -24,39 +25,42 @@ SOURCES += \
     mainwindow.cpp \
     muro.cpp \
     nivel.cpp \
+    partidas.cpp \
     pelota.cpp \
     personaje.cpp \
     pua.cpp \
     puntaje.cpp \
     senoidal.cpp \
     sesion.cpp \
-    sesion.cpp \
+    settingswindow.cpp \
     tiempo_juego.cpp \
     vida.cpp
 
 HEADERS += \
     disparo.h \
     endgame.h \
+    endgame.h \
     hd_nivel.h \
     mainwindow.h \
     muro.h \
     nivel.h \
+    partidas.h \
     pelota.h \
     personaje.h \
     pua.h \
     puntaje.h \
     senoidal.h \
     sesion.h \
-    sesion.h \
+    settingswindow.h \
     tiempo_juego.h \
     vida.h
 
 FORMS += \
     endgame.ui \
     mainwindow.ui \
+    partidas.ui \
     sesion.ui \
-    sesion.ui \
-    sesion.ui
+    settingswindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

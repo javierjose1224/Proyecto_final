@@ -4,11 +4,15 @@
 #include <QMainWindow>
 #include<fstream>
 #include<QString>
+#include <QKeyEvent>
 #include<QMessageBox>
-#include"mainwindow.h"
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QDebug>
+//#include"mainwindow.h"
+#include "partidas.h"
+#include "settingswindow.h"
+
 
 using namespace std;
 
@@ -32,9 +36,14 @@ private slots:
 
     void on_loginButton_2_clicked();
 
+    void on_pushButton_clicked();
+
+    void on_show_pass_clicked(bool clicked);
+
 private:
     Ui::Sesion *ui;
-    MainWindow * jugar;
+    Partidas *jugar;
+    SettingsWindow *controles;
     QString name;
     QString password;
     int idt;
@@ -44,6 +53,8 @@ private:
     bool crearBaseDatos();
     bool crearTablaUsuarios();
     void insertar();
+
+    void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // SESION_H

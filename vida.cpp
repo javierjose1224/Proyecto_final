@@ -5,8 +5,8 @@ vida::vida(QGraphicsItem *parent): QGraphicsTextItem(parent)
 {
     vidaT = 10;
     setPlainText(QString("Vidas: ")+ QString::number(vidaT));
-    setDefaultTextColor(Qt::red);
-    setFont(QFont("times",16));
+    setDefaultTextColor(Qt::black);
+    setFont(QFont("Segoe Script",16));
 }
 
 void vida::decrease()
@@ -21,9 +21,13 @@ void vida::increase()
     setPlainText(QString("Vidas: ")+ QString::number(vidaT));
 }
 
-
-
 int vida::getvidaT()
 {
     return vidaT;
+}
+
+void vida::setVidaT(int value)
+{
+    vidaT = value;
+    setPlainText(QString("Vidas: ")+ QString::number(vidaT));
 }

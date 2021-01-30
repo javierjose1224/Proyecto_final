@@ -9,6 +9,7 @@
 #include <time.h>
 #include <QList>
 #include <math.h>
+#include <QPixmap>
 
 class senoidal:public QGraphicsItem
 {
@@ -19,9 +20,9 @@ class senoidal:public QGraphicsItem
     float W;
     float dt;
     float u;
-
+    int idt;
 public:
-    senoidal(float posx,float posy,float w_);
+    senoidal(float posx,float posy,float w_,int idt_);
     void actualizar(float v_limit);
 
     QRectF boundingRect() const;
@@ -29,6 +30,7 @@ public:
     void setU(float value);
     float getPX() const;
     float getR() const;
+    int getIdt() const;
 };
 
 #endif // SENOIDAL_H

@@ -6,12 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>751</width>
-    <height>451</height>
+    <width>750</width>
+    <height>450</height>
    </rect>
   </property>
+  <property name="maximumSize">
+   <size>
+    <width>750</width>
+    <height>450</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>HOOK HIT</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="frame_2">
@@ -35,35 +41,34 @@
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>224</x>
-       <y>22</y>
-       <width>261</width>
-       <height>41</height>
+       <x>220</x>
+       <y>40</y>
+       <width>311</width>
+       <height>81</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <family>Droid Sans</family>
-       <pointsize>-1</pointsize>
+       <family>Segoe Script</family>
+       <pointsize>26</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">text-align: center;
-color: #393;
-margin: 0 auto;
-font-size: 35px;
-font-family: 'Droid Sans';</string>
+      <string notr="true">border-image: url(:/Imagenes/Titulo);</string>
      </property>
      <property name="text">
-      <string>HOOK HIT</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLineEdit" name="usernameBox">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>248</y>
-       <width>201</width>
+       <x>120</x>
+       <y>240</y>
+       <width>271</width>
        <height>41</height>
       </rect>
      </property>
@@ -297,9 +302,9 @@ color: #fefefe;</string>
     <widget class="QLineEdit" name="passwordBox">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>120</x>
        <y>300</y>
-       <width>201</width>
+       <width>271</width>
        <height>41</height>
       </rect>
      </property>
@@ -518,7 +523,7 @@ background: #333;
 color: #fefefe;</string>
      </property>
      <property name="inputMethodHints">
-      <set>Qt::ImhNone</set>
+      <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
      </property>
      <property name="inputMask">
       <string/>
@@ -528,6 +533,9 @@ color: #fefefe;</string>
      </property>
      <property name="frame">
       <bool>false</bool>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
      </property>
      <property name="cursorPosition">
       <number>0</number>
@@ -539,70 +547,54 @@ color: #fefefe;</string>
     <widget class="QPushButton" name="loginButton">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>354</y>
-       <width>80</width>
-       <height>21</height>
+       <x>490</x>
+       <y>200</y>
+       <width>151</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">Padding: 1px;
+font: 16pt &quot;MV Boli&quot;;
 Border-radius: 5px;
 Background: #393;
 Color: #fefefe;</string>
      </property>
      <property name="text">
-      <string>JUGAR</string>
+      <string>Jugar</string>
      </property>
     </widget>
     <widget class="QPushButton" name="regButton">
      <property name="geometry">
       <rect>
-       <x>160</x>
-       <y>354</y>
-       <width>80</width>
-       <height>21</height>
+       <x>490</x>
+       <y>250</y>
+       <width>151</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">Padding: 1px;
+font: 16pt &quot;MV Boli&quot;;
 Border-radius: 5px;
 Background: #933;
 Color: #fefefe;</string>
      </property>
      <property name="text">
-      <string>REGISTRARSE</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="loginLabel">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>222</y>
-       <width>267</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: #fefefe;</string>
-     </property>
-     <property name="text">
-      <string/>
+      <string>Registrarse</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_7">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>90</y>
-       <width>128</width>
-       <height>128</height>
+       <x>180</x>
+       <y>160</y>
+       <width>61</width>
+       <height>61</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-radius: 64px;
-border-image: url(:/Imagenes/user.png);
-</string>
+      <string notr="true">border-image: url(:/Imagenes/player1.png);</string>
      </property>
      <property name="text">
       <string/>
@@ -611,33 +603,79 @@ border-image: url(:/Imagenes/user.png);
     <widget class="QPushButton" name="loginButton_2">
      <property name="geometry">
       <rect>
-       <x>600</x>
-       <y>360</y>
-       <width>80</width>
-       <height>21</height>
+       <x>490</x>
+       <y>300</y>
+       <width>151</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">Padding: 1px;
+font: 16pt &quot;MV Boli&quot;;
 Border-radius: 5px;
-Background: #393;
+Background: #ffaa00;
 Color: #fefefe;</string>
      </property>
      <property name="text">
-      <string>INVITADO</string>
+      <string>Invitado</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>680</x>
+       <y>10</y>
+       <width>61</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-image: url(:/Imagenes/info icon);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="show_pass">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>360</y>
+       <width>161</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">padding-left: 20px;
+padding-right: 20px;
+border-radius: 20px;
+color: #fefefe;
+radius-background-color: rgb(51, 51, 51);</string>
+     </property>
+     <property name="text">
+      <string>Mostrar contraseña</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>160</y>
+       <width>61</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-image: url(:/Imagenes/player2.png);</string>
+     </property>
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>751</width>
-     <height>21</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

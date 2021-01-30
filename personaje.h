@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include "disparo.h"
+#include <QPixmap>
+#include <QMessageBox>
 
 class personaje:public QGraphicsItem
 {
@@ -28,10 +30,12 @@ private:
     int con=0;
     float VD;
     bool golpe;
+    int color;
     QList<disparo*> balas_jugador;
+
 public:
 
-    personaje(float posX_,float posY_,float velX_,float velY_,float radio,float k_,float e_,float G_);
+    personaje(float posX_,float posY_,float velX_,float velY_,float radio,float k_,float e_,float G_,int col);
     ~personaje();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) override;
@@ -55,8 +59,10 @@ public:
     void setPY(float value);
 
     void eliminar_disparo(int i);
+
     void disparo_lis(QGraphicsScene *scene,float v_limit);
     QList<disparo *> getBalas_jugador() const;
+
     float getVD() const;
     void setVD(float value);
     bool getGolpe() const;
