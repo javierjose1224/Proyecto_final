@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>735</width>
-    <height>352</height>
+    <width>1000</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0" alignment="Qt::AlignRight">
+    <item row="3" column="0" alignment="Qt::AlignRight">
      <widget class="QPushButton" name="pushButton">
       <property name="font">
        <font>

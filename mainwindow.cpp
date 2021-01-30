@@ -12,7 +12,7 @@ MainWindow::MainWindow(QString name,int id_lvl,bool num_pls):ui(new Ui::MainWind
 {
     song = new QMediaPlayer;
     song->setMedia(QUrl("qrc:/audio/Audio/main song.mp3"));
-    song->setVolume(20);
+    song->setVolume(15);
     song->play();
 
     ui->setupUi(this);
@@ -336,6 +336,7 @@ void MainWindow::on_pushButton_clicked()
         QPushButton *salir = msgBox.addButton(tr("Salir"), QMessageBox::RejectRole);
 
         msgBox.exec();
+
         if (msgBox.clickedButton() == discardButton)
         {
             msgBox.close();

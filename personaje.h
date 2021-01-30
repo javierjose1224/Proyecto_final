@@ -7,6 +7,7 @@
 #include <time.h>
 #include "disparo.h"
 #include <QPixmap>
+#include <QMessageBox>
 
 class personaje:public QGraphicsItem
 {

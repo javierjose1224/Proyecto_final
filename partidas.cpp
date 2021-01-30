@@ -37,32 +37,26 @@ Partidas::~Partidas()
 
 void Partidas::num_players()
 {
-    msgBox.setIcon(QMessageBox::Question);
-    msgBox.setText("Numero de jugadores");
+    msg.setText("Numero de jugadores");
+    msg.setIcon(QMessageBox::Question);
 
-    QPushButton *one_pButton = msgBox.addButton(tr("1 Jugador"), QMessageBox::RejectRole);
-    QPushButton *two_pButton = msgBox.addButton(tr("2 Jugadores"), QMessageBox::RejectRole);
-    QPushButton *three_pButton = msgBox.addButton(tr("cancelar"), QMessageBox::RejectRole);
+    QPushButton *one_pButton = msg.addButton(tr("1 Jugador"), QMessageBox::RejectRole);
+    QPushButton *two_pButton = msg.addButton(tr("2 Jugadores"), QMessageBox::RejectRole);
+    msg.exec();
 
-    msgBox.exec();
-    if (msgBox.clickedButton() == one_pButton)
+    if (msg.clickedButton() == one_pButton)
     {
         ver_num_pls=false;
-        msgBox.close();
+        msg.close();
     }
-    else if (msgBox.clickedButton() == two_pButton) {
+    else if (msg.clickedButton() == two_pButton) {
 
         ver_num_pls=true;
         this->close();
     }
-//    else if (msgBox.clickedButton() == three_pButton) {
-
-//        msgBox.close();
-//        Sesion *p;
-//        p = new Sesion;
-//        p->show();
-//        this->close();
-//    }
+    msg.close();
+    msg.removeButton(one_pButton);
+    msg.removeButton(two_pButton);
 
     delete one_pButton;
     delete two_pButton;

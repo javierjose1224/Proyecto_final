@@ -31,7 +31,7 @@ private slots:
 private:
     Ui::Partidas *ui;
     QString name;
-    QMessageBox msgBox;
+    QMessageBox msg;
     MainWindow *juego;
     bool ver_num_pls;
     int nivel;
