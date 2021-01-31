@@ -165,8 +165,8 @@ void MainWindow::actualizarm()
             puas2.push_back(new pua(h_limit/4,25,50,25));
             puas2.push_back(new pua(3*h_limit/4-70,25,50,25));
         //PELOTAS NIVEL 2
-            bars2.push_back(new pelota(20,300,10,0,50,40,0,1,2));
-            bars2.push_back(new pelota(80,300,10,0,50,40,0,1,2));
+            bars2.push_back(new pelota(h_limit/2,300,10,0,50,40,0,1,2));
+            bars2.push_back(new pelota(h_limit/2,300,-10,0,50,40,0,1,2));
 
             nivel_2= new nivel(bars2,muros2,globs,puas2,scene,v_limit);
             principal->setVD(20);
@@ -260,14 +260,18 @@ void MainWindow::actualizarm()
                 nivel_3->borrar_elementos(scene);
             }
             //nivel_1->borrar_elementos(scene);
-            bars4.push_back(new pelota((h_limit-100),450,-10,0,50,40,0,1,2));
-            bars4.push_back(new pelota((100),450,10,0,50,40,0,1,2));
+            bars4.push_back(new pelota((h_limit-100),450,-10,0,50,20,0,1,2));
+            bars4.push_back(new pelota(100,450,10,0,50,20,0,1,2));
+            bars4.push_back(new pelota((h_limit-150),450,-10,0,50,20,0,1,2));
+            bars4.push_back(new pelota(150,450,10,0,50,20,0,1,2));
+            bars4.push_back(new pelota((h_limit-200),450,-10,0,50,20,0,1,2));
+            bars4.push_back(new pelota(200,450,10,0,50,20,0,1,2));
 //            bars4.push_back(new pelota((300)+40,400,10,0,50,40,0,1,2));
 //            bars4.push_back(new pelota((300)+80,400,10,0,50,40,0,1,2));
 
             puas4.push_back(new pua(h_limit/4,25,50,25));
             puas4.push_back(new pua(3*h_limit/4-70,25,50,25));
-        //MUROS NIVEL 3
+        //MUROS NIVEL 4
             muros4.push_back(new muro(h_limit/2-50,v_limit,100,440));
 
             nivel_4= new nivel(bars4,muros4,globs,puas4,scene,v_limit);
@@ -282,7 +286,7 @@ void MainWindow::actualizarm()
             is_lineal=true;
         }
 
-        else if(score->getScore()>44 && score->getScore()<59)
+        else if(score->getScore()>44 && score->getScore()<63)
         {
             nivel_4->actualizar_nivel(scene,v_limit,h_limit,jugadores,conVidas,score,gener_glob,gener_glob2);
             if(contador_n1->getCon_abs()==0)
@@ -292,7 +296,7 @@ void MainWindow::actualizarm()
             }
         }
 
-        if(score->getScore()==59)
+        if(score->getScore()==63)
         {
             setcheckpoint();
             tpn=contador_n1->getCon_abs();

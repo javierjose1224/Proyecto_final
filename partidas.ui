@@ -79,25 +79,6 @@
       <string/>
      </property>
     </widget>
-    <widget class="QLabel" name="x_1">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>280</y>
-       <width>41</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">image: url(:/Imagenes/X.png);</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
@@ -164,25 +145,6 @@ Color: #fefefe;</string>
       <string>Nivel 3</string>
      </property>
     </widget>
-    <widget class="QLabel" name="x_2">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>430</x>
-       <y>280</y>
-       <width>41</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">image: url(:/Imagenes/X.png);</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
     <widget class="QPushButton" name="pushButton_4">
      <property name="enabled">
       <bool>false</bool>
@@ -206,34 +168,63 @@ Color: #fefefe;</string>
       <string>Nivel 4</string>
      </property>
     </widget>
-    <widget class="QLabel" name="x_3">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>610</x>
-       <y>280</y>
-       <width>41</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">image: url(:/Imagenes/X.png);</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <zorder>label_4</zorder>
-    <zorder>volver</zorder>
-    <zorder>pushButton</zorder>
-    <zorder>pushButton_2</zorder>
-    <zorder>pushButton_3</zorder>
-    <zorder>x_2</zorder>
-    <zorder>pushButton_4</zorder>
-    <zorder>x_3</zorder>
-    <zorder>x_1</zorder>
+   </widget>
+   <widget class="QLabel" name="x_3">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>290</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/Imagenes/X.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="x_1">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>290</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/Imagenes/X.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="x_2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>290</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/Imagenes/X.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

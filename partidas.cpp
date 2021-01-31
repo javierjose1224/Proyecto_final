@@ -15,17 +15,25 @@ Partidas::Partidas(QString nombre, int level, bool id_lev):ui(new Ui::Partidas)
     name=nombre;
     nivel=level;
     id_niv=id_lev;
-    if(nivel==3)
+    if (nivel==4) {
+        ui->pushButton_2->setEnabled(true);
+        ui->pushButton_3->setEnabled(true);
+        ui->pushButton_4->setEnabled(true);
+        ui->x_1->hide();
+        ui->x_2->hide();
+        ui->x_3->hide();
+    }
+    else if(nivel==3)
     {
         ui->pushButton_2->setEnabled(true);
         ui->pushButton_3->setEnabled(true);
-        delete ui->x_1;
-        delete ui->x_2;
+        ui->x_1->hide();
+        ui->x_2->hide();
     }
     else if(nivel==2)
     {
         ui->pushButton_2->setEnabled(true);
-        delete ui->x_1;
+        ui->x_1->hide();
     }
 
 }
