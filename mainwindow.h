@@ -75,6 +75,11 @@ private:
     QList<pelota*>bars3;
     QList<pua*>puas3;
 
+    nivel *nivel_4;
+    QList<muro*>muros4;
+    QList<pelota*>bars4;
+    QList<pua*>puas4;
+
     QMessageBox msgBox;
     QMessageBox msm;
 

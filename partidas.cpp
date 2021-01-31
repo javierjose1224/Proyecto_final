@@ -90,6 +90,14 @@ void Partidas::on_pushButton_3_clicked()
     this->close();
 }
 
+void Partidas::on_pushButton_4_clicked()
+{
+    nivel=4;
+    num_players();
+    juego = new MainWindow(name,nivel,ver_num_pls);
+    juego->show();
+    this->close();
+}
 
 void Partidas::on_volver_clicked()
 {
@@ -98,3 +106,5 @@ void Partidas::on_volver_clicked()
     p->show();
     this->close();
 }
+
+

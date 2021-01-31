@@ -73,6 +73,11 @@ MainWindow::MainWindow(QString name,int id_lvl,bool num_pls):ui(new Ui::MainWind
         score->setScore(22);
         is_lineal=false;
     }
+    else if(id_niv==4)
+    {
+        score->setScore(44);
+        is_lineal=false;
+    }
 
     if(num_pls==true)
     {
@@ -117,8 +122,6 @@ void MainWindow::actualizarm()
             jugadores.at(1)->setPX(h_limit-40);
             jugadores.at(1)->setPY(0);
 
-            puas.push_back(new pua(h_limit/4,25,50,25));
-            puas.push_back(new pua(3*h_limit/4,25,50,25));
         //PELOTAS PARA NIVEL 1
             bars.push_back(new pelota(80,300,10,0,50,40,0,1,2));
             nivel_1=new nivel(bars,muros,globs,puas,scene,v_limit);
@@ -156,8 +159,8 @@ void MainWindow::actualizarm()
             {
                 nivel_1->borrar_elementos(scene);
             }
-            muros2.push_back(new muro(100,v_limit/2,100,100));
-            muros2.push_back(new muro(h_limit-200,v_limit/2,100,100));
+            muros2.push_back(new muro(100,v_limit/2+100,100,100));
+            muros2.push_back(new muro(h_limit-200,v_limit/2+100,100,100));
 
             puas2.push_back(new pua(h_limit/4,25,50,25));
             puas2.push_back(new pua(3*h_limit/4-70,25,50,25));
@@ -239,7 +242,57 @@ void MainWindow::actualizarm()
             }
         }
 
-        if(score->getScore()==44)
+        else if(score->getScore()==44)
+        {
+            jugadores.at(0)->setGolpe(false);
+            jugadores.at(1)->setGolpe(false);
+
+            jugadores.at(0)->setPos(40,0);
+            jugadores.at(0)->setPX(40);
+            jugadores.at(0)->setPY(0);
+
+            jugadores.at(1)->setPos(h_limit-40,0);
+            jugadores.at(1)->setPX(h_limit-40);
+            jugadores.at(1)->setPY(0);
+            tpn=contador_n1->getCon_abs();
+            if(is_lineal==true)
+            {
+                nivel_3->borrar_elementos(scene);
+            }
+            //nivel_1->borrar_elementos(scene);
+            bars4.push_back(new pelota((h_limit-100),450,-10,0,50,40,0,1,2));
+            bars4.push_back(new pelota((100),450,10,0,50,40,0,1,2));
+//            bars4.push_back(new pelota((300)+40,400,10,0,50,40,0,1,2));
+//            bars4.push_back(new pelota((300)+80,400,10,0,50,40,0,1,2));
+
+            puas4.push_back(new pua(h_limit/4,25,50,25));
+            puas4.push_back(new pua(3*h_limit/4-70,25,50,25));
+        //MUROS NIVEL 3
+            muros4.push_back(new muro(h_limit/2-50,v_limit,100,440));
+
+            nivel_4= new nivel(bars4,muros4,globs,puas4,scene,v_limit);
+
+            principal->setVD(20);
+            segundo_plyr->setVD(20);
+            nivel_graf->setNivel_graf(4);
+            score->setScore(45);
+            //score_pasar=22;
+            //contador_n1->reset_neg();
+            contador_n1->setContador(60);
+            is_lineal=true;
+        }
+
+        else if(score->getScore()>44 && score->getScore()<59)
+        {
+            nivel_4->actualizar_nivel(scene,v_limit,h_limit,jugadores,conVidas,score,gener_glob,gener_glob2);
+            if(contador_n1->getCon_abs()==0)
+            {
+                conVidas->decrease();
+                reiniciar_lvl();
+            }
+        }
+
+        if(score->getScore()==59)
         {
             setcheckpoint();
             tpn=contador_n1->getCon_abs();
@@ -404,6 +457,15 @@ void MainWindow::reiniciar_lvl()
         puas3.clear();
         muros3.clear();
         score->setScore(22);
+    }
+    else if(nivel_graf->getNivel_act()==4)
+    {
+        is_lineal=false;
+        nivel_4->borrar_elementos(scene);
+        bars4.clear();
+        puas4.clear();
+        muros4.clear();
+        score->setScore(44);
     }
 }
 

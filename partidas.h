@@ -28,6 +28,8 @@ private slots:
 
     void on_volver_clicked();
 
+    void on_pushButton_4_clicked();
+
 private:
     Ui::Partidas *ui;
     QString name;
