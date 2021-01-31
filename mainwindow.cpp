@@ -10,10 +10,10 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::MainWindow(QString name,int id_lvl,bool num_pls):ui(new Ui::MainWindow)
 {
-    song = new QMediaPlayer;
-    song->setMedia(QUrl("qrc:/audio/Audio/main song.mp3"));
-    song->setVolume(15);
-    song->play();
+//    song = new QMediaPlayer;
+//    song->setMedia(QUrl("qrc:/audio/Audio/main song.mp3"));
+//    song->setVolume(15);
+//    song->play();
 
     ui->setupUi(this);
     nombre_jugador=name;
@@ -247,7 +247,7 @@ void MainWindow::actualizarm()
             pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act(),true);
             pasar->show();
             this->close();
-            song->stop();
+//            song->stop();
         }
     }
     else
@@ -258,7 +258,7 @@ void MainWindow::actualizarm()
         pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act(),false);
         pasar->show();
         this->close();
-        song->stop();
+//        song->stop();
     }
 }
 
@@ -330,10 +330,11 @@ void MainWindow::on_pushButton_clicked()
         timer->stop();
         msgBox.setIcon(QMessageBox::Question);
         msgBox.setText("Pausa");
+
         QPushButton *saveButton = msgBox.addButton(tr("Salir y guardar partida"), QMessageBox::AcceptRole);
         QPushButton *restartButton = msgBox.addButton(tr("Reiniciar Nivel"), QMessageBox::RejectRole);
         QPushButton *discardButton = msgBox.addButton(tr("Volver al juego"), QMessageBox::RejectRole);
-        QPushButton *salir = msgBox.addButton(tr("Salir"), QMessageBox::RejectRole);
+        QPushButton *salir = msgBox.addButton(tr("Salir"), QMessageBox::RejectRole);        
 
         msgBox.exec();
 
@@ -354,7 +355,7 @@ void MainWindow::on_pushButton_clicked()
                 pasar = new EndGame(nombre_jugador, score->getScore(),contador_n1->getCon_abs(),conVidas->getvidaT(),nivel_graf->getNivel_act(),false);
                 pasar->show();
                 this->close();
-                song->stop();
+//                song->stop();
             }
         }
         else if (msgBox.clickedButton() == restartButton)

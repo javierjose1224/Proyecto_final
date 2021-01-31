@@ -30,6 +30,8 @@ private slots:
 
     void on_SALIR_clicked();
 
+    void on_Menu_clicked();
+
 private:
     Ui::EndGame *ui;
     QString name;

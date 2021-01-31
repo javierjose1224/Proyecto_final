@@ -675,6 +675,35 @@ radius-background-color: rgb(51, 51, 51);</string>
       <string/>
      </property>
     </widget>
+    <widget class="QPushButton" name="SALIR">
+     <property name="geometry">
+      <rect>
+       <x>660</x>
+       <y>400</y>
+       <width>81</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>MV Boli</family>
+       <pointsize>12</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">Padding: 1px;
+font: 12pt &quot;MV Boli&quot;;
+Border-radius: 5px;
+Background: #933;
+Color: #fefefe;</string>
+     </property>
+     <property name="text">
+      <string>SALIR</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

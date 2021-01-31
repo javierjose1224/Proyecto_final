@@ -217,3 +217,8 @@ void Sesion::on_show_pass_clicked(bool clicked)
         ui->passwordBox->setEchoMode(QLineEdit::Password);
     }
 }
+
+void Sesion::on_SALIR_clicked()
+{
+    this->close();
+}

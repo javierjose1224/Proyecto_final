@@ -1,6 +1,6 @@
 #include "endgame.h"
 #include "ui_endgame.h"
-//#include "mainwindow.h"
+#include "sesion.h"
 
 EndGame::EndGame(QWidget *parent) :
     QMainWindow(parent),
@@ -95,5 +95,13 @@ void EndGame::on_Eliminar_clicked()
 void EndGame::on_SALIR_clicked()
 {
     ui->tabla->close();
+    this->close();
+}
+
+void EndGame::on_Menu_clicked()
+{
+    Sesion *volver;
+    volver = new Sesion;
+    volver->show();
     this->close();
 }
