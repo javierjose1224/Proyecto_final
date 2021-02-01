@@ -67,6 +67,7 @@ public:
     void setVD(float value);
     bool getGolpe() const;
     void setGolpe(bool value);
+    void setK(float value);
 };
 
 #endif // PERSONAJE_H

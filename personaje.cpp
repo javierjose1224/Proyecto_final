@@ -2,6 +2,11 @@
 #include <math.h>
 #include <cmath>
 
+void personaje::setK(float value)
+{
+    K = value;
+}
+
 personaje::personaje(float posX_, float posY_, float velX_, float velY_, float radio, float k_, float e_,float G_,int col)
 {
      PX=posX_;

@@ -277,6 +277,8 @@ void MainWindow::actualizarm()
             nivel_4= new nivel(bars4,muros4,globs,puas4,scene,v_limit);
 
             principal->setVD(20);
+            principal->setK(0.05);
+            segundo_plyr->setK(0.05);
             segundo_plyr->setVD(20);
             nivel_graf->setNivel_graf(4);
             score->setScore(45);
