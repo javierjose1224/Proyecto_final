@@ -50,7 +50,7 @@ MainWindow::MainWindow(QString name,int id_lvl,bool num_pls):ui(new Ui::MainWind
 //VIDAS, PUNTAJE Y TIEMPO
     conVidas= new vida();
     conVidas->setPos(0,-30);
-    conVidas->setVidaT(6);
+    conVidas->setVidaT(8);
     scene->addItem(conVidas);
 
     score = new puntaje();
@@ -130,7 +130,7 @@ void MainWindow::actualizarm()
             score->setScore(0);
             is_lineal=true;
             contador_n1->setContador(15);
-            //contador_n1->reset_neg();
+
         }
         if(score->getScore()>-1 && score->getScore()<7)
         {
@@ -172,13 +172,11 @@ void MainWindow::actualizarm()
             principal->setVD(20);
             segundo_plyr->setVD(20);
             nivel_graf->setNivel_graf(2);
-//            qDebug()<<"nivel 3";
+
             score->setScore(8);
             score_pasar=7;
             is_lineal=true;
-            //contador_n1->reset_neg();
             contador_n1->setContador(30);
-            //score->setScore(22);
         }
 
         else if(score->getScore()>7 && score->getScore()<22)
@@ -226,10 +224,8 @@ void MainWindow::actualizarm()
             nivel_graf->setNivel_graf(3);
             score->setScore(23);
             score_pasar=22;
-            //contador_n1->reset_neg();
             contador_n1->setContador(60);
             is_lineal=true;
-//            qDebug()<<"nivel 3";
         }
 
         else if(score->getScore()>22 && score->getScore()<44)
@@ -261,13 +257,16 @@ void MainWindow::actualizarm()
             }
             //nivel_1->borrar_elementos(scene);
             bars4.push_back(new pelota((h_limit-100),450,-10,0,50,20,0,1,2));
-            bars4.push_back(new pelota(100,450,10,0,50,20,0,1,2));
             bars4.push_back(new pelota((h_limit-150),450,-10,0,50,20,0,1,2));
-            bars4.push_back(new pelota(150,450,10,0,50,20,0,1,2));
             bars4.push_back(new pelota((h_limit-200),450,-10,0,50,20,0,1,2));
+            bars4.push_back(new pelota((h_limit-250),450,-10,0,50,20,0,1,2));
+            bars4.push_back(new pelota((h_limit-300),450,-10,0,50,20,0,1,2));
+
+            bars4.push_back(new pelota(100,450,10,0,50,20,0,1,2));           
+            bars4.push_back(new pelota(150,450,10,0,50,20,0,1,2));         
             bars4.push_back(new pelota(200,450,10,0,50,20,0,1,2));
-//            bars4.push_back(new pelota((300)+40,400,10,0,50,40,0,1,2));
-//            bars4.push_back(new pelota((300)+80,400,10,0,50,40,0,1,2));
+            bars4.push_back(new pelota(250,450,10,0,50,20,0,1,2));
+            bars4.push_back(new pelota(300,450,10,0,50,20,0,1,2));
 
             puas4.push_back(new pua(h_limit/4,25,50,25));
             puas4.push_back(new pua(3*h_limit/4-70,25,50,25));
@@ -277,18 +276,15 @@ void MainWindow::actualizarm()
             nivel_4= new nivel(bars4,muros4,globs,puas4,scene,v_limit);
 
             principal->setVD(20);
-            principal->setK(0.05);
-            segundo_plyr->setK(0.05);
+
             segundo_plyr->setVD(20);
             nivel_graf->setNivel_graf(4);
             score->setScore(45);
-            //score_pasar=22;
-            //contador_n1->reset_neg();
             contador_n1->setContador(60);
             is_lineal=true;
         }
 
-        else if(score->getScore()>44 && score->getScore()<63)
+        else if(score->getScore()>44 && score->getScore()<75)
         {
             nivel_4->actualizar_nivel(scene,v_limit,h_limit,jugadores,conVidas,score,gener_glob,gener_glob2);
             if(contador_n1->getCon_abs()==0)
@@ -298,7 +294,7 @@ void MainWindow::actualizarm()
             }
         }
 
-        if(score->getScore()==63)
+        if(score->getScore()==75)
         {
             setcheckpoint();
             tpn=contador_n1->getCon_abs();
